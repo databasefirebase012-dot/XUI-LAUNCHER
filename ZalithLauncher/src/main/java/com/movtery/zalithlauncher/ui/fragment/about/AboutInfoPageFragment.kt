@@ -34,7 +34,7 @@ class AboutInfoPageFragment : Fragment(R.layout.fragment_about_info_page) {
         binding.apply {
             dec1.text = "XUI LAUNCHER"
             dec2.text = "by XRANS OFFICIAL"
-            dec3.text = "Blood Gradient Edition — an Android launcher fork for Minecraft: Java Edition. Open source under GPL-3.0; see the project LICENSE and NOTICE for license details and upstream attribution."
+            dec3.text = "Blood Gradient Edition\nA community-built launcher fork for Minecraft: Java Edition, with a dark interface and blood-red accents.\nOpen source under GPL-3.0. See LICENSE and NOTICE for license details and upstream attribution."
 
             githubButton.setOnClickListener {
                 ZHTools.openLink(requireActivity(), "https://github.com/databasefirebase012-dot/XUI-LAUNCHER")
