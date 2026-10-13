@@ -1,7 +1,9 @@
 name: XUI Launcher Android CI
 
 on:
+  # PR updates validate feature branches without scheduling a duplicate push run.
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
