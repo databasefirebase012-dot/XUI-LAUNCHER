@@ -64,7 +64,7 @@ class AboutInfoPageFragment : Fragment(R.layout.fragment_about_info_page) {
             AboutItemBean(
                 placeholderIcon,
                 "Xrans Official",
-                "Modder Fork · Telegram: t.me/xrans_offc · TikTok: @1shadow_dx",
+                "Modder Fork · Telegram: https://t.me/xrans_offc · TikTok: https://www.tiktok.com/@1shadow_dx",
                 null
             )
         )
