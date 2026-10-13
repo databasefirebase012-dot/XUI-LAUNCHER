@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_app">
+    android:background="@drawable/xui_bg_gradient">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_layout"
@@ -87,6 +87,7 @@
 
                 <com.movtery.zalithlauncher.ui.view.AnimButton
                     android:id="@+id/start_button"
+                    android:background="@drawable/xui_button_primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_8sdp"

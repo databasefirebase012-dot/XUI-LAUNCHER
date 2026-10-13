@@ -1,4 +1,4 @@
-name: Android CI
+name: XUI Launcher Android CI
 
 on:
   push:
@@ -58,11 +58,11 @@ jobs:
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: ZalithLauncher(Release) ${{ matrix.arch }}
+          name: XUI-Launcher (Release) ${{ matrix.arch }}
           path: ZalithLauncher/build/outputs/apk/release/*
 
   BuildDebug:
-    if: startsWith(github.ref, 'refs/pull/') || github.ref_name != 'main'
+    if: startsWith(github.ref, 'refs/pull/') || github.ref_name != 'main' || github.repository_owner != 'ZalithLauncher'
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -93,5 +93,5 @@ jobs:
       - name: Upload Debug ${{matrix.arch}}
         uses: actions/upload-artifact@v4
         with:
-          name: ZalithLauncher(Debug) ${{ matrix.arch }}
+          name: XUI-Launcher (Debug) ${{ matrix.arch }}
           path: ZalithLauncher/build/outputs/apk/debug/*
