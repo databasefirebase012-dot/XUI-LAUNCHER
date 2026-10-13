@@ -37,7 +37,7 @@
                     android:layout_height="@dimen/_44sdp"
                     android:contentDescription="@string/xui_disclaimer_title"
                     android:scaleType="centerInside"
-                    android:src="@drawable/app_name_title"
+                    android:src="@drawable/xui_logo_mark"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
