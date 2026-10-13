@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/background_ripple_effect">
-    <item><shape android:shape="rectangle"><corners android:radius="@dimen/_6sdp" /><solid android:color="#E5253A" /></shape></item>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/xui_ripple">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <gradient android:angle="0" android:startColor="@color/xui_primary" android:endColor="@color/xui_primary_dark" android:type="linear" />
+        </shape>
+    </item>
 </ripple>
