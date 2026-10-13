@@ -35,7 +35,7 @@
                     android:id="@+id/title"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_44sdp"
-                    android:contentDescription="@string/app_name"
+                    android:contentDescription="@string/xui_disclaimer_title"
                     android:scaleType="centerInside"
                     android:src="@drawable/app_name_title"
                     app:layout_constraintEnd_toEndOf="parent"
