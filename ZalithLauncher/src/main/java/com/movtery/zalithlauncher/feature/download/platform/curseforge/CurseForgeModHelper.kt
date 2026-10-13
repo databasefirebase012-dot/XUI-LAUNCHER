@@ -40,7 +40,7 @@ class CurseForgeModHelper {
                 name = PlatformUtils.searchModLikeWithChinese(
                     filters,
                     type == CurseForgeCommonUtils.CURSEFORGE_MOD_CLASS_ID
-                ) ?: filters.name
+                ).takeIf { !it.isNullOrBlank() } ?: filters.name
                 mcVersion = filters.mcVersion
                 modloader = filters.modloader
                 sort = filters.sort
