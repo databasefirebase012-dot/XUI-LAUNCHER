@@ -1,5 +1,9 @@
 name: XUI Launcher Android CI
 
+concurrency:
+  group: xui-android-ci-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   # PR updates validate feature branches without scheduling a duplicate push run.
   push:
