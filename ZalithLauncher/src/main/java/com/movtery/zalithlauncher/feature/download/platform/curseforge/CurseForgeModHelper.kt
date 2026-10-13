@@ -36,22 +36,22 @@ class CurseForgeModHelper {
                 throw PlatformNotSupportedException("The platform does not support the ${filters.category} category!")
             }
 
-            val originalName = filters.name
-            val translatedName = PlatformUtils.searchModLikeWithChinese(
-                filters,
-                type == CurseForgeCommonUtils.CURSEFORGE_MOD_CLASS_ID
-            )
-            if (translatedName != null) filters.name = translatedName
+            val searchFilters = Filters().apply {
+                name = PlatformUtils.searchModLikeWithChinese(
+                    filters,
+                    type == CurseForgeCommonUtils.CURSEFORGE_MOD_CLASS_ID
+                ) ?: filters.name
+                mcVersion = filters.mcVersion
+                modloader = filters.modloader
+                sort = filters.sort
+                category = filters.category
+            }
+            val params = HashMap<String, Any>()
+            CurseForgeCommonUtils.putDefaultParams(params, searchFilters, lastResult.previousCount)
+            params["classId"] = type
+            searchFilters.modloader?.let { params["modLoaderTypes"] = "[${it.curseforgeId}]" }
 
-            val response = try {
-                val params = HashMap<String, Any>()
-                CurseForgeCommonUtils.putDefaultParams(params, filters, lastResult.previousCount)
-                params["classId"] = type
-                filters.modloader?.let { params["modLoaderTypes"] = "[${it.curseforgeId}]" }
-                api.get("mods/search", params, JsonObject::class.java)
-            } finally {
-                filters.name = originalName
-            } ?: return null
+            val response = api.get("mods/search", params, JsonObject::class.java) ?: return null
             val dataArray = response.getAsJsonArray("data") ?: return null
 
             val infoItems: MutableList<InfoItem> = ArrayList()
