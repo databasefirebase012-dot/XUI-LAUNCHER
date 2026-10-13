@@ -297,6 +297,7 @@ abstract class AbstractResourceDownloadFragment(
             mTaskInProgress = null
         }
         this.mLastPage = false
+        mCurrentResult = null
         mTaskInProgress = SelfReferencingFuture(SearchApiTask(null))
             .startOnExecutor(TaskExecutors.getDefault())
     }
