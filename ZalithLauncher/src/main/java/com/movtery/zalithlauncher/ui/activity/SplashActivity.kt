@@ -39,13 +39,15 @@ class SplashActivity : BaseActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.titleText.text = InfoDistributor.APP_NAME
+        binding.titleText.text = getString(R.string.xui_brand_title)
+        binding.splashText.text = getString(R.string.xui_brand_edition) + "\n\n" + getString(R.string.splash_screen_desc)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@SplashActivity)
             adapter = installableAdapter
         }
 
         binding.startButton.apply {
+            text = getString(R.string.xui_start)
             setOnClickListener {
                 if (isStarted) return@setOnClickListener
                 isStarted = true
