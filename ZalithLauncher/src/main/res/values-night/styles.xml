@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:statusBarColor">@color/background_status_bar</item>
-        <item name="android:navigationBarColor">@color/background_app</item>
-        <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>
-        <item name="android:scrollbarThumbVertical">@color/background_menu_element</item>
+        <item name="android:navigationBarColor">@color/xui_bg_dark</item>
+        <item name="android:scrollbarThumbHorizontal">@color/xui_primary</item>
+        <item name="android:scrollbarThumbVertical">@color/xui_primary</item>
         <item name="android:textSize">@dimen/_12ssp</item>
-        <item name="colorAccent">#FF3048</item>
-        <item name="colorControlActivated">#FF3048</item>
-        <item name="colorControlHighlight">@color/background_ripple_effect</item>
-        <item name="android:windowBackground">@color/background_app</item>
-        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="colorPrimary">@color/xui_primary</item>
+        <item name="colorPrimaryDark">@color/xui_primary_dark</item>
+        <item name="colorSecondary">@color/xui_accent</item>
+        <item name="colorAccent">@color/xui_accent</item>
+        <item name="colorControlActivated">@color/xui_primary_light</item>
+        <item name="colorControlHighlight">@color/xui_ripple</item>
+        <item name="android:windowBackground">@drawable/xui_bg_gradient</item>
+        <item name="android:textColorPrimary">@color/xui_text_primary</item>
+        <item name="android:textColorSecondary">@color/xui_text_secondary</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <style name="CustomDialogStyle" parent="Theme.AppCompat.Dialog">
+    <style name="CustomDialogStyle" parent="Theme.Material3.Dark.Dialog">
         <item name="android:windowBackground">@drawable/dialog_background</item>
-        <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>
-        <item name="android:scrollbarThumbVertical">@color/background_menu_element</item>
+        <item name="android:scrollbarThumbHorizontal">@color/xui_primary</item>
+        <item name="android:scrollbarThumbVertical">@color/xui_primary</item>
     </style>
 
-    <style name="CustomAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="CustomAlertDialogTheme" parent="Theme.Material3.Dark.Dialog.Alert">
         <item name="android:windowBackground">@drawable/dialog_background</item>
-        <item name="android:scrollbarThumbHorizontal">@color/background_menu_element</item>
-        <item name="android:scrollbarThumbVertical">@color/background_menu_element</item>
+        <item name="android:scrollbarThumbHorizontal">@color/xui_primary</item>
+        <item name="android:scrollbarThumbVertical">@color/xui_primary</item>
     </style>
 </resources>
