@@ -199,6 +199,10 @@ abstract class AbstractResourceDownloadFragment(
     }
 
     private fun initSpinnerIndex() {
+        mCurrentPlatform = recommendedPlatform
+        mFilters.sort = Sort.RELEVANT
+        mFilters.category = categoryList.firstOrNull() ?: Category.ALL
+        mFilters.modloader = null
         binding.apply {
             platformSpinner.selectItemByIndex(recommendedPlatform.ordinal)
             sortSpinner.selectItemByIndex(0)
