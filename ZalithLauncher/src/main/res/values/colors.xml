@@ -1,42 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black_or_white">#F7F7FA</color>
+    <color name="xui_primary">#DC2626</color>
+    <color name="xui_primary_dark">#7F1D1D</color>
+    <color name="xui_primary_light">#EF4444</color>
+    <color name="xui_accent">#EF4444</color>
+    <color name="xui_bg_gradient_top">#1A0000</color>
+    <color name="xui_bg_gradient_bottom">#0A0A0A</color>
+    <color name="xui_bg_dark">#0A0A0A</color>
+    <color name="xui_bg_card">#140808</color>
+    <color name="xui_bg_card_alt">#1A0A0A</color>
+    <color name="xui_text_primary">#FFFFFF</color>
+    <color name="xui_text_secondary">#B8A0A0</color>
+    <color name="xui_text_hint">#6B4040</color>
+    <color name="xui_watermark">#40FFFFFF</color>
+    <color name="xui_divider">#33DC2626</color>
+    <color name="xui_ripple">#66EF4444</color>
+    <color name="xui_glow">#40EF4444</color>
 
-    <color name="background_app">#0A0A0D</color>
-    <color name="background_app_error">#240B0F</color>
-    <color name="background_overlay">#25252B</color>
-    <color name="background_status_bar">#08080A</color>
-    <color name="background_menu_top">#121216</color>
-    <color name="background_menu_top_error">#4A1018</color>
-    <color name="background_menu_element">#E5253A</color>
-    <color name="background_ripple_effect">#66FF3048</color>
-
-    <color name="button_background">#24242B</color>
-    <color name="button_background_selected">#3A2027</color>
-    <color name="dialog_background">#141419</color>
-
-    <color name="menu_bar">#17171D</color>
-    <color name="menu_bar_text">#F7F7FA</color>
-    <color name="menu_overlay">#E6121218</color>
-    <color name="menu_progress">#FF3048</color>
-
-    <color name="background_item">#D91A1A20</color>
-    <color name="background_item_selected">#E62C1018</color>
-    <color name="background_item_disabled">#D9302428</color>
-    <color name="background_sponsor_intermediate">#D9C28B35</color>
-    <color name="background_sponsor_advanced">#D9E5253A</color>
-
-    <color name="edit_box_fill">#202027</color>
-    <color name="edit_box_fill_selected">#32151B</color>
-
-    <color name="mod_category_fill">#8033333A</color>
-    <color name="text_background_fill">#B3212128</color>
-
-    <color name="settings_category">#FF3048</color>
-
-    <color name="favorite_color">#FF4A60</color>
-
-    <color name="icon_color">#F4F4F6</color>
-
-    <color name="primary_text">#F5F5F7</color>
+    <color name="black_or_white">@color/xui_text_primary</color>
+    <color name="background_app">@color/xui_bg_dark</color>
+    <color name="background_app_error">#240B0B</color>
+    <color name="background_overlay">#1A0A0A</color>
+    <color name="background_status_bar">@color/xui_bg_gradient_top</color>
+    <color name="background_menu_top">@color/xui_bg_card</color>
+    <color name="background_menu_top_error">@color/xui_primary_dark</color>
+    <color name="background_menu_element">@color/xui_primary</color>
+    <color name="background_ripple_effect">@color/xui_ripple</color>
+    <color name="button_background">@color/xui_bg_card_alt</color>
+    <color name="button_background_selected">#33262626</color>
+    <color name="dialog_background">@color/xui_bg_card</color>
+    <color name="menu_bar">@color/xui_bg_card</color>
+    <color name="menu_bar_text">@color/xui_text_primary</color>
+    <color name="menu_overlay">#E60A0505</color>
+    <color name="menu_progress">@color/xui_primary_light</color>
+    <color name="background_item">#D9140808</color>
+    <color name="background_item_selected">#E6331010</color>
+    <color name="background_item_disabled">#D91A1010</color>
+    <color name="background_sponsor_intermediate">#D9A16D2A</color>
+    <color name="background_sponsor_advanced">#D9DC2626</color>
+    <color name="edit_box_fill">@color/xui_bg_card_alt</color>
+    <color name="edit_box_fill_selected">#33262626</color>
+    <color name="mod_category_fill">#80331A1A</color>
+    <color name="text_background_fill">#B3140808</color>
+    <color name="settings_category">@color/xui_primary_light</color>
+    <color name="favorite_color">@color/xui_primary_light</color>
+    <color name="icon_color">@color/xui_text_primary</color>
+    <color name="primary_text">@color/xui_text_primary</color>
 </resources>
