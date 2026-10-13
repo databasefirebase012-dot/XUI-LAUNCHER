@@ -84,7 +84,7 @@
                 android:background="@drawable/background_item"
                 android:gravity="center_vertical"
                 android:padding="@dimen/_12sdp"
-                android:textColor="#FF1E1E"
+                android:textColor="@color/xui_primary_light"
                 android:textStyle="bold"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
