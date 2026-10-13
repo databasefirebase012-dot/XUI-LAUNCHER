@@ -32,7 +32,7 @@ class ModrinthModHelper {
             }
 
             val searchFilters = Filters().apply {
-                name = PlatformUtils.searchModLikeWithChinese(filters, type == "mod") ?: filters.name
+                name = PlatformUtils.searchModLikeWithChinese(filters, type == "mod").takeIf { !it.isNullOrBlank() } ?: filters.name
                 mcVersion = filters.mcVersion
                 modloader = filters.modloader
                 sort = filters.sort
