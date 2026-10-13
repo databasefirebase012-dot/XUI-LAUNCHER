@@ -2,4 +2,7 @@
 <resources>
     <string name="xui_disclaimer_title">XUI Launcher — Disclaimer</string>
     <string name="xui_disclaimer_message">XUI Launcher adalah fork komunitas tidak resmi yang menggunakan kode dari proyek upstream terkait. Aplikasi ini tidak berafiliasi dengan Mojang atau Microsoft. Anda bertanggung jawab atas akun, file game, dan penggunaan aplikasi. Perangkat lunak disediakan apa adanya tanpa jaminan. Lihat LICENSE dan NOTICE untuk informasi lisensi serta atribusi.</string>
+    <string name="xui_brand_title">XUI LAUNCHER</string>
+    <string name="xui_brand_edition">Blood Gradient Edition</string>
+    <string name="xui_start">START</string>
 </resources>
