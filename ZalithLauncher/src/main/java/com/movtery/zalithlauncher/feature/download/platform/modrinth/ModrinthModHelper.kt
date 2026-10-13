@@ -31,12 +31,14 @@ class ModrinthModHelper {
                 throw PlatformNotSupportedException("The platform does not support the ${filters.category} category!")
             }
 
-            PlatformUtils.searchModLikeWithChinese(filters, type == "mod")?.let {
-                filters.name = it
-            }
-
-            val response = api.get("search",
-                ModrinthCommonUtils.getParams(lastResult, filters, type), JsonObject::class.java) ?: return null
+            val originalName = filters.name
+            val translatedName = PlatformUtils.searchModLikeWithChinese(filters, type == "mod")
+            if (translatedName != null) filters.name = translatedName
+            val response = try {
+                api.get("search", ModrinthCommonUtils.getParams(lastResult, filters, type), JsonObject::class.java)
+            } finally {
+                filters.name = originalName
+            } ?: return null
             val responseHits = response.getAsJsonArray("hits") ?: return null
 
             val infoItems: MutableList<InfoItem> = ArrayList()
