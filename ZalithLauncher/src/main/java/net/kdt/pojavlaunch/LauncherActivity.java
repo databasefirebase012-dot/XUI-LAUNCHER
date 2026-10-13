@@ -541,7 +541,7 @@ public class LauncherActivity extends BaseActivity {
 
     private void checkNotice() {
         checkNotice = TaskExecutors.getDefault().submit(() -> CheckNewNotice.checkNewNotice(noticeInfo -> {
-            if (checkNotice.isCancelled() || noticeInfo == null) {
+            if (noticeInfo == null || (checkNotice != null && checkNotice.isCancelled())) {
                 return;
             }
             //当偏好设置内是开启通知栏 或者 检测到通知编号不为偏好设置里保存的值时，显示通知栏
