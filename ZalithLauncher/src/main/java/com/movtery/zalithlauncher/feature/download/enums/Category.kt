@@ -65,7 +65,7 @@ enum class Category(val classify: Classify, val resNameID: Int, val curseforgeID
     RP_VANILLA(Classify.RESOURCE_PACK, R.string.category_vanilla, null, "vanilla-like"),
     RP_MODERN(Classify.RESOURCE_PACK, R.string.category_modern, "401", null),
     RP_PHOTO_REALISTIC(Classify.RESOURCE_PACK, R.string.category_photo_realistic, "400", "realistic"),
-    RP_ANIMATED(Classify.RESOURCE_PACK, R.string.category_animated, "", null),
+    RP_ANIMATED(Classify.RESOURCE_PACK, R.string.category_animated, "402", "animated"),
     RP_MOD_SUPPORT(Classify.RESOURCE_PACK, R.string.category_mod_support, "4465", "modded"),
     RP_MISCELLANEOUS(Classify.RESOURCE_PACK, R.string.category_miscellaneous, "405", null),
     RP_16X(Classify.RESOURCE_PACK, R.string.category_16x, "393", null),
