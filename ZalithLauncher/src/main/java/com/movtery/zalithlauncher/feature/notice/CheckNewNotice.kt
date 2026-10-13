@@ -12,6 +12,9 @@ class CheckNewNotice {
         var noticeInfo: NoticeInfo? = null
 
         @JvmStatic
+        fun getNoticeInfo(): NoticeInfo? = noticeInfo
+
+        @JvmStatic
         fun checkNewNotice(listener: CheckNoticeListener) {
             noticeInfo = null
             Logging.i("XUI Notice", "Upstream launcher notices are disabled.")
