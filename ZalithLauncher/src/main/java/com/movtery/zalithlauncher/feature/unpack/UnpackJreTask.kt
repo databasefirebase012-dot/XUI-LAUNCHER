@@ -31,7 +31,8 @@ class UnpackJreTask(val context: Context, val jre: Jre) : AbstractUnpackTask() {
             return launcherRuntimeVersion != installedRuntimeVersion
         }.getOrElse { e ->
             Logging.e("CheckInternalRuntime", Tools.printToString(e))
-            return false
+            // A failed installed-runtime check must not mark this JRE as already installed.
+            return true
         }
     }
 
