@@ -8,6 +8,7 @@ import com.movtery.anim.AnimPlayer
 import com.movtery.anim.animations.Animations
 import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.databinding.SettingsFragmentLauncherBinding
+import com.movtery.zalithlauncher.event.single.BackgroundOpacityChangeEvent
 import com.movtery.zalithlauncher.event.single.PageOpacityChangeEvent
 import com.movtery.zalithlauncher.setting.AllSettings
 import com.movtery.zalithlauncher.ui.fragment.CustomBackgroundFragment
@@ -141,6 +142,19 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             "%"
         ).setOnSeekBarProgressChangeListener {
             EventBus.getDefault().post(PageOpacityChangeEvent(it))
+        }
+
+        SeekBarSettingsWrapper(
+            context,
+            AllSettings.launcherBackgroundOpacity,
+            binding.launcherBackgroundOpacityLayout,
+            binding.launcherBackgroundOpacityTitle,
+            binding.launcherBackgroundOpacitySummary,
+            binding.launcherBackgroundOpacityValue,
+            binding.launcherBackgroundOpacity,
+            "%"
+        ).setOnSeekBarProgressChangeListener {
+            EventBus.getDefault().post(BackgroundOpacityChangeEvent(it))
         }
 
         SwitchSettingsWrapper(
