@@ -16,7 +16,7 @@
             android:id="@+id/custom_controls_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -26,7 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_control"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFEF4444"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/disableGestures_layout"
@@ -56,6 +58,8 @@
                     android:text="@string/setting_disable_gestures_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/disableGestures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -126,6 +130,9 @@
                     android:text="@string/setting_longpress_trigger_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/timeLongPressTrigger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
