@@ -17,7 +17,6 @@ import com.movtery.zalithlauncher.feature.unpack.Jre
 import com.movtery.zalithlauncher.feature.unpack.UnpackComponentsTask
 import com.movtery.zalithlauncher.feature.unpack.UnpackJreTask
 import com.movtery.zalithlauncher.feature.unpack.UnpackSingleFilesTask
-import com.movtery.zalithlauncher.task.Task
 import com.movtery.zalithlauncher.ui.dialog.TipDialog
 import com.movtery.zalithlauncher.utils.StoragePermissionsUtils
 import net.kdt.pojavlaunch.LauncherActivity
@@ -27,6 +26,7 @@ import net.kdt.pojavlaunch.Tools
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
     private var isStarted: Boolean = false
+    @Volatile private var isCheckingStartupFiles: Boolean = false
     private lateinit var binding: ActivitySplashBinding
     private lateinit var installableAdapter: InstallableAdapter
     private val items: MutableList<InstallableItem> = ArrayList()
@@ -55,6 +55,7 @@ class SplashActivity : BaseActivity() {
                 installableAdapter.startAllTasks()
             }
             isClickable = false
+            isEnabled = false
         }
 
         if (!Tools.checkStorageRoot()) {
@@ -123,41 +124,72 @@ class SplashActivity : BaseActivity() {
     private fun initItems() {
         Components.entries.forEach {
             val unpackComponentsTask = UnpackComponentsTask(this, it)
-            if (!unpackComponentsTask.isCheckFailed()) {
-                items.add(
-                    InstallableItem(
-                        it.displayName,
-                        it.summary?.let { it1 -> getString(it1) },
-                        unpackComponentsTask
-                    )
+            // Keep broken/missing assets visible as failed tasks; silently omitting them
+            // makes the splash screen believe the launcher is ready when it is not.
+            items.add(
+                InstallableItem(
+                    it.displayName,
+                    it.summary?.let { it1 -> getString(it1) },
+                    unpackComponentsTask
                 )
-            }
+            )
         }
         Jre.entries.forEach {
             val unpackJreTask = UnpackJreTask(this, it)
-            if (!unpackJreTask.isCheckFailed()) {
-                items.add(
-                    InstallableItem(
-                        it.jreName,
-                        getString(it.summary),
-                        unpackJreTask
-                    )
+            items.add(
+                InstallableItem(
+                    it.jreName,
+                    getString(it.summary),
+                    unpackJreTask
                 )
-            }
+            )
         }
         items.sort()
-        installableAdapter = InstallableAdapter(items) {
-            toMain()
+        installableAdapter = InstallableAdapter(items) { success ->
+            if (success) {
+                toMain()
+            } else {
+                isStarted = false
+                binding.startButton.isEnabled = true
+                binding.startButton.isClickable = true
+                binding.splashText.setText(R.string.splash_screen_install_failed)
+                AlertDialog.Builder(this)
+                    .setTitle(R.string.generic_warning)
+                    .setMessage(R.string.splash_screen_install_failed)
+                    .setPositiveButton(R.string.generic_ok, null)
+                    .show()
+            }
         }
     }
     
     private fun checkEnd() {
-        installableAdapter.checkAllTask()
-        Task.runTask {
-            UnpackSingleFilesTask(this).run()
-        }.execute()
+        if (isCheckingStartupFiles) return
+        isCheckingStartupFiles = true
+        binding.startButton.isEnabled = false
+        binding.startButton.isClickable = false
+        binding.splashText.setText(R.string.splash_screen_installing)
 
-        binding.startButton.isClickable = true
+        Thread({
+            val result = runCatching { UnpackSingleFilesTask(this).run() }
+            runOnUiThread {
+                isCheckingStartupFiles = false
+                if (result.isSuccess) {
+                    installableAdapter.checkAllTask()
+                    binding.splashText.setText(R.string.splash_screen_desc)
+                    binding.startButton.isEnabled = true
+                    binding.startButton.isClickable = true
+                } else {
+                    binding.startButton.isEnabled = false
+                    binding.startButton.isClickable = false
+                    AlertDialog.Builder(this)
+                        .setTitle(R.string.generic_warning)
+                        .setMessage(R.string.splash_screen_system_files_failed)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.generic_ok) { _, _ -> checkEnd() }
+                        .show()
+                }
+            }
+        }, "XUI-Startup-Files").start()
     }
 
     private fun toMain() {
