@@ -31,6 +31,23 @@ jobs:
           test -f ZalithLauncher/src/main/res/drawable/xui_tab_indicator_bottom.xml
           echo "PASS: building the XUI redesign UI source from branch xui-redesign."
 
+      - name: Verify bundled JRE archives for both ARM ABIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          for jre in jre-8 jre-17 jre-21 jre-25; do
+            base="ZalithLauncher/src/main/assets/components/$jre"
+            test -s "$base/version"
+            test -s "$base/universal.tar.xz"
+            test -s "$base/bin-arm.tar.xz"
+            test -s "$base/bin-arm64.tar.xz"
+            echo "PASS: $jre contains version, universal archive, ARM32 archive and ARM64 archive."
+          done
+          grep -Fq 'check(!item.task.isNeedUnpack())' ZalithLauncher/src/main/java/com/movtery/zalithlauncher/ui/activity/InstallableAdapter.kt
+          grep -Fq 'getSmartResolutionRatio()' ZalithLauncher/src/main/java/net/kdt/pojavlaunch/utils/JREUtils.java
+          grep -Fq 'AllSettings.getFpsStable().getValue()' ZalithLauncher/src/main/java/net/kdt/pojavlaunch/utils/JREUtils.java
+          echo "PASS: startup task validation and both performance setting hooks are present."
+
       - name: Install XML validator
         run: |
           sudo apt-get update
