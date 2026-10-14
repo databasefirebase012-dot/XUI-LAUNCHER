@@ -453,6 +453,10 @@ public final class JREUtils {
         String resolvFile;
         resolvFile = new File(PathManager.DIR_DATA,"resolv.conf").getAbsolutePath();
 
+        int resolutionRatio = AllSettings.getResolutionSmart().getValue()
+                ? getSmartResolutionRatio()
+                : AllSettings.getResolutionRatio().getValue();
+
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + runtimeHome,
                 "-Djava.io.tmpdir=" + PathManager.DIR_CACHE.getAbsolutePath(),
@@ -471,8 +475,8 @@ public final class JREUtils {
                 //"-Dorg.lwjgl.util.DebugFunctions=true",
                 //"-Dorg.lwjgl.util.DebugLoader=true",
                 // GLFW Stub width height
-                "-Dglfwstub.windowWidth=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, AllSettings.getResolutionRatio().getValue() / 100F),
-                "-Dglfwstub.windowHeight=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, AllSettings.getResolutionRatio().getValue() / 100F),
+                "-Dglfwstub.windowWidth=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, resolutionRatio / 100F),
+                "-Dglfwstub.windowHeight=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, resolutionRatio / 100F),
                 "-Dglfwstub.initEgl=false",
                 "-Dext.net.resolvPath=" +resolvFile,
                 "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
@@ -500,9 +504,44 @@ public final class JREUtils {
                 Logging.i("ArgProcessor","Arg skipped: "+arg);
         }
 
+        if (AllSettings.getFpsStable().getValue()) {
+            boolean hasExplicitGc = userArguments.stream().anyMatch(arg ->
+                    arg.startsWith("-XX:+Use") && arg.endsWith("GC"));
+            if (!hasExplicitGc) additionalArguments.add("-XX:+UseG1GC");
+            if (userArguments.stream().noneMatch(arg -> arg.startsWith("-XX:MaxGCPauseMillis="))) {
+                additionalArguments.add("-XX:MaxGCPauseMillis=50");
+            }
+            if (userArguments.stream().noneMatch(arg -> arg.startsWith("-XX:+ParallelRefProcEnabled"))) {
+                additionalArguments.add("-XX:+ParallelRefProcEnabled");
+            }
+        }
+
         //Add all the arguments
         userArguments.addAll(additionalArguments);
         return userArguments;
+    }
+
+    /**
+     * Select a conservative starting resolution profile for high pixel-count displays.
+     * GLFW window dimensions are initialized before Minecraft's render loop starts, so this
+     * is a launch-time adjustment, not a live in-game FPS controller.
+     */
+    private static int getSmartResolutionRatio() {
+        int configuredRatio = AllSettings.getResolutionRatio().getValue();
+        long pixelCount = (long) currentDisplayMetrics.widthPixels * currentDisplayMetrics.heightPixels;
+        int recommendedMaximum;
+        if (pixelCount >= 8_000_000L) {
+            recommendedMaximum = 50;
+        } else if (pixelCount >= 4_000_000L) {
+            recommendedMaximum = 60;
+        } else if (pixelCount >= 2_500_000L) {
+            recommendedMaximum = 70;
+        } else if (pixelCount >= 1_500_000L) {
+            recommendedMaximum = 80;
+        } else {
+            recommendedMaximum = 90;
+        }
+        return Math.max(25, Math.min(configuredRatio, recommendedMaximum));
     }
 
     /**
