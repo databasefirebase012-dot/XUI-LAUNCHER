@@ -181,7 +181,7 @@ jobs:
           test -n "$SDK_ROOT"
           SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -type f -name sdkmanager -print -quit)"
           test -x "$SDKMANAGER"
-          yes | "$SDKMANAGER" --licenses >/dev/null
+          printf 'y\n%.0s' {1..100} | "$SDKMANAGER" --licenses >/dev/null
           "$SDKMANAGER" "platforms;android-34" "ndk;25.2.9519653" "build-tools;34.0.0"
 
       - name: Build JRE components
