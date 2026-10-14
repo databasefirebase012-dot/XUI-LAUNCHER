@@ -88,14 +88,21 @@ object BackgroundManager {
         return pngName != null && pngName != NULL
     }
 
-    fun getBackgroundImage(backgroundType: BackgroundType): File? {
+    @JvmStatic
+    fun getBackgroundMedia(backgroundType: BackgroundType): File? {
         if (!hasBackgroundImage(backgroundType)) return null
+        val mediaName = properties[backgroundType.name] as? String ?: return null
+        val mediaFile = File(PathManager.DIR_BACKGROUND, mediaName)
+        return mediaFile.takeIf { it.isFile && (isImage(it) || isVideo(it)) }
+    }
 
-        val pngName = properties[backgroundType.name] as String
+    @JvmStatic
+    fun isVideo(file: File): Boolean {
+        return file.extension.lowercase() in setOf("mp4", "m4v", "webm", "mkv", "mov", "3gp")
+    }
 
-        val backgroundImage = File(PathManager.DIR_BACKGROUND, pngName)
-        if (!backgroundImage.exists() || !isImage(backgroundImage)) return null
-        return backgroundImage
+    fun getBackgroundImage(backgroundType: BackgroundType): File? {
+        return getBackgroundMedia(backgroundType)?.takeIf { isImage(it) }
     }
 
     private fun saveProperties(properties: Properties) {
