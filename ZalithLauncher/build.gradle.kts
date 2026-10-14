@@ -79,7 +79,7 @@ android {
     }
 
     buildTypes {
-        val storageProviderId = "com.xrans.xui.storage_provider"
+        val storageProviderId = "xrans.xui.launcher.storage_provider"
 
         getByName("debug") {
             applicationIdSuffix = ".debug"
