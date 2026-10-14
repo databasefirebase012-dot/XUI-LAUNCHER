@@ -1,4 +1,5 @@
 name: XUI Launcher Android CI
+# Single push-triggered build; older runs for the same ref are cancelled.
 
 on:
   push:
