@@ -50,12 +50,13 @@
             app:tab_indicator_enable_flow="true"
             app:tab_indicator_drawable="@drawable/xui_tab_indicator_bottom"
             app:tab_indicator_x_offset="@dimen/_4sdp"
-            app:tab_orientation="HORIZONTAL">
+            app:tab_orientation="HORIZONTAL"
+            app:tab_item_is_equ_width="false"
+            app:tab_item_auto_equ_width="false">
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="112dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="2dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
@@ -82,16 +83,15 @@
                     android:paddingHorizontal="1dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:text="@string/download_classify_mod"
                     android:textColor="@color/xui_text_primary"
                     android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="112dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="2dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
@@ -118,16 +118,15 @@
                     android:paddingHorizontal="1dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:text="@string/download_classify_modpack"
                     android:textColor="@color/xui_text_primary"
                     android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="112dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="2dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
@@ -154,16 +153,15 @@
                     android:paddingHorizontal="1dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:text="@string/download_classify_resource_pack"
                     android:textColor="@color/xui_text_primary"
                     android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="112dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="2dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
@@ -190,7 +188,7 @@
                     android:paddingHorizontal="1dp"
                     android:singleLine="true"
                     android:ellipsize="end"
-                    android:textSize="8sp"
+                    android:textSize="10sp"
                     android:text="@string/download_classify_shader_pack"
                     android:textColor="@color/xui_text_primary"
                     android:textStyle="bold" />
