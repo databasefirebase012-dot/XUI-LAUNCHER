@@ -114,7 +114,7 @@ public class ControlData {
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle) {
-        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x4D000000, 0xFFFFFFFF, 0, 0, true, true, false, false);
+        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x801A1A1A, 0xFFDC2626, 1.5f, 25, true, true, false, false);
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu, boolean isSwipable, boolean mousePassthrough) {
