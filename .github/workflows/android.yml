@@ -145,8 +145,11 @@ jobs:
           fi
 
           echo "=== Package identity validation ===" | tee -a "$REPORT"
-          if grep -Fq 'val nameId = "com.movtery.zalithlauncher"' ZalithLauncher/build.gradle.kts              && grep -Fq 'applicationId = nameId' ZalithLauncher/build.gradle.kts              && grep -Fq 'applicationIdSuffix = ".debug"' ZalithLauncher/build.gradle.kts; then
-            echo "PASS: namespace/applicationId is com.movtery.zalithlauncher; debug APK package is com.movtery.zalithlauncher.debug." | tee -a "$REPORT"
+          if grep -Fq 'val nameId = "com.movtery.zalithlauncher"' ZalithLauncher/build.gradle.kts \
+             && grep -Fq 'applicationId = "com.xrans.xui"' ZalithLauncher/build.gradle.kts \
+             && grep -Fq 'val storageProviderId = "com.xrans.xui.storage_provider"' ZalithLauncher/build.gradle.kts \
+             && grep -Fq 'applicationIdSuffix = ".debug"' ZalithLauncher/build.gradle.kts; then
+            echo "PASS: namespace is com.movtery.zalithlauncher; applicationId is com.xrans.xui; debug APK package is com.xrans.xui.debug." | tee -a "$REPORT"
           else
             echo "ERROR: application package configuration differs from the expected repository identity." | tee -a "$REPORT"
             FAIL=1
@@ -243,7 +246,7 @@ jobs:
             unzip -tq "$FILE"
             BADGING="$("$AAPT" dump badging "$FILE")"
             echo "$BADGING"
-            echo "$BADGING" | grep -Fq "package: name='com.movtery.zalithlauncher.debug'"
+            echo "$BADGING" | grep -Fq "package: name='com.xrans.xui.debug'"
             echo "$BADGING" | grep -Fq "native-code: '$ABI'"
             echo "PASS: $FILE size=$SIZE bytes, package verified, ABI=$ABI, ZIP integrity valid."
           done
