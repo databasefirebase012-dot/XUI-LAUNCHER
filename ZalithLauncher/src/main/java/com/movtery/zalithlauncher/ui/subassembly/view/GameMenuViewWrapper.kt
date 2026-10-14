@@ -88,15 +88,18 @@ class GameMenuViewWrapper(
     private fun refreshSmartResolutionTimer() {
         smartResolutionTimer?.cancel()
         smartResolutionTimer = null
-        if (AllSettings.resolutionSmart.getValue()) {
+        if (AllSettings.resolutionSmart.getValue() || AllSettings.fpsStable.getValue()) {
             smartResolutionTimer = Timer("XUI-ResolutionSmart", true).apply {
                 scheduleAtFixedRate(object : TimerTask() {
                     override fun run() {
-                        MainActivity.applySmartResolution(CallbackBridge.getCurrentFps())
+                        val fps = CallbackBridge.getCurrentFps()
+                        if (AllSettings.fpsStable.getValue()) MainActivity.applyFpsStable(fps)
+                        else MainActivity.applySmartResolution(fps)
                     }
                 }, 1000L, 1000L)
             }
         } else {
+            MainActivity.resetFpsStable()
             MainActivity.restoreManualResolution()
         }
     }

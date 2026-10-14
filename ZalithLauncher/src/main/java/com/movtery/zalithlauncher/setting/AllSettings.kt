@@ -32,6 +32,9 @@ class AllSettings {
         val resolutionSmart = BooleanSettingUnit("resolutionSmart", false)
 
         @JvmStatic
+        val fpsStable = BooleanSettingUnit("fpsStable", false)
+
+        @JvmStatic
         val sustainedPerformance = BooleanSettingUnit("sustainedPerformance", false)
 
         @JvmStatic

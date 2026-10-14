@@ -536,10 +536,50 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         else return super.dispatchTrackballEvent(ev);
     }
 
+    private static float fpsStableAverage = 0f;
+    private static int fpsStableLowSamples = 0;
+    private static int fpsStableHighSamples = 0;
+
     public static void applySmartResolution(int fps) {
-        if (fps <= 0 || binding == null || !AllSettings.getResolutionSmart().getValue()) return;
+        if (fps <= 0 || binding == null || AllSettings.getFpsStable().getValue()
+                || !AllSettings.getResolutionSmart().getValue()) return;
         final int target = fps <= 15 ? 40 : (fps <= 20 ? 50 : (fps <= 25 ? 70 : AllSettings.getResolutionRatio().getValue()));
         applyResolutionScale(target);
+    }
+
+    public static void applyFpsStable(int fps) {
+        if (fps <= 0 || binding == null || !AllSettings.getFpsStable().getValue()) return;
+        fpsStableAverage = fpsStableAverage <= 0f ? fps : (fpsStableAverage * 0.65f + fps * 0.35f);
+        int current = Math.round(AllStaticSettings.scaleFactor * 100f);
+        int manual = AllSettings.getResolutionRatio().getValue();
+        int target = current;
+        if (fpsStableAverage <= 15f) {
+            fpsStableLowSamples += 2;
+            fpsStableHighSamples = 0;
+        } else if (fpsStableAverage <= 25f) {
+            fpsStableLowSamples++;
+            fpsStableHighSamples = 0;
+        } else if (fpsStableAverage >= 38f) {
+            fpsStableHighSamples++;
+            fpsStableLowSamples = 0;
+        } else {
+            fpsStableLowSamples = 0;
+            fpsStableHighSamples = 0;
+        }
+        if (fpsStableLowSamples >= 2) {
+            target = Math.max(40, current - (fpsStableAverage <= 15f ? 10 : 5));
+            fpsStableLowSamples = 0;
+        } else if (fpsStableHighSamples >= 4) {
+            target = Math.min(manual, current + 5);
+            fpsStableHighSamples = 0;
+        }
+        if (Math.abs(target - current) >= 4) applyResolutionScale(target);
+    }
+
+    public static void resetFpsStable() {
+        fpsStableAverage = 0f;
+        fpsStableLowSamples = 0;
+        fpsStableHighSamples = 0;
     }
 
     public static void restoreManualResolution() {
@@ -582,6 +622,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.openMemoryInfo.setChecked(AllSettings.getGameMenuShowMemory().getValue());
             this.binding.openFpsInfo.setChecked(AllSettings.getGameMenuShowFPS().getValue());
             this.binding.resolutionSmart.setChecked(AllSettings.getResolutionSmart().getValue());
+            this.binding.fpsStable.setChecked(AllSettings.getFpsStable().getValue());
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
             this.binding.disableDoubleTap.setChecked(AllSettings.getDisableDoubleTap().getValue());
             this.binding.enableGyro.setChecked(AllSettings.getEnableGyro().getValue());
@@ -599,6 +640,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.openMemoryInfoLayout.setOnClickListener(this);
             this.binding.resolutionSmart.setOnCheckedChangeListener(this);
             this.binding.resolutionSmartLayout.setOnClickListener(this);
+            this.binding.fpsStable.setOnCheckedChangeListener(this);
+            this.binding.fpsStableLayout.setOnClickListener(this);
             this.binding.openFpsInfo.setOnCheckedChangeListener(this);
             this.binding.openFpsInfoLayout.setOnClickListener(this);
 
@@ -709,6 +752,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             else if (v == binding.openMemoryInfoLayout) MenuUtils.toggleSwitchState(binding.openMemoryInfo);
             else if (v == binding.openFpsInfoLayout) MenuUtils.toggleSwitchState(binding.openFpsInfo);
             else if (v == binding.resolutionSmartLayout) MenuUtils.toggleSwitchState(binding.resolutionSmart);
+            else if (v == binding.fpsStableLayout) MenuUtils.toggleSwitchState(binding.fpsStable);
             else if (v == binding.resolutionScalerRemove) MenuUtils.adjustSeekbar(binding.resolutionScaler, -1);
             else if (v == binding.resolutionScalerAdd) MenuUtils.adjustSeekbar(binding.resolutionScaler, 1);
             else if (v == binding.disableGesturesLayout) MenuUtils.toggleSwitchState(binding.disableGestures);
@@ -780,10 +824,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
 
         @Override public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-            if (v == binding.resolutionSmart) {
+            if (v == binding.fpsStable) {
+                AllSettings.getFpsStable().put(isChecked).save();
+                resetFpsStable();
+                if (!isChecked && AllSettings.getResolutionSmart().getValue()) applySmartResolution(CallbackBridge.getCurrentFps());
+                else if (!isChecked) restoreManualResolution();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.resolutionSmart) {
                 AllSettings.getResolutionSmart().put(isChecked).save();
-                if (isChecked) applySmartResolution(CallbackBridge.getCurrentFps());
-                else restoreManualResolution();
+                if (isChecked && !AllSettings.getFpsStable().getValue()) applySmartResolution(CallbackBridge.getCurrentFps());
+                else if (!isChecked && !AllSettings.getFpsStable().getValue()) restoreManualResolution();
                 mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.openMemoryInfo) {
                 AllSettings.getGameMenuShowMemory().put(isChecked).save();

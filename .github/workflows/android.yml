@@ -1,6 +1,5 @@
 name: XUI Launcher Android CI
-# Single push-triggered build; older runs for the same ref are cancelled.
-
+# One workflow run, one job, two ABI-specific debug APKs.
 on:
   push:
     branches: [xui-redesign, main]
@@ -16,7 +15,7 @@ permissions:
 jobs:
   build-debug:
     runs-on: ubuntu-22.04
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,35 +27,54 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Build universal debug APK
+      - name: Build ARM32 and ARM64 debug APKs
         shell: bash
         run: |
           set -euo pipefail
           chmod +x ./gradlew
-          ./gradlew ZalithLauncher:assembleDebug -Darch=all --no-daemon
+          mkdir -p dist
 
-      - name: Verify APK archive and signature
+          ./gradlew ZalithLauncher:clean ZalithLauncher:assembleDebug -Darch=arm --no-daemon
+          mapfile -t ARM32_APKS < <(find ZalithLauncher/build/outputs/apk/debug -maxdepth 1 -type f -name '*armeabi-v7a*.apk' -size +0c)
+          if [[ "${#ARM32_APKS[@]}" -ne 1 ]]; then
+            echo "Expected one ARM32 debug APK, found ${#ARM32_APKS[@]}."
+            find ZalithLauncher/build/outputs/apk/debug -maxdepth 1 -type f -print || true
+            exit 1
+          fi
+          cp "${ARM32_APKS[0]}" dist/XUI-Launcher-Debug-arm32.apk
+
+          ./gradlew ZalithLauncher:clean ZalithLauncher:assembleDebug -Darch=arm64 --no-daemon
+          mapfile -t ARM64_APKS < <(find ZalithLauncher/build/outputs/apk/debug -maxdepth 1 -type f -name '*arm64-v8a*.apk' -size +0c)
+          if [[ "${#ARM64_APKS[@]}" -ne 1 ]]; then
+            echo "Expected one ARM64 debug APK, found ${#ARM64_APKS[@]}."
+            find ZalithLauncher/build/outputs/apk/debug -maxdepth 1 -type f -print || true
+            exit 1
+          fi
+          cp "${ARM64_APKS[0]}" dist/XUI-Launcher-Debug-arm64.apk
+
+      - name: Verify both APK archives and signatures
         shell: bash
         run: |
           set -euo pipefail
-          APK_DIR="ZalithLauncher/build/outputs/apk/debug"
-          mapfile -t APK_FILES < <(find "$APK_DIR" -maxdepth 1 -type f -name '*.apk' -size +0c)
-          if [[ "${#APK_FILES[@]}" -ne 1 ]]; then
-            echo "Expected exactly one non-empty debug APK in $APK_DIR; found ${#APK_FILES[@]}."
-            find "$APK_DIR" -maxdepth 1 -type f -print || true
+          mapfile -t APK_FILES < <(find dist -maxdepth 1 -type f -name '*.apk' -size +0c | sort)
+          if [[ "${#APK_FILES[@]}" -ne 2 ]]; then
+            echo "Expected exactly two debug APKs, found ${#APK_FILES[@]}."
+            ls -lah dist || true
             exit 1
           fi
-          unzip -t "${APK_FILES[0]}"
           SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
           test -n "$SDK_ROOT"
           APKSIGNER="$(find "$SDK_ROOT/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
           test -n "$APKSIGNER"
-          "$APKSIGNER" verify --verbose "${APK_FILES[0]}"
+          for APK in "${APK_FILES[@]}"; do
+            unzip -t "$APK"
+            "$APKSIGNER" verify --verbose "$APK"
+          done
 
-      - name: Upload debug APK
+      - name: Upload ARM32 and ARM64 debug APKs
         uses: actions/upload-artifact@v4
         with:
-          name: XUI-Launcher-Debug
-          path: ZalithLauncher/build/outputs/apk/debug/*.apk
+          name: XUI-Launcher-Debug-ARM32-ARM64
+          path: dist/*.apk
           if-no-files-found: error
           compression-level: 0
