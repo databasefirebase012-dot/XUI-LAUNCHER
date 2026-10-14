@@ -104,6 +104,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -490,8 +491,15 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (binding != null) binding.backgroundVideoView.resumePlayback();
         setPageOpacity(AllSettings.getPageOpacity().getValue());
         VersionsManager.INSTANCE.refresh("LauncherActivity:onResume", false);
+    }
+
+    @Override
+    protected void onPause() {
+        if (binding != null) binding.backgroundVideoView.pausePlayback();
+        super.onPause();
     }
 
     @Override
@@ -503,6 +511,7 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        binding.backgroundVideoView.releasePlayback();
         binding.progressLayout.cleanUpObservers();
         ProgressKeeper.removeTaskCountListener(binding.progressLayout);
         ProgressKeeper.removeTaskCountListener(mProgressServiceKeeper);
@@ -585,7 +594,18 @@ public class LauncherActivity extends BaseActivity {
     }
 
     private void refreshBackground() {
-        BackgroundManager.setBackgroundImage(this, BackgroundType.MAIN_MENU, binding.backgroundView, this::refreshTopBarColor);
+        File media = BackgroundManager.getBackgroundMedia(BackgroundType.MAIN_MENU);
+        if (media != null && BackgroundManager.isVideo(media)) {
+            binding.backgroundView.setVisibility(View.GONE);
+            binding.backgroundVideoView.setVisibility(View.VISIBLE);
+            binding.backgroundVideoView.setVideoFile(media);
+            refreshTopBarColor(false);
+        } else {
+            binding.backgroundVideoView.setVideoFile(null);
+            binding.backgroundVideoView.setVisibility(View.GONE);
+            binding.backgroundView.setVisibility(View.VISIBLE);
+            BackgroundManager.setBackgroundImage(this, BackgroundType.MAIN_MENU, binding.backgroundView, this::refreshTopBarColor);
+        }
     }
 
     private void refreshTopBarColor(boolean loadFromBackground) {
