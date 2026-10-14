@@ -32,6 +32,7 @@ import com.movtery.zalithlauncher.InfoDistributor;
 import com.movtery.zalithlauncher.R;
 import com.movtery.zalithlauncher.context.ContextExecutor;
 import com.movtery.zalithlauncher.databinding.ActivityLauncherBinding;
+import com.movtery.zalithlauncher.event.single.BackgroundOpacityChangeEvent;
 import com.movtery.zalithlauncher.event.single.LaunchGameEvent;
 import com.movtery.zalithlauncher.event.single.MainBackgroundChangeEvent;
 import com.movtery.zalithlauncher.event.single.PageOpacityChangeEvent;
@@ -49,6 +50,7 @@ import com.movtery.zalithlauncher.feature.accounts.AccountsManager;
 import com.movtery.zalithlauncher.feature.accounts.LocalAccountUtils;
 import com.movtery.zalithlauncher.feature.background.BackgroundManager;
 import com.movtery.zalithlauncher.feature.background.BackgroundType;
+import com.movtery.zalithlauncher.utils.XuiBackgroundOpacity;
 import com.movtery.zalithlauncher.feature.download.item.ModLoaderWrapper;
 import com.movtery.zalithlauncher.feature.log.Logging;
 import com.movtery.zalithlauncher.feature.mod.modpack.install.InstallExtra;
@@ -152,6 +154,11 @@ public class LauncherActivity extends BaseActivity {
     @Subscribe()
     public void event(PageOpacityChangeEvent event) {
         setPageOpacity(event.getProgress());
+    }
+
+    @Subscribe()
+    public void event(BackgroundOpacityChangeEvent event) {
+        XuiBackgroundOpacity.apply(binding.getRoot(), event.getProgress(), this);
     }
 
     @Subscribe()
@@ -491,7 +498,10 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (binding != null) binding.backgroundVideoView.resumePlayback();
+        if (binding != null) {
+            binding.backgroundVideoView.resumePlayback();
+            XuiBackgroundOpacity.apply(binding.getRoot(), AllSettings.getLauncherBackgroundOpacity().getValue(), this);
+        }
         setPageOpacity(AllSettings.getPageOpacity().getValue());
         VersionsManager.INSTANCE.refresh("LauncherActivity:onResume", false);
     }
