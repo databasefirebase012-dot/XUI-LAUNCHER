@@ -71,10 +71,18 @@ jobs:
             "$APKSIGNER" verify --verbose "$APK"
           done
 
-      - name: Upload ARM32 and ARM64 debug APKs
+      - name: Upload ARM32 debug APK (separate artifact)
         uses: actions/upload-artifact@v4
         with:
-          name: XUI-Launcher-Debug-ARM32-ARM64
-          path: dist/*.apk
+          name: XUI-Launcher-Debug-ARM32
+          path: dist/XUI-Launcher-Debug-arm32.apk
+          if-no-files-found: error
+          compression-level: 0
+
+      - name: Upload ARM64 debug APK (separate artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: XUI-Launcher-Debug-ARM64
+          path: dist/XUI-Launcher-Debug-arm64.apk
           if-no-files-found: error
           compression-level: 0

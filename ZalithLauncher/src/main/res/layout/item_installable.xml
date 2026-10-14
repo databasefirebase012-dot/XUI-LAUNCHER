@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/_4sdp"
-    android:background="@drawable/xui_bg_card"
+    android:background="@drawable/xui_tab_outline"
     android:paddingVertical="@dimen/_12sdp">
 
     <LinearLayout
