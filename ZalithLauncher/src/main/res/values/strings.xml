@@ -646,7 +646,7 @@
     <!-- Splash -->
     <string name="splash_screen_desc">The launcher needs to install these contents to ensure Minecraft can start properly. These contents are included in the app and need to be extracted before they can be used. Click the button below to start extracting and updating these contents.</string>
     <string name="splash_screen_installing">The launcher is extracting these contents. The main interface will automatically open after extraction is complete. Please wait patiently.</string>
-    <string name="splash_screen_install_failed">One or more launcher components or Java runtimes could not be installed. The launcher has not been opened. Check the highlighted items and try Start again.</string>
+    <string name="splash_screen_install_failed">One or more launcher components or Java runtimes could not be installed. The launcher has not been opened. Check the item list and try Start again.</string>
     <string name="splash_screen_system_files_failed">Critical launcher files could not be extracted. Start is blocked to prevent opening an incomplete launcher. Press OK to retry.</string>
     <string name="splash_screen_lwjgl">Lightweight Java Game Library, Minecraft relies on it to run the game.</string>
     <string name="splash_screen_cacio">Provides a portable GUI backend for OpenJDK.</string>
