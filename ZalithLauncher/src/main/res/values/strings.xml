@@ -517,6 +517,8 @@
     <string name="setting_animation_speed_title">Animation Speed</string>
     <string name="setting_animation_speed_desc">Set the speed of animations in the launcher</string>
     <string name="setting_page_opacity_title">Page Opacity</string>
+    <string name="setting_launcher_background_opacity_title">Launcher Background Opacity</string>
+    <string name="setting_launcher_background_opacity_desc">Adjust the opacity of launcher button and card backgrounds. This does not change your selected image or video.</string>
     <string name="setting_page_opacity_desc">Set the opacity of the main pages in the launcher</string>
     <string name="setting_quit_launcher_title">Quit Launcher</string>
     <string name="setting_quit_launcher_desc">Whether to quit the launcher when the application officially starts the game</string>
