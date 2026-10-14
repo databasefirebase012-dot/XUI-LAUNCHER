@@ -8,7 +8,7 @@
     <color name="xui_bg_gradient_bottom">#0A0A0A</color>
     <color name="xui_bg_dark">#0A0A0A</color>
     <color name="xui_bg_card">#F2180808</color>
-    <color name="xui_bg_card_alt">#1A0A0A</color>
+    <color name="xui_bg_card_alt">#F21A0A0A</color>
     <color name="xui_text_primary">#FFFFFF</color>
     <color name="xui_text_secondary">#B8A0A0</color>
     <color name="xui_text_hint">#6B4040</color>
