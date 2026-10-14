@@ -7,7 +7,8 @@ class InstallableItem(
     val summary: String?,
     val task: AbstractUnpackTask,
     var isRunning: Boolean = false,
-    var isFinished: Boolean = false
+    var isFinished: Boolean = false,
+    var isFailed: Boolean = false
 ) : Comparable<InstallableItem> {
 
     override fun compareTo(other: InstallableItem): Int {
