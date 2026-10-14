@@ -2,70 +2,92 @@ package com.movtery.zalithlauncher.feature.unpack
 
 import android.content.Context
 import android.content.res.AssetManager
-import com.movtery.zalithlauncher.feature.log.Logging.i
+import com.movtery.zalithlauncher.feature.log.Logging
 import com.movtery.zalithlauncher.utils.path.PathManager
 import net.kdt.pojavlaunch.Tools
 import org.apache.commons.io.FileUtils
 import java.io.File
-import java.io.FileInputStream
-import java.io.InputStream
+import java.io.IOException
 
 class UnpackComponentsTask(val context: Context, val component: Components) : AbstractUnpackTask() {
-    private lateinit var am: AssetManager
-    private lateinit var rootDir: String
-    private lateinit var versionFile: File
-    private lateinit var input: InputStream
-    private var isCheckFailed: Boolean = false
+    private var assetManager: AssetManager? = null
+    private var rootDir: String = ""
+    private var versionFile: File? = null
+    private var bundledVersion: String? = null
+    private var initializationError: Throwable? = null
 
     init {
         runCatching {
-            am = context.assets
+            assetManager = context.assets
             rootDir = if (component.privateDirectory) PathManager.DIR_DATA else PathManager.DIR_GAME_HOME
             versionFile = File("$rootDir/${component.component}/version")
-            input = am.open("components/${component.component}/version")
-        }.getOrElse {
-            isCheckFailed = true
+            bundledVersion = context.assets.open("components/${component.component}/version")
+                .use { Tools.read(it).trim() }
+            require(!bundledVersion.isNullOrEmpty()) {
+                "Bundled component version is empty: ${component.component}"
+            }
+        }.onFailure { error ->
+            initializationError = error
+            Logging.e("UnpackComponents", "Bundled component assets are unavailable for ${component.component}", error)
         }
     }
 
-    fun isCheckFailed() = isCheckFailed
+    fun isCheckFailed(): Boolean = initializationError != null
 
     override fun isNeedUnpack(): Boolean {
-        if (isCheckFailed) return false
-
-        if (!versionFile.exists()) {
-            requestEmptyParentDir(versionFile)
-            i("Unpack Components", "${component.component}: Pack was installed manually, or does not exist...")
+        if (initializationError != null) return true
+        val expectedVersion = bundledVersion ?: return true
+        val localVersionFile = versionFile ?: return true
+        if (!localVersionFile.isFile) {
+            requestEmptyParentDir(localVersionFile)
             return true
-        } else {
-            val fis = FileInputStream(versionFile)
-            val release1 = Tools.read(input)
-            val release2 = Tools.read(fis)
-            if (release1 != release2) {
-                requestEmptyParentDir(versionFile)
-                return true
-            } else {
-                i("UnpackPrep", "${component.component}: Pack is up-to-date with the launcher, continuing...")
-                return false
-            }
         }
+        return runCatching { Tools.read(localVersionFile.absolutePath).trim() != expectedVersion }
+            .getOrDefault(true)
     }
 
     override fun run() {
         listener?.onTaskStart()
-        val fileList = am.list("components/${component.component}")
-        for (fileName in fileList!!) {
-            Tools.copyAssetFile(context, "components/${component.component}/$fileName", "$rootDir/${component.component}", true)
+        try {
+            initializationError?.let {
+                throw IOException("Cannot load bundled component assets for ${component.component}", it)
+            }
+            val assets = assetManager ?: throw IOException("AssetManager is unavailable")
+            val localVersionFile = versionFile ?: throw IOException("Component destination is unavailable")
+            val fileList = assets.list("components/${component.component}")
+                ?: throw IOException("Cannot list bundled component ${component.component}")
+            if (fileList.isEmpty()) {
+                throw IOException("Bundled component ${component.component} is empty")
+            }
+
+            requestEmptyParentDir(localVersionFile)
+            for (fileName in fileList) {
+                Tools.copyAssetFile(
+                    context,
+                    "components/${component.component}/$fileName",
+                    "$rootDir/${component.component}",
+                    true
+                )
+            }
+
+            if (isNeedUnpack()) {
+                throw IOException("Component ${component.component} failed post-extraction validation")
+            }
+            listener?.onTaskEnd()
+        } catch (error: Throwable) {
+            Logging.e("UnpackComponents", "Failed to extract component ${component.component}", error)
+            throw error
         }
-        listener?.onTaskEnd()
     }
 
     private fun requestEmptyParentDir(file: File) {
-        file.parentFile!!.apply {
-            if (exists() and isDirectory) {
+        file.parentFile?.apply {
+            if (exists() && isDirectory) {
                 FileUtils.deleteDirectory(this)
             }
-            mkdirs()
-        }
+            if (!exists() && !mkdirs()) {
+                throw IOException("Failed to create component directory: $absolutePath")
+            }
+        } ?: throw IOException("Component parent directory is unavailable")
     }
 }
