@@ -144,6 +144,7 @@ jobs:
           echo "=== Analysis result ===" | tee -a "$REPORT"
           if [ "$FAIL" -ne 0 ]; then
             echo "FAIL: analysis errors found; build must not run." | tee -a "$REPORT"
+            cat "$REPORT"
             exit 1
           fi
           echo "PASS: analysis succeeded; build may proceed." | tee -a "$REPORT"
