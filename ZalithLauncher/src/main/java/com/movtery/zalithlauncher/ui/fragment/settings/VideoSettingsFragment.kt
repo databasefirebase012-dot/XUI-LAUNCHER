@@ -182,6 +182,20 @@ class VideoSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragmen
 
         SwitchSettingsWrapper(
             context,
+            AllSettings.resolutionSmart,
+            binding.resolutionSmartLayout,
+            binding.resolutionSmart
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.fpsStable,
+            binding.fpsStableLayout,
+            binding.fpsStable
+        )
+
+        SwitchSettingsWrapper(
+            context,
             AllSettings.sustainedPerformance,
             binding.sustainedPerformanceLayout,
             binding.sustainedPerformance
