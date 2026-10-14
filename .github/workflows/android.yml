@@ -173,11 +173,16 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install required Android build tools
-        run: sdkmanager "ndk;25.2.9519653" "build-tools;34.0.0"
+      - name: Configure Android SDK and install required build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          test -n "$SDK_ROOT"
+          SDKMANAGER="$(find "$SDK_ROOT/cmdline-tools" -type f -name sdkmanager -print -quit)"
+          test -x "$SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses >/dev/null
+          "$SDKMANAGER" "platforms;android-34" "ndk;25.2.9519653" "build-tools;34.0.0"
 
       - name: Build JRE components
         run: |
