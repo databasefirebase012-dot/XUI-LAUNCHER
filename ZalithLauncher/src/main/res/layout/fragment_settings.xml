@@ -42,9 +42,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:tab_draw_indicator="true"
             app:tab_indicator_enable_flow="true"
-            app:tab_indicator_drawable="@drawable/selector_bar_vertical"
+            app:tab_indicator_drawable="@drawable/selector_bar_vertical_xui"
             app:tab_indicator_x_offset="@dimen/_6sdp"
-            app:tab_orientation="VERTICAL">
+            app:tab_orientation="VERTICAL"
+            app:tab_deselect_color="#B8A0A0"
+            app:tab_select_color="#EF4444">
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
@@ -67,7 +69,7 @@
                     app:srcCompat="@drawable/ic_setting_video" />
 
                 <TextView
-                    android:layout_width="@dimen/_70sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_8sdp"
@@ -97,7 +99,7 @@
                     app:srcCompat="@drawable/ic_menu_custom_controls" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -128,7 +130,7 @@
                     app:srcCompat="@drawable/ic_setting_game" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -159,7 +161,7 @@
                     app:srcCompat="@drawable/ic_setting_launcher" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
@@ -190,7 +192,7 @@
                     app:srcCompat="@drawable/ic_setting_experimental" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"

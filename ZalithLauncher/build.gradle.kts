@@ -144,16 +144,16 @@ android {
 
     splits {
         val arch = System.getProperty("arch", "all")
-        if (arch != "all") {
-            abi {
-                isEnable = true
-                reset()
-                when (arch) {
-                    "arm" -> include("armeabi-v7a")
-                    "arm64" -> include("arm64-v8a")
-                    "x86" -> include("x86")
-                    "x86_64" -> include("x86_64")
-                }
+        abi {
+            // Each CI build selects one ABI explicitly; never create a universal APK.
+            isEnable = arch != "all"
+            isUniversalApk = false
+            reset()
+            when (arch) {
+                "arm" -> include("armeabi-v7a")
+                "arm64" -> include("arm64-v8a")
+                "x86" -> include("x86")
+                "x86_64" -> include("x86_64")
             }
         }
     }
