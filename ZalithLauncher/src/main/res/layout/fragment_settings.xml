@@ -52,16 +52,15 @@
             app:tab_orientation="HORIZONTAL">
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="2dp"
+                android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
                 <ImageView
                     android:id="@+id/video_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
@@ -88,16 +87,15 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="2dp"
+                android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
                 <ImageView
                     android:id="@+id/controls_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
@@ -124,16 +122,15 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="2dp"
+                android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
                 <ImageView
                     android:id="@+id/game_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
@@ -160,16 +157,15 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="2dp"
+                android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
                 <ImageView
                     android:id="@+id/launcher_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"
@@ -196,16 +192,15 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="0dp"
+                android:layout_width="58dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="2dp"
+                android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
                 android:background="@drawable/xui_tab_outline">
                 <ImageView
                     android:id="@+id/experimental_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="3dp"

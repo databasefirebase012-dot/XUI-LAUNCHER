@@ -36,14 +36,8 @@ class AboutInfoPageFragment : Fragment(R.layout.fragment_about_info_page) {
             dec2.text = "by XRANS OFFICIAL"
             dec3.text = "Blood Gradient Edition\nA community-built launcher fork for Minecraft: Java Edition, with a dark interface and blood-red accents.\nOpen source under GPL-3.0. See LICENSE and NOTICE for license details and upstream attribution."
 
-            githubButton.setOnClickListener {
-                ZHTools.openLink(requireActivity(), "https://github.com/databasefirebase012-dot/XUI-LAUNCHER")
-            }
             licenseButton.setOnClickListener {
                 ZHTools.openLink(requireActivity(), "https://www.gnu.org/licenses/gpl-3.0.html")
-            }
-            discordButton.setOnClickListener {
-                ZHTools.openLink(requireActivity(), "https://discord.gg/yDDkTHp4cJ")
             }
             qqGroupButton.visibility = View.GONE
 
