@@ -13,6 +13,9 @@ class UnpackSingleFilesTask(val context: Context) : AbstractUnpackTask() {
         runCatching {
             copyFromAssets(context)
             Tools.copyAssetFile(context, "resolv.conf", PathManager.DIR_DATA, false)
-        }.getOrElse { e("AsyncAssetManager", "Failed to unpack critical components !") }
+        }.getOrElse { error ->
+            e("AsyncAssetManager", "Failed to unpack critical launcher files", error)
+            throw error
+        }
     }
 }
