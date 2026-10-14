@@ -5,16 +5,15 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  # PR updates validate feature branches without scheduling a duplicate push run.
   push:
-    branches: [main]
-  pull_request:
+    branches: [main, xui-redesign]
   workflow_dispatch:
 
 jobs:
   BuildRelease:
     if: github.repository_owner == 'ZalithLauncher' && !startsWith(github.ref, 'refs/pull/') && github.ref_name == 'main'
     runs-on: ubuntu-22.04
+    timeout-minutes: 45
     strategy:
       matrix:
         arch: [ "all", "arm", "arm64", "x86", "x86_64" ]
@@ -46,11 +45,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: gradle
 
       - name: Build JRE JAR files
         run: |
           chmod +x gradlew
-          mkdir out
+          mkdir -p out
           ./gradlew jre_lwjgl3glfw:build --no-daemon
 
       - name: Build Release ${{ matrix.arch }}
@@ -58,18 +58,36 @@ jobs:
           MOVTERY_KEYSTORE_PASSWORD: ${{ secrets.MOVTERY_KEYSTORE_PASSWORD }}
         run: |
           chmod +x gradlew
-          ./gradlew ZalithLauncher:assemblerelease -Darch=${{ matrix.arch }}
+          ./gradlew ZalithLauncher:assemblerelease -Darch=${{ matrix.arch }} --no-daemon
 
-      - name: Upload Release ${{matrix.arch}}
-        continue-on-error: true
+      - name: Verify Release APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK_DIR="ZalithLauncher/build/outputs/apk/release"
+          mapfile -t APK_FILES < <(find "$APK_DIR" -maxdepth 1 -type f -name '*.apk' -size +0c)
+          if [[ "${#APK_FILES[@]}" -ne 1 ]]; then
+            echo "Expected exactly one release APK in $APK_DIR; found ${#APK_FILES[@]}."
+            find "$APK_DIR" -maxdepth 1 -type f -print || true
+            exit 1
+          fi
+          unzip -t "${APK_FILES[0]}"
+          APKSIGNER="$(find "${ANDROID_HOME:-$ANDROID_SDK_ROOT}/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
+          test -n "$APKSIGNER"
+          "$APKSIGNER" verify --verbose "${APK_FILES[0]}"
+
+      - name: Upload Release ${{ matrix.arch }}
         uses: actions/upload-artifact@v4
         with:
-          name: XUI-Launcher (Release) ${{ matrix.arch }}
-          path: ZalithLauncher/build/outputs/apk/release/*
+          name: XUI-Launcher-Release-${{ github.ref_name }}-${{ matrix.arch }}
+          path: ZalithLauncher/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+          compression-level: 0
 
   BuildDebug:
     if: startsWith(github.ref, 'refs/pull/') || github.ref_name != 'main' || github.repository_owner != 'ZalithLauncher'
     runs-on: ubuntu-22.04
+    timeout-minutes: 45
     strategy:
       matrix:
         arch: [ "all", "arm", "arm64", "x86", "x86_64" ]
@@ -84,20 +102,39 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: gradle
 
       - name: Build JRE JAR files
         run: |
           chmod +x gradlew
-          mkdir out
+          mkdir -p out
           ./gradlew jre_lwjgl3glfw:build --no-daemon
 
-      - name: Build Debug ${{matrix.arch}}
+      - name: Build Debug ${{ matrix.arch }}
         run: |
           chmod +x gradlew
-          ./gradlew ZalithLauncher:assembleDebug -Darch=${{ matrix.arch }}
+          ./gradlew ZalithLauncher:assembleDebug -Darch=${{ matrix.arch }} --no-daemon
 
-      - name: Upload Debug ${{matrix.arch}}
+      - name: Verify Debug APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          APK_DIR="ZalithLauncher/build/outputs/apk/debug"
+          mapfile -t APK_FILES < <(find "$APK_DIR" -maxdepth 1 -type f -name '*.apk' -size +0c)
+          if [[ "${#APK_FILES[@]}" -ne 1 ]]; then
+            echo "Expected exactly one debug APK in $APK_DIR; found ${#APK_FILES[@]}."
+            find "$APK_DIR" -maxdepth 1 -type f -print || true
+            exit 1
+          fi
+          unzip -t "${APK_FILES[0]}"
+          APKSIGNER="$(find "${ANDROID_HOME:-$ANDROID_SDK_ROOT}/build-tools" -type f -name apksigner | sort -V | tail -n 1)"
+          test -n "$APKSIGNER"
+          "$APKSIGNER" verify --verbose "${APK_FILES[0]}"
+
+      - name: Upload Debug ${{ matrix.arch }}
         uses: actions/upload-artifact@v4
         with:
-          name: XUI-Launcher (Debug) ${{ matrix.arch }}
-          path: ZalithLauncher/build/outputs/apk/debug/*
+          name: XUI-Launcher-Debug-${{ github.ref_name }}-${{ matrix.arch }}
+          path: ZalithLauncher/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          compression-level: 0
