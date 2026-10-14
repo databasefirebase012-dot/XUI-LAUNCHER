@@ -212,6 +212,11 @@ fun generateJavaClass(sourceOutputDir: File, packageName: String, className: Str
     println("Generated Java file: ${javaFile.absolutePath}")
 }
 
+// Assets are assembled from the generated JRE jar; declare the dependency explicitly for Gradle 8.11.
+tasks.matching { it.name.startsWith("merge") && it.name.endsWith("Assets") }.configureEach {
+    dependsOn(":jre_lwjgl3glfw:jar")
+}
+
 tasks.register("generateInfoDistributor") {
     doLast {
         val constantMap = mapOf(

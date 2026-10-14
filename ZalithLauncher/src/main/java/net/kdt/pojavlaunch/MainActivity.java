@@ -312,6 +312,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     protected void onDestroy() {
+        if (mGameMenuWrapper != null) mGameMenuWrapper.release();
         super.onDestroy();
         mMenuSettingsInitListener.closeSpinner();
         CallbackBridge.removeGrabListener(binding.mainTouchpad);
@@ -535,6 +536,30 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         else return super.dispatchTrackballEvent(ev);
     }
 
+    public static void applySmartResolution(int fps) {
+        if (fps <= 0 || binding == null || !AllSettings.getResolutionSmart().getValue()) return;
+        final int target = fps <= 15 ? 40 : (fps <= 20 ? 50 : (fps <= 25 ? 70 : AllSettings.getResolutionRatio().getValue()));
+        applyResolutionScale(target);
+    }
+
+    public static void restoreManualResolution() {
+        if (binding != null) applyResolutionScale(AllSettings.getResolutionRatio().getValue());
+    }
+
+    private static void applyResolutionScale(int percent) {
+        ActivityGameBinding current = binding;
+        if (current == null) return;
+        current.getRoot().post(() -> {
+            ActivityGameBinding active = binding;
+            if (active == null) return;
+            float scale = Math.max(25, Math.min(300, percent)) / 100f;
+            if (Math.abs(AllStaticSettings.scaleFactor - scale) > 0.004f) {
+                AllStaticSettings.scaleFactor = scale;
+                active.mainGameRenderView.refreshSize();
+            }
+        });
+    }
+
     private class MenuSettingsInitListener implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener, OnSpinnerItemSelectedListener<HotbarType>, DrawerLayout.DrawerListener {
         private final ViewGameMenuBinding binding;
 
@@ -556,6 +581,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             //初始化Switch的状态
             this.binding.openMemoryInfo.setChecked(AllSettings.getGameMenuShowMemory().getValue());
             this.binding.openFpsInfo.setChecked(AllSettings.getGameMenuShowFPS().getValue());
+            this.binding.resolutionSmart.setChecked(AllSettings.getResolutionSmart().getValue());
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
             this.binding.disableDoubleTap.setChecked(AllSettings.getDisableDoubleTap().getValue());
             this.binding.enableGyro.setChecked(AllSettings.getEnableGyro().getValue());
@@ -571,6 +597,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.sendCustomKey.setOnClickListener(this);
             this.binding.openMemoryInfo.setOnCheckedChangeListener(this);
             this.binding.openMemoryInfoLayout.setOnClickListener(this);
+            this.binding.resolutionSmart.setOnCheckedChangeListener(this);
+            this.binding.resolutionSmartLayout.setOnClickListener(this);
             this.binding.openFpsInfo.setOnCheckedChangeListener(this);
             this.binding.openFpsInfoLayout.setOnClickListener(this);
 
@@ -680,6 +708,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             else if (v == binding.sendCustomKey) dialogSendCustomKey();
             else if (v == binding.openMemoryInfoLayout) MenuUtils.toggleSwitchState(binding.openMemoryInfo);
             else if (v == binding.openFpsInfoLayout) MenuUtils.toggleSwitchState(binding.openFpsInfo);
+            else if (v == binding.resolutionSmartLayout) MenuUtils.toggleSwitchState(binding.resolutionSmart);
             else if (v == binding.resolutionScalerRemove) MenuUtils.adjustSeekbar(binding.resolutionScaler, -1);
             else if (v == binding.resolutionScalerAdd) MenuUtils.adjustSeekbar(binding.resolutionScaler, 1);
             else if (v == binding.disableGesturesLayout) MenuUtils.toggleSwitchState(binding.disableGestures);
@@ -751,7 +780,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
 
         @Override public void onCheckedChanged(CompoundButton v, boolean isChecked) {
-            if (v == binding.openMemoryInfo) {
+            if (v == binding.resolutionSmart) {
+                AllSettings.getResolutionSmart().put(isChecked).save();
+                if (isChecked) applySmartResolution(CallbackBridge.getCurrentFps());
+                else restoreManualResolution();
+                mGameMenuWrapper.refreshSettingsState();
+            } else if (v == binding.openMemoryInfo) {
                 AllSettings.getGameMenuShowMemory().put(isChecked).save();
                 mGameMenuWrapper.refreshSettingsState();
             } else if (v == binding.openFpsInfo) {

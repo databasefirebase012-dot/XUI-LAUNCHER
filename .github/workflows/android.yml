@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           chmod +x ./gradlew
-          ./gradlew jre_lwjgl3glfw:build ZalithLauncher:assembleDebug -Darch=all --no-daemon
+          ./gradlew ZalithLauncher:assembleDebug -Darch=all --no-daemon
 
       - name: Verify APK archive and signature
         shell: bash

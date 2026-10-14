@@ -18,8 +18,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="132dp"
         android:layout_height="0dp"
+        android:background="@drawable/xui_bg_gradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,15 +36,15 @@
 
         <com.angcyo.tablayout.DslTabLayout
             android:id="@+id/settings_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/menu_overlay"
+            android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/shadowView"
             app:layout_constraintStart_toStartOf="parent"
             app:tab_draw_indicator="true"
             app:tab_indicator_enable_flow="true"
             app:tab_indicator_drawable="@drawable/selector_bar_vertical"
-            app:tab_indicator_x_offset="@dimen/_6sdp"
+            app:tab_indicator_x_offset="@dimen/_2sdp"
             app:tab_orientation="VERTICAL">
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout

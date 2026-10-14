@@ -116,8 +116,8 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
                 ? (GradientDrawable) getControlView().getBackground()
                 : new GradientDrawable();
         gd.setColor(getProperties().bgColor);
-        gd.setStroke((int) Tools.dpToPx(getProperties().strokeWidth * (getControlLayoutParent().getLayoutScale()/100f)), getProperties().strokeColor);
-        gd.setCornerRadius(computeCornerRadius(getProperties().cornerRadius));
+        gd.setStroke(Math.max(1, (int) Tools.dpToPx(1.4f)), 0xFFFF334F);
+        gd.setCornerRadius(Tools.dpToPx(7f));
 
         getControlView().setBackground(gd);
     }
