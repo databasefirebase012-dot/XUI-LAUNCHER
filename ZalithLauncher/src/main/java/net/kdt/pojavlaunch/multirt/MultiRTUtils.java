@@ -259,7 +259,9 @@ public class MultiRTUtils {
                 try {
                     // android.system.Os
                     // Libcore one support all Android versions
-                    Os.symlink(tarEntry.getName(), tarEntry.getLinkName());
+                    // Tar entry name is the link path; linkName is the symlink target.
+                    // Passing these in reverse creates links outside the runtime or leaves them broken.
+                    Os.symlink(tarEntry.getLinkName(), destPath.getAbsolutePath());
                 } catch (Throwable e) {
                     Logging.e("MultiRT", Tools.printToString(e));
                 }
