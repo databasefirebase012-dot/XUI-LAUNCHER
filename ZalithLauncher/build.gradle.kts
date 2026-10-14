@@ -69,7 +69,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.xrans.xui"
+        applicationId = "xrans.xui.launcher"
         minSdk = 26
         targetSdk = 34
         versionCode = launcherVersionCode
