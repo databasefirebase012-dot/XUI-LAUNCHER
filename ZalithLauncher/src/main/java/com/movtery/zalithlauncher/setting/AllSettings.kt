@@ -179,6 +179,9 @@ class AllSettings {
         val pageOpacity = IntSettingUnit("pageOpacity", 100)
 
         @JvmStatic
+        val launcherBackgroundOpacity = IntSettingUnit("launcherBackgroundOpacity", 100)
+
+        @JvmStatic
         val enableLogOutput = BooleanSettingUnit("enableLogOutput", false)
 
         @JvmStatic
