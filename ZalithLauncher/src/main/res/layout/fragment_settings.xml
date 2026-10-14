@@ -10,23 +10,26 @@
         android:id="@+id/settings_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_minus4sdp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/settings_layout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_layout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_layout"
-        android:layout_width="132dp"
-        android:layout_height="0dp"
-        android:background="@drawable/xui_bg_gradient"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/xui_bg_card"
+        android:elevation="3dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:id="@+id/shadowView"
+            android:visibility="gone"
             android:layout_width="@dimen/_4sdp"
             android:layout_height="0dp"
             android:background="@drawable/shadow_gradient_left"
@@ -38,6 +41,7 @@
             android:id="@+id/settings_tab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/_4sdp"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/shadowView"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +49,7 @@
             app:tab_indicator_enable_flow="true"
             app:tab_indicator_drawable="@drawable/selector_bar_vertical"
             app:tab_indicator_x_offset="@dimen/_2sdp"
-            app:tab_orientation="VERTICAL">
+            app:tab_orientation="HORIZONTAL">
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
@@ -74,7 +78,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/video_image"
                     android:text="@string/setting_category_video"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -98,14 +103,15 @@
                     app:srcCompat="@drawable/ic_menu_custom_controls" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/controls_image"
                     android:text="@string/setting_category_control"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -129,14 +135,15 @@
                     app:srcCompat="@drawable/ic_setting_game" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/game_image"
                     android:text="@string/setting_category_game"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -160,14 +167,15 @@
                     app:srcCompat="@drawable/ic_setting_launcher" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/launcher_image"
                     android:text="@string/setting_category_launcher"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -191,14 +199,15 @@
                     app:srcCompat="@drawable/ic_setting_experimental" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/experimental_image"
                     android:text="@string/setting_category_experimental"
-                    android:textColor="@color/black_or_white" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
         </com.angcyo.tablayout.DslTabLayout>

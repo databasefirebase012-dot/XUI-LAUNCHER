@@ -11,20 +11,26 @@
         android:id="@+id/download_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_minus4sdp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/classify_layout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classify_layout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/classify_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/xui_bg_card"
+        android:elevation="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <View
             android:id="@+id/classify_shadowView"
+            android:visibility="gone"
             android:layout_width="@dimen/_4sdp"
             android:layout_height="0dp"
             android:background="@drawable/shadow_gradient_left"
@@ -34,16 +40,17 @@
 
         <com.angcyo.tablayout.DslTabLayout
             android:id="@+id/classify_tab"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/menu_overlay"
+            android:paddingHorizontal="@dimen/_4sdp"
+            android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/classify_shadowView"
             app:layout_constraintStart_toStartOf="parent"
             app:tab_draw_indicator="true"
             app:tab_indicator_enable_flow="true"
             app:tab_indicator_drawable="@drawable/selector_bar_vertical"
             app:tab_indicator_x_offset="@dimen/_4sdp"
-            app:tab_orientation="VERTICAL">
+            app:tab_orientation="HORIZONTAL">
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="wrap_content"
@@ -67,7 +74,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/mod_image"
                     android:text="@string/download_classify_mod"
-                    android:textColor="@color/xui_text_primary" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -92,7 +100,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/modpack_image"
                     android:text="@string/download_classify_modpack"
-                    android:textColor="@color/xui_text_primary" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -117,7 +126,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/resource_pack_image"
                     android:text="@string/download_classify_resource_pack"
-                    android:textColor="@color/xui_text_primary" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -142,7 +152,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_toEndOf="@+id/shader_pack_image"
                     android:text="@string/download_classify_shader_pack"
-                    android:textColor="@color/xui_text_primary" />
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
         </com.angcyo.tablayout.DslTabLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

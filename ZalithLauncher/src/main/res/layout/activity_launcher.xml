@@ -31,6 +31,7 @@
             android:maxLines="1"
             android:textColor="@color/xui_text_primary"
             android:textSize="@dimen/_16ssp"
+            android:letterSpacing="0.02"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/download_button"
