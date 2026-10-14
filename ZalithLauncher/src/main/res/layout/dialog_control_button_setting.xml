@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/padding_moderate"
         android:paddingVertical="@dimen/padding_moderate"
+        android:textColor="#FFFFFFFF"
         app:layout_optimizationLevel="standard|dimensions|chains">
 
 
