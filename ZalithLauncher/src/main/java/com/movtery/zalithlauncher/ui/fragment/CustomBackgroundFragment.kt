@@ -155,7 +155,7 @@ class CustomBackgroundFragment : FragmentWithAnim(R.layout.fragment_custom_backg
                 }
 
                 returnButton.setOnClickListener { ZHTools.onBackPressed(requireActivity()) }
-                addFileButton.setOnClickListener { openDocumentLauncher?.launch(arrayOf("image/*")) }
+                addFileButton.setOnClickListener { openDocumentLauncher?.launch(arrayOf("image/*", "video/*")) }
                 refreshButton.setOnClickListener {
                     fileRecyclerView.listFileAt(backgroundPath())
                 }
@@ -223,7 +223,7 @@ class CustomBackgroundFragment : FragmentWithAnim(R.layout.fragment_custom_backg
 
     private fun refreshBackgroundPreview() {
         binding.preview.let {
-            BackgroundManager.getBackgroundImage(backgroundType)?.apply {
+            BackgroundManager.getBackgroundMedia(backgroundType)?.apply {
                 Glide.with(requireActivity())
                     .load(this)
                     .fitCenter()
