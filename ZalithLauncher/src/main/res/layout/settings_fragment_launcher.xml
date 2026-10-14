@@ -460,6 +460,55 @@
                     tools:text="0" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
+            <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
+                android:id="@+id/launcherBackgroundOpacity_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground">
+
+                <TextView
+                    android:id="@+id/launcherBackgroundOpacity_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:text="@string/setting_launcher_background_opacity_title"
+                    android:textColor="@color/black_or_white" />
+
+                <TextView
+                    android:id="@+id/launcherBackgroundOpacity_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/launcherBackgroundOpacity_title"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginHorizontal="@dimen/_12sdp"
+                    android:text="@string/setting_launcher_background_opacity_desc" />
+
+                <SeekBar
+                    android:id="@+id/launcherBackgroundOpacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/launcherBackgroundOpacity_value"
+                    android:layout_alignBottom="@+id/launcherBackgroundOpacity_value"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/launcherBackgroundOpacity_value"
+                    android:max="100"
+                    android:min="0" />
+
+                <TextView
+                    android:id="@+id/launcherBackgroundOpacity_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/launcherBackgroundOpacity_summary"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    tools:text="0" />
+            </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
