@@ -7,6 +7,12 @@
     android:background="@drawable/xui_bg_gradient"
     tools:ignore="ContentDescription">
 
+    <com.movtery.zalithlauncher.ui.view.XuiVideoBackgroundView
+        android:id="@+id/background_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/background_view"
         android:layout_width="match_parent"
