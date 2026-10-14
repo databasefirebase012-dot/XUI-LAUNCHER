@@ -94,10 +94,12 @@ class CustomBackgroundFragment : FragmentWithAnim(R.layout.fragment_custom_backg
                         val fileName = file!!.name
 
                         val image = isImage(file)
+                        val video = backgroundType == BackgroundType.MAIN_MENU && BackgroundManager.isVideo(file)
+                        val supportedMedia = image || video
                         val filesButton = FilesButton()
-                        filesButton.setButtonVisibility(false, false, true, true, true, image)
-                        //默认虚拟鼠标不支持分享、重命名、删除操作
-                        val message = if (image) { //如果选中的不是一个图片，那么将显示默认的文件选择提示信息
+                        filesButton.setButtonVisibility(false, false, true, true, true, supportedMedia)
+                        // The launcher main-menu background accepts images or videos; other background types remain image-only.
+                        val message = if (supportedMedia) {
                             getString(R.string.custom_background_dialog_message, currentStatusName)
                         } else {
                             getString(R.string.file_message)
