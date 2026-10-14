@@ -60,8 +60,6 @@
                 <Switch
                     android:thumbTint="#FFFFFFFF"
                     android:trackTint="#FFDC2626"
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
                     android:id="@+id/disableGestures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,9 +132,6 @@
                     android:text="@string/setting_longpress_trigger_desc" />
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
                     android:progressTint="#FFDC2626"
                     android:thumbTint="#FFDC2626"
                     android:progressBackgroundTint="#FF333333"
