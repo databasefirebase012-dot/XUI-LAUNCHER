@@ -41,7 +41,6 @@
             android:id="@+id/settings_tab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/_4sdp"
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/shadowView"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +53,8 @@
             app:tab_item_auto_equ_width="false">
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="78dp"
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.2"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
@@ -89,7 +89,8 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="78dp"
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.2"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
@@ -124,7 +125,8 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="78dp"
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.2"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
@@ -159,7 +161,8 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="78dp"
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.2"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
@@ -194,7 +197,8 @@
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
-                android:layout_width="78dp"
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.2"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="1dp"
                 android:padding="2dp"
