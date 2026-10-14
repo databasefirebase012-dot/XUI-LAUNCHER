@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/background_card"
+    android:background="@drawable/background_xui_card"
     android:padding="@dimen/_8sdp"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="@color/black_or_white"
+                android:textColor="#FFFFFFFF"
                 android:text="@string/option_edit_controls"/>
 
             <View
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/background_item"
+                android:background="@drawable/background_xui_button"
                 android:text="@string/customctrl_addbutton"
                 android:gravity="center_horizontal"
                 android:paddingVertical="@dimen/_12sdp"
