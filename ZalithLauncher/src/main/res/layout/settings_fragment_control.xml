@@ -8,15 +8,15 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical"
-        android:paddingVertical="@dimen/_12sdp">
+        android:paddingVertical="20dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/custom_controls_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_2sdp"
             android:paddingVertical="@dimen/_12sdp">
@@ -26,7 +26,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_12sdp"
                 android:text="@string/setting_category_control"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFEF4444"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/disableGestures_layout"
@@ -56,6 +58,8 @@
                     android:text="@string/setting_disable_gestures_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/disableGestures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,6 +95,8 @@
                     android:text="@string/setting_disable_swap_hand_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/disableDoubleTap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -126,6 +132,9 @@
                     android:text="@string/setting_longpress_trigger_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/timeLongPressTrigger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -194,6 +203,9 @@
                     android:text="@string/setting_button_scale_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/buttonscale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -243,6 +255,8 @@
                     android:text="@string/setting_button_allcaps_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/buttonAllCaps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -297,6 +311,9 @@
                     android:text="@string/setting_mouse_scale_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/mousescale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -346,6 +363,9 @@
                     android:text="@string/setting_mouse_speed_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/mousespeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -392,6 +412,8 @@
                     android:text="@string/setting_mouse_start_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/mouse_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -473,6 +495,8 @@
                     android:text="@string/setting_enable_gyro_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/enableGyro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -508,6 +532,9 @@
                     android:text="@string/setting_gyro_sensitivity_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/gyroSensitivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -557,6 +584,9 @@
                     android:text="@string/setting_gyro_sample_rate_description" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/gyroSampleRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -606,6 +636,8 @@
                     android:text="@string/setting_gyro_smoothing_desc" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/gyroSmoothing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -642,6 +674,8 @@
                     android:text="@string/setting_gyro_invert_x_axis_description" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/gyroInvertX"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -677,6 +711,8 @@
                     android:text="@string/setting_gyro_invert_y_axis_description" />
 
                 <Switch
+                    android:thumbTint="#FFFFFFFF"
+                    android:trackTint="#FFDC2626"
                     android:id="@+id/gyroInvertY"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -783,6 +819,9 @@
                     android:text="@string/setting_deadzone_scale_desc" />
 
                 <SeekBar
+                    android:progressTint="#FFDC2626"
+                    android:thumbTint="#FFDC2626"
+                    android:progressBackgroundTint="#FF333333"
                     android:id="@+id/gamepad_deadzone_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

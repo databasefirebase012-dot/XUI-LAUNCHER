@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.movtery.zalithlauncher.InfoCenter
@@ -38,13 +39,15 @@ class SplashActivity : BaseActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.titleText.text = InfoDistributor.APP_NAME
+        binding.titleText.text = getString(R.string.xui_brand_title)
+        binding.splashText.text = getString(R.string.xui_brand_edition) + "\n\n" + getString(R.string.splash_screen_desc)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@SplashActivity)
             adapter = installableAdapter
         }
 
         binding.startButton.apply {
+            text = getString(R.string.xui_start)
             setOnClickListener {
                 if (isStarted) return@setOnClickListener
                 isStarted = true
@@ -60,15 +63,36 @@ class SplashActivity : BaseActivity() {
             return
         }
 
-        //如果安卓版本小于等于9，则检查存储权限（不是管理所有文件权限），拥有存储权限会保证文件、文件夹正常创建
-        //但是并不强制要求用户必须授予权限，如果用户拒绝，那么之后产生的问题将由用户承担
+        if (!showDisclaimerIfNeeded()) return
+        continueStartup()
+    }
+
+
+    private fun showDisclaimerIfNeeded(): Boolean {
+        val preferences = getSharedPreferences(XUI_PREFERENCES, MODE_PRIVATE)
+        if (preferences.getBoolean(KEY_DISCLAIMER_ACCEPTED, false)) return true
+
+        AlertDialog.Builder(this)
+            .setTitle(R.string.xui_disclaimer_title)
+            .setMessage(R.string.xui_disclaimer_message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.generic_ok) { _, _ ->
+                preferences.edit().putBoolean(KEY_DISCLAIMER_ACCEPTED, true).apply()
+                continueStartup()
+            }
+            .show()
+        return false
+    }
+
+    private fun continueStartup() {
+        // Android 9 and earlier use the existing legacy storage permission flow.
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P && !StoragePermissionsUtils.hasStoragePermissions(this)) {
             TipDialog.Builder(this)
                 .setTitle(R.string.generic_warning)
                 .setMessage(InfoCenter.replaceName(this, R.string.permissions_write_external_storage))
                 .setWarning()
                 .setConfirmClickListener { requestStoragePermissions() }
-                .setCancelClickListener { checkEnd() } //用户取消，那就跟随用户的意愿
+                .setCancelClickListener { checkEnd() }
                 .showDialog()
         } else {
             checkEnd()
@@ -143,5 +167,7 @@ class SplashActivity : BaseActivity() {
 
     companion object {
         private const val STORAGE_PERMISSION_REQUEST_CODE: Int = 100
+        private const val XUI_PREFERENCES = "xui_launcher_preferences"
+        private const val KEY_DISCLAIMER_ACCEPTED = "disclaimer_accepted"
     }
 }

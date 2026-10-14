@@ -66,13 +66,15 @@ abstract class AbstractResourceDownloadFragment(
 
             override fun loadMoreResult() {
                 mTaskInProgress?.let { return }
-                mTaskInProgress = SelfReferencingFuture(SearchApiTask(mCurrentResult))
-                    .startOnExecutor(TaskExecutors.getDefault())
+                mTaskInProgress = SelfReferencingFuture(
+                    SearchApiTask(mCurrentResult, copyFilters(mCurrentSearchFilters), mCurrentPlatform)
+                ).startOnExecutor(TaskExecutors.getDefault())
             }
         })
 
     private var mTaskInProgress: Future<*>? = null
     private var mCurrentResult: SearchResult? = null
+    private var mCurrentSearchFilters: Filters = Filters()
     protected var mLastPage = false
 
     abstract fun initInstallButton(installButton: Button)
@@ -138,6 +140,7 @@ abstract class AbstractResourceDownloadFragment(
             }
             selectedMcVersionView.setOnLongClickListener {
                 selectedMcVersionView.text = null
+                mFilters.mcVersion = null
                 true
             }
         }
@@ -198,7 +201,19 @@ abstract class AbstractResourceDownloadFragment(
         }
     }
 
+    private fun copyFilters(source: Filters): Filters = Filters().apply {
+        name = source.name
+        mcVersion = source.mcVersion
+        modloader = source.modloader
+        sort = source.sort
+        category = source.category
+    }
+
     private fun initSpinnerIndex() {
+        mCurrentPlatform = recommendedPlatform
+        mFilters.sort = Sort.RELEVANT
+        mFilters.category = categoryList.firstOrNull() ?: Category.ALL
+        mFilters.modloader = null
         binding.apply {
             platformSpinner.selectItemByIndex(recommendedPlatform.ordinal)
             sortSpinner.selectItemByIndex(0)
@@ -293,8 +308,11 @@ abstract class AbstractResourceDownloadFragment(
             mTaskInProgress = null
         }
         this.mLastPage = false
-        mTaskInProgress = SelfReferencingFuture(SearchApiTask(null))
-            .startOnExecutor(TaskExecutors.getDefault())
+        mCurrentResult = null
+        mCurrentSearchFilters = copyFilters(mFilters)
+        mTaskInProgress = SelfReferencingFuture(
+            SearchApiTask(null, copyFilters(mCurrentSearchFilters), mCurrentPlatform)
+        ).startOnExecutor(TaskExecutors.getDefault())
     }
 
     /**
@@ -329,12 +347,14 @@ abstract class AbstractResourceDownloadFragment(
     }
 
     private inner class SearchApiTask(
-        private val mPreviousResult: SearchResult?
+        private val mPreviousResult: SearchResult?,
+        private val filters: Filters,
+        private val platform: Platform
     ) : SelfReferencingFuture.FutureInterface {
 
         override fun run(myFuture: Future<*>) {
             runCatching {
-                val result: SearchResult? = mCurrentPlatform.helper.search(classify, mFilters, mPreviousResult ?: SearchResult())
+                val result: SearchResult? = platform.helper.search(classify, filters, mPreviousResult ?: SearchResult())
 
                 TaskExecutors.runInUIThread {
                     if (myFuture.isCancelled) return@runInUIThread
@@ -369,6 +389,8 @@ abstract class AbstractResourceDownloadFragment(
                 }
             }.getOrElse { e ->
                 TaskExecutors.runInUIThread {
+                    if (myFuture.isCancelled) return@runInUIThread
+                    mTaskInProgress = null
                     mInfoAdapter.setItems(MOD_ITEMS_EMPTY)
                     Logging.e("SearchTask", Tools.printToString(e))
                     if (e is PlatformNotSupportedException) {

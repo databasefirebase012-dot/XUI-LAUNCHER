@@ -69,7 +69,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = nameId
+        applicationId = "com.xrans.xui"
         minSdk = 26
         targetSdk = 34
         versionCode = launcherVersionCode
@@ -79,7 +79,7 @@ android {
     }
 
     buildTypes {
-        val storageProviderId = "$nameId.storage_provider"
+        val storageProviderId = "com.xrans.xui.storage_provider"
 
         getByName("debug") {
             applicationIdSuffix = ".debug"
@@ -210,6 +210,11 @@ fun generateJavaClass(sourceOutputDir: File, packageName: String, className: Str
         """.trimMargin()
     )
     println("Generated Java file: ${javaFile.absolutePath}")
+}
+
+// Assets are assembled from the generated JRE jar; declare the dependency explicitly for Gradle 8.11.
+tasks.matching { it.name.startsWith("merge") && it.name.endsWith("Assets") }.configureEach {
+    dependsOn(":jre_lwjgl3glfw:jar")
 }
 
 tasks.register("generateInfoDistributor") {

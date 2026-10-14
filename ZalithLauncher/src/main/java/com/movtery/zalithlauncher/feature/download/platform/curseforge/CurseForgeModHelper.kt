@@ -36,14 +36,20 @@ class CurseForgeModHelper {
                 throw PlatformNotSupportedException("The platform does not support the ${filters.category} category!")
             }
 
-            PlatformUtils.searchModLikeWithChinese(filters, type == CurseForgeCommonUtils.CURSEFORGE_MOD_CLASS_ID)?.let {
-                filters.name = it
+            val searchFilters = Filters().apply {
+                name = PlatformUtils.searchModLikeWithChinese(
+                    filters,
+                    type == CurseForgeCommonUtils.CURSEFORGE_MOD_CLASS_ID
+                ).takeIf { !it.isNullOrBlank() } ?: filters.name
+                mcVersion = filters.mcVersion
+                modloader = filters.modloader
+                sort = filters.sort
+                category = filters.category
             }
-
             val params = HashMap<String, Any>()
-            CurseForgeCommonUtils.putDefaultParams(params, filters, lastResult.previousCount)
+            CurseForgeCommonUtils.putDefaultParams(params, searchFilters, lastResult.previousCount)
             params["classId"] = type
-            filters.modloader?.let { params["modLoaderTypes"] = "[${it.curseforgeId}]" }
+            searchFilters.modloader?.let { params["modLoaderTypes"] = "[${it.curseforgeId}]" }
 
             val response = api.get("mods/search", params, JsonObject::class.java) ?: return null
             val dataArray = response.getAsJsonArray("data") ?: return null

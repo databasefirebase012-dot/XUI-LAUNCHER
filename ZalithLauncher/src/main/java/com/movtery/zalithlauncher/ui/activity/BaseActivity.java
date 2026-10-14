@@ -27,6 +27,12 @@ import org.greenrobot.eventbus.Subscribe;
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+        XuiWatermark.attach(this);
+    }
+
+    @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(LocaleHelper.Companion.setLocale(newBase));
     }

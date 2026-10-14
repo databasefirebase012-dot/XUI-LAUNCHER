@@ -9,7 +9,6 @@ import com.movtery.anim.animations.Animations
 import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.databinding.SettingsFragmentLauncherBinding
 import com.movtery.zalithlauncher.event.single.PageOpacityChangeEvent
-import com.movtery.zalithlauncher.feature.update.UpdateUtils
 import com.movtery.zalithlauncher.setting.AllSettings
 import com.movtery.zalithlauncher.ui.fragment.CustomBackgroundFragment
 import com.movtery.zalithlauncher.ui.fragment.FragmentWithAnim
@@ -165,19 +164,9 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             start(context)
         }
 
-        BaseSettingsWrapper(
-            context,
-            binding.checkUpdateLayout
-        ) {
-            UpdateUtils.checkDownloadedPackage(context, force = true, ignore = false)
-        }
-
-        SwitchSettingsWrapper(
-            context,
-            AllSettings.acceptPreReleaseUpdates,
-            binding.acceptPreReleaseUpdatesLayout,
-            binding.acceptPreReleaseUpdates
-        )
+        // Upstream self-updates are disabled in the XUI fork.
+        binding.checkUpdateLayout.visibility = View.GONE
+        binding.acceptPreReleaseUpdatesLayout.visibility = View.GONE
 
         val notificationPermissionRequest = SwitchSettingsWrapper(
             context,

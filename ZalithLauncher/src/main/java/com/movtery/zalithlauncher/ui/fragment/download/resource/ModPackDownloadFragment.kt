@@ -10,6 +10,7 @@ import com.movtery.anim.animations.Animations
 import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.event.value.InstallLocalModpackEvent
 import com.movtery.zalithlauncher.feature.download.enums.Classify
+import com.movtery.zalithlauncher.feature.download.enums.Platform
 import com.movtery.zalithlauncher.feature.download.utils.CategoryUtils
 import com.movtery.zalithlauncher.feature.mod.modpack.install.InstallExtra
 import com.movtery.zalithlauncher.task.Task
@@ -26,7 +27,8 @@ class ModPackDownloadFragment(parentFragment: Fragment? = null) : AbstractResour
     parentFragment,
     Classify.MODPACK,
     CategoryUtils.getModPackCategory(),
-    true
+    true,
+    Platform.MODRINTH
 ) {
     private var openDocumentLauncher: ActivityResultLauncher<Any>? = null
 

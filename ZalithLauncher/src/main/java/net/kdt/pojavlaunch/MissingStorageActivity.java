@@ -5,10 +5,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.movtery.zalithlauncher.ui.activity.XuiWatermark;
+
 import com.movtery.zalithlauncher.InfoCenter;
 import com.movtery.zalithlauncher.R;
 
 public class MissingStorageActivity extends AppCompatActivity {
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+        XuiWatermark.attach(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

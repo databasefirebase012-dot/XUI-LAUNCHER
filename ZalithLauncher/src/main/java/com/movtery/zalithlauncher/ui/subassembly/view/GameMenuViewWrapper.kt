@@ -15,6 +15,7 @@ import com.petterp.floatingx.assist.helper.FxScopeHelper
 import com.petterp.floatingx.listener.IFxViewLifecycle
 import com.petterp.floatingx.listener.control.IFxScopeControl
 import com.petterp.floatingx.view.FxViewHolder
+import net.kdt.pojavlaunch.MainActivity
 import org.lwjgl.glfw.CallbackBridge
 import java.util.Timer
 import java.util.TimerTask
@@ -29,6 +30,7 @@ class GameMenuViewWrapper(
     }
 
     private var timer: Timer? = null
+    private var smartResolutionTimer: Timer? = null
     private val memoryText: String = AllSettings.gameMenuMemoryText.getValue()
     private var showMemory: Boolean = false
     private var showFPS: Boolean = false
@@ -38,6 +40,7 @@ class GameMenuViewWrapper(
 
     init {
         refreshState()
+        refreshSmartResolutionTimer()
     }
 
     private fun getWindow(): IFxScopeControl {
@@ -78,7 +81,33 @@ class GameMenuViewWrapper(
 
     fun refreshSettingsState() {
         refreshState()
+        refreshSmartResolutionTimer()
         thinkForVisibility()
+    }
+
+    private fun refreshSmartResolutionTimer() {
+        smartResolutionTimer?.cancel()
+        smartResolutionTimer = null
+        if (AllSettings.resolutionSmart.getValue() || AllSettings.fpsStable.getValue()) {
+            smartResolutionTimer = Timer("XUI-ResolutionSmart", true).apply {
+                scheduleAtFixedRate(object : TimerTask() {
+                    override fun run() {
+                        val fps = CallbackBridge.getCurrentFps()
+                        if (AllSettings.fpsStable.getValue()) MainActivity.applyFpsStable(fps)
+                        else MainActivity.applySmartResolution(fps)
+                    }
+                }, 1000L, 1000L)
+            }
+        } else {
+            MainActivity.resetFpsStable()
+            MainActivity.restoreManualResolution()
+        }
+    }
+
+    fun release() {
+        smartResolutionTimer?.cancel()
+        smartResolutionTimer = null
+        cancelInfoTimer()
     }
 
     /**

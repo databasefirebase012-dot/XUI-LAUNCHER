@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -44,7 +45,8 @@ public class ControlButton extends TextView implements ControlInterface {
         setAllCaps(AllSettings.getButtonAllCaps().getValue());
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
-        setTextSize(14); // Nullify the default size setting
+        setTextSize(12); // Compact label for the XUI controller style
+        setTypeface(Typeface.DEFAULT_BOLD);
         setOutlineProvider(null); // Disable shadow casting, removing one drawing pass
 
         //setOnLongClickListener(this);

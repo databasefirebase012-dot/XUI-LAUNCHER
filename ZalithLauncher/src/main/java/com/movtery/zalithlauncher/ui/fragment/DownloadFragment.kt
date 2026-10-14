@@ -19,7 +19,6 @@ import com.movtery.zalithlauncher.ui.fragment.download.resource.ModDownloadFragm
 import com.movtery.zalithlauncher.ui.fragment.download.resource.ModPackDownloadFragment
 import com.movtery.zalithlauncher.ui.fragment.download.resource.ResourcePackDownloadFragment
 import com.movtery.zalithlauncher.ui.fragment.download.resource.ShaderPackDownloadFragment
-import com.movtery.zalithlauncher.ui.fragment.download.resource.WorldDownloadFragment
 import org.greenrobot.eventbus.EventBus
 
 class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
@@ -40,7 +39,6 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViewPager()
-
         binding.classifyTab.observeIndexChange { _, toIndex, reselect, fromUser ->
             if (reselect) return@observeIndexChange
             if (fromUser) binding.downloadViewpager.setCurrentItem(toIndex, false)
@@ -53,7 +51,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
             offscreenPageLimit = 1
             isUserInputEnabled = false
-            registerOnPageChangeCallback(object: OnPageChangeCallback() {
+            registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     onFragmentSelect(position)
@@ -81,14 +79,14 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
         super.onDestroyView()
     }
 
-    private class ViewPagerAdapter(private val fragment: Fragment): FragmentStateAdapter(fragment.requireActivity()) {
-        override fun getItemCount(): Int = 5
+    private class ViewPagerAdapter(private val fragment: Fragment) : FragmentStateAdapter(fragment.requireActivity()) {
+        override fun getItemCount(): Int = 4
+
         override fun createFragment(position: Int): Fragment {
-            return when(position) {
+            return when (position) {
                 1 -> ModPackDownloadFragment(fragment)
                 2 -> ResourcePackDownloadFragment(fragment)
-                3 -> WorldDownloadFragment(fragment)
-                4 -> ShaderPackDownloadFragment(fragment)
+                3 -> ShaderPackDownloadFragment(fragment)
                 else -> ModDownloadFragment(fragment)
             }
         }
