@@ -56,7 +56,17 @@ class ErrorActivity : BaseActivity() {
         val throwable = extras.getSerializable(BUNDLE_THROWABLE) as Throwable?
         val stackTrace = if (throwable != null) Tools.printToString(throwable) else "<null>"
         val strSavePath = extras.getString(BUNDLE_SAVE_PATH)
-        val errorText = "$strSavePath :\r\n\r\n$stackTrace"
+        val diagnosis = diagnoseCrash(stackTrace)
+        val errorText = buildString {
+            appendLine("XUI CRASH ANALYSIS")
+            appendLine()
+            appendLine("Likely cause: ${diagnosis.first}")
+            appendLine("Suggested action: ${diagnosis.second}")
+            appendLine()
+            appendLine("Log path: ${strSavePath ?: "not provided"}")
+            appendLine()
+            append(stackTrace)
+        }
 
         binding.apply {
             this.errorTitle.text = InfoCenter.replaceName(context, R.string.error_fatal)
@@ -64,6 +74,42 @@ class ErrorActivity : BaseActivity() {
 
             this.topView.setBackgroundColor(ContextCompat.getColor(context, R.color.background_menu_top_error))
             this.background.setBackgroundColor(ContextCompat.getColor(context, R.color.background_app_error))
+        }
+    }
+
+    /**
+     * Best-effort crash hints. These are heuristic; the full stack trace is retained
+     * so users can confirm the suspected cause using Share Log Files.
+     */
+    private fun diagnoseCrash(stackTrace: String): Pair<String, String> {
+        val log = stackTrace.lowercase()
+        return when {
+            log.contains("org.lwjgl.opengl") || log.contains("opengl") ||
+                log.contains("egl_bad") || log.contains("glx") ->
+                "Graphics renderer / OpenGL" to
+                    "Try another renderer or lower graphics settings."
+            log.contains("outofmemoryerror") || log.contains("failed to allocate") ||
+                log.contains("could not reserve enough space") ->
+                "Memory allocation / RAM pressure" to
+                    "Lower allocated RAM and close other apps."
+            log.contains("unsupportedclassversionerror") ||
+                log.contains("unrecognized vm option") ||
+                log.contains("invalid maximum heap size") ||
+                log.contains("could not create the java virtual machine") ->
+                "Java runtime / JVM arguments" to
+                    "Reset custom JVM arguments and choose a compatible Java runtime."
+            log.contains("modloading") || log.contains("modlauncher") ||
+                log.contains("fabricloader") || log.contains("net.fabricmc") ||
+                log.contains("net.minecraftforge") || log.contains("mixin") ->
+                "Possible mod / loader conflict" to
+                    "Temporarily remove recently added mods and check the first mod named in the log."
+            log.contains("failed to download") || log.contains("unknownhostexception") ||
+                log.contains("sockettimeoutexception") || log.contains("connection refused") ->
+                "Network or download failure" to
+                    "Check the connection and retry the download."
+            else ->
+                "Cause not identified automatically" to
+                    "Use Share Log Files and inspect the first error / 'Caused by' section."
         }
     }
 
