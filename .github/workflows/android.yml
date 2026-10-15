@@ -217,18 +217,16 @@ jobs:
           printf 'y\n%.0s' {1..100} | "$SDKMANAGER" --licenses >/dev/null
           "$SDKMANAGER" "platforms;android-34" "ndk;25.2.9519653" "build-tools;34.0.0"
 
-      - name: Build JRE components
-        run: |
-          chmod +x gradlew
-          mkdir -p out
-          ./gradlew jre_lwjgl3glfw:build --no-daemon
+      - name: Prepare Gradle wrapper
+        run: chmod +x gradlew
 
       - name: Build 32-bit APK
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf ZalithLauncher/build/outputs/apk/debug
-          ./gradlew ZalithLauncher:assembleDebug --no-daemon -Darch=arm
+          # System.getProperty("arch") is not a declared Gradle task input. Clean first
+          # so the merged assets cannot be reused from the other ABI build.
+          ./gradlew clean jre_lwjgl3glfw:build ZalithLauncher:assembleDebug --no-daemon -Darch=arm
           APK="$(find ZalithLauncher/build/outputs/apk/debug -type f -name '*armeabi-v7a*.apk' -print -quit)"
           test -n "$APK"
           mkdir -p dist
@@ -238,8 +236,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf ZalithLauncher/build/outputs/apk/debug
-          ./gradlew ZalithLauncher:assembleDebug --no-daemon -Darch=arm64
+          # Clean again: the ARM64 APK must merge ARM64 runtime archives, not cached ARM32 assets.
+          ./gradlew clean jre_lwjgl3glfw:build ZalithLauncher:assembleDebug --no-daemon -Darch=arm64
           APK="$(find ZalithLauncher/build/outputs/apk/debug -type f -name '*arm64-v8a*.apk' -print -quit)"
           test -n "$APK"
           mkdir -p dist
