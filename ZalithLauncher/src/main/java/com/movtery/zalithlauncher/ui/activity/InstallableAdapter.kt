@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.movtery.zalithlauncher.databinding.ItemInstallableBinding
 import com.movtery.zalithlauncher.feature.unpack.OnTaskRunningListener
-import java.util.concurrent.atomic.AtomicInteger
 
 class InstallableAdapter(
     private val items: List<InstallableItem>,
@@ -55,12 +54,17 @@ class InstallableAdapter(
             return
         }
 
-        val remaining = AtomicInteger(pending.size)
-        pending.forEach { indexed ->
-            val index = indexed.index
-            val item = indexed.value
-            item.isFailed = false
-            Thread({
+        // Run installs sequentially. MultiRTUtils and its runtime cache/progress UI are
+        // shared process-wide; extracting several JRE archives concurrently can race and
+        // leave a partially installed runtime. The launcher is small enough to prefer safety.
+        Thread({
+            for (indexed in pending) {
+                val index = indexed.index
+                val item = indexed.value
+                item.isFailed = false
+                item.isRunning = true
+                updateUI { notifyItemChanged(index) }
+
                 val result = runCatching {
                     item.task.setTaskRunningListener(object : OnTaskRunningListener {
                         override fun onTaskStart() {
@@ -68,8 +72,6 @@ class InstallableAdapter(
                             updateUI { notifyItemChanged(index) }
                         }
 
-                        // Success is determined only after run() returns and the installed
-                        // component/runtime is re-checked below.
                         override fun onTaskEnd() = Unit
                     })
                     item.task.run()
@@ -82,14 +84,12 @@ class InstallableAdapter(
                 item.isFinished = result.isSuccess
                 item.isFailed = result.isFailure
                 updateUI { notifyItemChanged(index) }
+            }
 
-                if (remaining.decrementAndGet() == 0) {
-                    val allSucceeded = items.all { it.isFinished && !it.isFailed }
-                    synchronized(this) { runInProgress = false }
-                    updateUI { listener.onAllTasksCompleted(allSucceeded) }
-                }
-            }, "XUI-Install-${item.name}").start()
-        }
+            val allSucceeded = items.all { it.isFinished && !it.isFailed }
+            synchronized(this) { runInProgress = false }
+            updateUI { listener.onAllTasksCompleted(allSucceeded) }
+        }, "XUI-Install-Tasks").start()
     }
 
     private fun updateUI(action: () -> Unit) {
