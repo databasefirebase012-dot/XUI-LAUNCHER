@@ -160,13 +160,13 @@ public class MainMenuFragment extends FragmentWithAnim {
     public void slideIn(AnimPlayer animPlayer) {
         animPlayer.apply(new AnimPlayer.Entry(binding.launcherMenu, Animations.BounceInDown))
                 .apply(new AnimPlayer.Entry(binding.playLayout, Animations.BounceInLeft))
-                .apply(new AnimPlayer.Entry(binding.playButtonsLayout, Animations.BounceEnlarge));
+                .apply(new AnimPlayer.Entry(binding.playLayout, Animations.BounceEnlarge));
     }
 
     @Override
     public void slideOut(AnimPlayer animPlayer) {
         animPlayer.apply(new AnimPlayer.Entry(binding.launcherMenu, Animations.FadeOutUp))
                 .apply(new AnimPlayer.Entry(binding.playLayout, Animations.FadeOutRight))
-                .apply(new AnimPlayer.Entry(binding.playButtonsLayout, Animations.BounceShrink));
+                .apply(new AnimPlayer.Entry(binding.playLayout, Animations.BounceShrink));
     }
 }
