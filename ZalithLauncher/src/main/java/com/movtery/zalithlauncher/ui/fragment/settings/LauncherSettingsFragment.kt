@@ -21,6 +21,8 @@ import com.movtery.zalithlauncher.utils.CleanUpCache.Companion.start
 import com.movtery.zalithlauncher.utils.ZHTools
 import net.kdt.pojavlaunch.LauncherActivity
 import org.greenrobot.eventbus.EventBus
+import android.content.Intent
+import com.movtery.zalithlauncher.utils.xui.XuiMediaTools
 
 class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fragment_launcher, SettingCategory.LAUNCHER) {
     private lateinit var binding: SettingsFragmentLauncherBinding
@@ -41,6 +43,7 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = requireContext()
+        XuiMediaTools.addControls(this, binding.root)
 
         SwitchSettingsWrapper(
             context,
@@ -189,6 +192,11 @@ class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fr
             binding.notificationPermissionRequest
         )
         setupNotificationRequestPreference(notificationPermissionRequest)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        XuiMediaTools.handleResult(this, requestCode, resultCode, data)
     }
 
     override fun slideIn(animPlayer: AnimPlayer) {

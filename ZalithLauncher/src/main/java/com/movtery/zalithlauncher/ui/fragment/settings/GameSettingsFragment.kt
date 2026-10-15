@@ -22,6 +22,8 @@ import com.movtery.zalithlauncher.utils.platform.MemoryUtils.Companion.getFreeDe
 import com.movtery.zalithlauncher.utils.platform.MemoryUtils.Companion.getTotalDeviceMemory
 import com.movtery.zalithlauncher.utils.platform.MemoryUtils.Companion.getUsedDeviceMemory
 import com.movtery.zalithlauncher.utils.stringutils.StringUtils
+import com.movtery.zalithlauncher.utils.xui.XuiMediaTools
+import android.content.Intent
 import net.kdt.pojavlaunch.Architecture
 import net.kdt.pojavlaunch.Tools
 import net.kdt.pojavlaunch.contracts.OpenDocumentWithExtension
@@ -51,6 +53,7 @@ class GameSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = requireContext()
+        XuiMediaTools.addControls(this, binding.root)
 
         SwitchSettingsWrapper(
             context,
@@ -215,6 +218,11 @@ class GameSettingsFragment : AbstractSettingsFragment(R.layout.settings_fragment
         openGameMenuFPS()
         updateGameMenuMemoryText()
         setGameMenuAlpha(AllSettings.gameMenuAlpha.getValue().toFloat() / 100F)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        XuiMediaTools.handleResult(this, requestCode, resultCode, data)
     }
 
     override fun slideIn(animPlayer: AnimPlayer) {

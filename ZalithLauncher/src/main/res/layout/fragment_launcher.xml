@@ -320,10 +320,26 @@
                     android:textColor="@color/xui_text_primary"
                     android:textSize="12sp" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
-            <View
+            <Button
+                android:id="@+id/skin_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/xui_button_outline"
+                android:text="Skin"
+                android:textColor="@color/xui_text_primary"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/music_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:background="@drawable/xui_button_outline"
+                android:text="Music"
+                android:textColor="@color/xui_text_primary"
+                android:textAllCaps="false" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
