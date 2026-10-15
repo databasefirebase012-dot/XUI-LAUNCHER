@@ -265,7 +265,33 @@ jobs:
             echo "$BADGING"
             echo "$BADGING" | grep -Fq "package: name='xrans.xui.launcher'"
             echo "$BADGING" | grep -Fq "native-code: '$ABI'"
-            echo "PASS: $FILE size=$SIZE bytes, package verified, ABI=$ABI, ZIP integrity valid."
+
+            # Verify the packaged APK, not only the source tree: startup tasks read these
+            # files through Android AssetManager. A missing archive would make Start fail.
+            case "$ABI" in
+              armeabi-v7a) JRE_ARCH="arm" ;;
+              arm64-v8a) JRE_ARCH="arm64" ;;
+              *) echo "ERROR: unexpected ABI $ABI" >&2; exit 1 ;;
+            esac
+            for JRE in jre-8 jre-17 jre-21 jre-25; do
+              for ASSET in version universal.tar.xz "bin-$JRE_ARCH.tar.xz"; do
+                unzip -Z1 "$FILE" | grep -Fxq "assets/components/$JRE/$ASSET" || {
+                  echo "ERROR: $FILE is missing assets/components/$JRE/$ASSET" >&2
+                  exit 1
+                }
+              done
+            done
+            for COMPONENT in other_login caciocavallo caciocavallo17 lwjgl3 components; do
+              unzip -Z1 "$FILE" | grep -Fxq "assets/components/$COMPONENT/version" || {
+                echo "ERROR: $FILE is missing assets/components/$COMPONENT/version" >&2
+                exit 1
+              }
+              unzip -Z1 "$FILE" | grep -Fq "assets/components/$COMPONENT/" || {
+                echo "ERROR: $FILE contains no assets for component $COMPONENT" >&2
+                exit 1
+              }
+            done
+            echo "PASS: $FILE size=$SIZE bytes, package and ABI verified, ZIP integrity valid, all startup component/JRE assets present."
           done
 
       - name: Upload 32-bit APK
