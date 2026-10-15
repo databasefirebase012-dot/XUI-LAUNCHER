@@ -7,15 +7,15 @@
     <color name="xui_bg_gradient_top">#1A0000</color>
     <color name="xui_bg_gradient_bottom">#0A0A0A</color>
     <color name="xui_bg_dark">#0A0A0A</color>
-    <color name="xui_bg_card">#FF180808</color>
-    <color name="xui_bg_card_alt">#FF1A0A0A</color>
+    <color name="xui_bg_card">#B8180808</color>
+    <color name="xui_bg_card_alt">#B31A0A0A</color>
     <color name="xui_text_primary">#FFFFFF</color>
     <color name="xui_text_secondary">#B8A0A0</color>
     <color name="xui_text_hint">#6B4040</color>
     <color name="xui_watermark">#40FFFFFF</color>
-    <color name="xui_divider">#80DC2626</color>
+    <color name="xui_divider">#A6EF4444</color>
     <color name="xui_ripple">#66EF4444</color>
-    <color name="xui_glow">#40EF4444</color>
+    <color name="xui_glow">#66120808</color>
 
     <color name="black_or_white">@color/xui_text_primary</color>
     <color name="background_app">@color/xui_bg_dark</color>
