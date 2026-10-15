@@ -34,6 +34,7 @@ import com.movtery.zalithlauncher.ui.subassembly.account.AccountViewWrapper;
 import com.movtery.zalithlauncher.utils.path.PathManager;
 import com.movtery.zalithlauncher.utils.ZHTools;
 import com.movtery.zalithlauncher.utils.anim.ViewAnimUtils;
+import com.movtery.zalithlauncher.utils.xui.XuiMediaTools;
 
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
@@ -95,6 +96,9 @@ public class MainMenuFragment extends FragmentWithAnim {
             }
         });
 
+        binding.skinButton.setOnClickListener(v -> XuiMediaTools.chooseSkin(this));
+        binding.musicButton.setOnClickListener(v -> XuiMediaTools.playAudio(this));
+        binding.musicButton.setOnLongClickListener(v -> { XuiMediaTools.chooseAudio(this); return true; });
         binding.playButton.setOnClickListener(v -> EventBus.getDefault().post(new LaunchGameEvent()));
 
         binding.versionName.setSelected(true);
