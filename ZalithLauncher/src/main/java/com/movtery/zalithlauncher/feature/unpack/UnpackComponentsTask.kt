@@ -42,8 +42,32 @@ class UnpackComponentsTask(val context: Context, val component: Components) : Ab
             requestEmptyParentDir(localVersionFile)
             return true
         }
-        return runCatching { Tools.read(localVersionFile.absolutePath).trim() != expectedVersion }
-            .getOrDefault(true)
+        val versionMatches = runCatching {
+            Tools.read(localVersionFile.absolutePath).trim() == expectedVersion
+        }.getOrDefault(false)
+        if (!versionMatches) return true
+
+        val assets = assetManager ?: return true
+        return !runCatching {
+            hasCompleteAssetTree(
+                assets,
+                "components/${component.component}",
+                File(rootDir, component.component)
+            )
+        }.getOrDefault(false)
+    }
+
+    /**
+     * A version marker alone is not proof that extraction completed. Check every
+     * bundled asset exists at its installed destination so a partial extraction is retried.
+     */
+    private fun hasCompleteAssetTree(assets: AssetManager, assetPath: String, destination: File): Boolean {
+        val children = assets.list(assetPath) ?: return false
+        if (children.isEmpty()) return destination.isFile
+        if (!destination.isDirectory) return false
+        return children.all { child ->
+            hasCompleteAssetTree(assets, "$assetPath/$child", File(destination, child))
+        }
     }
 
     override fun run() {
