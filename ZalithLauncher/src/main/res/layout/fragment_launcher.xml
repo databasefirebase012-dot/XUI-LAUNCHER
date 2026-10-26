@@ -112,11 +112,11 @@
 
         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
             android:id="@+id/version"
-            android:layout_width="52dp"
-            android:layout_height="56dp"
+            android:layout_width="46dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/xui_button_outline"
-            android:padding="5dp"
+            android:padding="3dp"
             app:ripple_for_relative="true">
             <ImageView
                 android:id="@+id/version_icon"
