@@ -175,6 +175,12 @@ class SplashActivity : BaseActivity() {
                 isCheckingStartupFiles = false
                 if (result.isSuccess) {
                     installableAdapter.checkAllTask()
+                    if (installableAdapter.areAllTasksFinished()) {
+                        // All bundled components and runtimes are already installed and healthy.
+                        // Do not show the setup screen again on ordinary launcher starts.
+                        toMain()
+                        return@runOnUiThread
+                    }
                     binding.splashText.setText(R.string.splash_screen_desc)
                     binding.startButton.isEnabled = true
                     binding.startButton.isClickable = true
