@@ -58,11 +58,24 @@ class ErrorActivity : BaseActivity() {
         val stackTrace = if (throwable != null) Tools.printToString(throwable) else "<null>"
         val strSavePath = extras.getString(BUNDLE_SAVE_PATH)
         val diagnosis = diagnoseCrash(stackTrace)
+        val report = runCatching { XuiErrorAnalyzer.analyze(-1) }.getOrNull()
         val errorText = buildString {
-            appendLine("XUI CRASH ANALYSIS")
+            appendLine("XUI SMART ERROR ANALYZER")
             appendLine()
             appendLine("Likely cause: ${diagnosis.first}")
             appendLine("Suggested action: ${diagnosis.second}")
+            if (report != null) {
+                appendLine()
+                appendLine("Renderer aktif: ${report.renderer}")
+                appendLine("Kemungkinan tambahan:")
+                report.findings.forEachIndexed { index, finding -> appendLine("${index + 1}. $finding") }
+                appendLine("Saran:")
+                report.actions.forEachIndexed { index, action -> appendLine("${index + 1}. $action") }
+                if (report.logExcerpt.isNotBlank()) {
+                    appendLine()
+                    appendLine("Baris log terkait: ${report.logExcerpt}")
+                }
+            }
             appendLine()
             appendLine("Log path: ${strSavePath ?: "not provided"}")
             appendLine()
