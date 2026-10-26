@@ -3,10 +3,15 @@ package net.kdt.pojavlaunch.fragments;
 import static com.movtery.zalithlauncher.event.single.RefreshVersionsEvent.MODE.END;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +52,17 @@ public class MainMenuFragment extends FragmentWithAnim {
     public static final String TAG = "MainMenuFragment";
     private FragmentLauncherBinding binding;
     private AccountViewWrapper accountViewWrapper;
+    private final Handler dashboardClockHandler = new Handler(Looper.getMainLooper());
+    private final Runnable dashboardClockUpdater = new Runnable() {
+        @Override
+        public void run() {
+            if (binding == null || !isAdded()) return;
+            Date now = new Date();
+            binding.xuiHeroTitle.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(now));
+            binding.xuiHeroSubtitle.setText(DateFormat.getDateInstance(DateFormat.FULL).format(now));
+            dashboardClockHandler.postDelayed(this, 1000L);
+        }
+    };
 
     public MainMenuFragment() {
         super(R.layout.fragment_launcher);
@@ -64,6 +80,8 @@ public class MainMenuFragment extends FragmentWithAnim {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         binding.aboutText.setText(InfoCenter.replaceName(requireActivity(), R.string.about_tab));
+        dashboardClockHandler.removeCallbacks(dashboardClockUpdater);
+        dashboardClockUpdater.run();
         binding.aboutButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, AboutFragment.class, AboutFragment.TAG, null));
         binding.customControlButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, ControlButtonFragment.class, ControlButtonFragment.TAG, null));
         binding.openMainDirButton.setOnClickListener(v -> {
@@ -139,6 +157,14 @@ public class MainMenuFragment extends FragmentWithAnim {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void event(AccountUpdateEvent event) {
         if (accountViewWrapper != null) accountViewWrapper.refreshAccountInfo();
+    }
+
+    @Override
+    public void onDestroyView() {
+        dashboardClockHandler.removeCallbacks(dashboardClockUpdater);
+        binding = null;
+        accountViewWrapper = null;
+        super.onDestroyView();
     }
 
     @Override
