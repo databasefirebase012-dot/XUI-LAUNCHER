@@ -3,13 +3,20 @@ package net.kdt.pojavlaunch.fragments;
 import static com.movtery.zalithlauncher.event.single.RefreshVersionsEvent.MODE.END;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import eightbitlab.com.blurview.BlurTarget;
+import eightbitlab.com.blurview.BlurView;
 
 import com.movtery.anim.AnimPlayer;
 import com.movtery.anim.animations.Animations;
@@ -34,6 +41,7 @@ import com.movtery.zalithlauncher.ui.subassembly.account.AccountViewWrapper;
 import com.movtery.zalithlauncher.utils.path.PathManager;
 import com.movtery.zalithlauncher.utils.ZHTools;
 import com.movtery.zalithlauncher.utils.anim.ViewAnimUtils;
+import com.movtery.zalithlauncher.utils.xui.XuiMediaTools;
 
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
@@ -62,7 +70,7 @@ public class MainMenuFragment extends FragmentWithAnim {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        binding.aboutText.setText(InfoCenter.replaceName(requireActivity(), R.string.about_tab));
+        binding.aboutText.setText("About");
         binding.aboutButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, AboutFragment.class, AboutFragment.TAG, null));
         binding.customControlButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, ControlButtonFragment.class, ControlButtonFragment.TAG, null));
         binding.openMainDirButton.setOnClickListener(v -> {
@@ -76,6 +84,13 @@ public class MainMenuFragment extends FragmentWithAnim {
             return true;
         });
         binding.shareLogsButton.setOnClickListener(v -> ZHTools.shareLogs(requireActivity()));
+        binding.skinButton.setOnClickListener(v -> XuiMediaTools.chooseSkin(this));
+        binding.musicButton.setOnClickListener(v -> XuiMediaTools.toggleAudio(this));
+        binding.musicButton.setOnLongClickListener(v -> { XuiMediaTools.chooseAudio(this); return true; });
+
+        installGlassLayer(binding.xuiHeroPanel);
+        installGlassLayer(binding.playLayout);
+        installGlassLayer(binding.launcherMenu);
 
         binding.version.setOnClickListener(v -> {
             if (!isTaskRunning()) {
@@ -101,6 +116,34 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.versionInfo.setSelected(true);
 
         refreshCurrentVersion();
+    }
+
+    private void installGlassLayer(View panel) {
+        if (!(panel.getLayoutParams() instanceof ConstraintLayout.LayoutParams)) return;
+        ViewGroup parent = (ViewGroup) panel.getParent();
+        if (parent == null) return;
+        BlurTarget target = requireActivity().findViewById(R.id.xui_blur_target);
+        if (target == null) return;
+
+        int index = parent.indexOfChild(panel);
+        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
+                (ConstraintLayout.LayoutParams) panel.getLayoutParams());
+        BlurView blur = new BlurView(requireContext());
+        blur.setBackgroundResource(R.drawable.xui_bg_glass);
+        blur.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
+        blur.setClipToOutline(true);
+        blur.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        blur.setupWith(target).setBlurRadius(15f);
+        parent.addView(blur, index, params);
+        panel.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (XuiMediaTools.handleResult(this, requestCode, resultCode, data) && accountViewWrapper != null) {
+            accountViewWrapper.refreshAccountInfo();
+        }
     }
 
     private void refreshCurrentVersion() {

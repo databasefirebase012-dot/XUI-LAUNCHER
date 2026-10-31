@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +20,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/settings_layout"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@drawable/xui_bg_card"
-        android:elevation="3dp"
+        android:layout_height="78dp"
+        android:background="@drawable/background_xui_card"
+        android:elevation="0dp"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,10 +46,8 @@
             android:background="@android:color/transparent"
             app:layout_constraintEnd_toStartOf="@+id/shadowView"
             app:layout_constraintStart_toStartOf="parent"
-            app:tab_draw_indicator="true"
-            app:tab_indicator_enable_flow="true"
-            app:tab_indicator_drawable="@drawable/xui_tab_indicator_bottom"
-            app:tab_indicator_x_offset="@dimen/_2sdp"
+            app:tab_draw_indicator="false"
+            app:tab_indicator_enable_flow="false"
             app:tab_orientation="HORIZONTAL"
             app:tab_item_is_equ_width="false"
             app:tab_item_auto_equ_width="false">
@@ -55,10 +55,10 @@
                         <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:layout_width="0dp"
                 app:layout_tab_weight="0.2"
-                android:layout_height="68dp"
-                android:layout_marginHorizontal="1dp"
-                android:padding="2dp"
-                android:background="@drawable/xui_tab_outline">
+                android:layout_height="64dp"
+                android:layout_marginHorizontal="4dp"
+                android:padding="4dp"
+                android:background="@drawable/xui_tab_chip">
                 <ImageView
                     android:id="@+id/video_image"
                     android:layout_width="20dp"

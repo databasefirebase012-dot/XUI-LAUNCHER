@@ -3,37 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical"
-        android:paddingVertical="@dimen/_12sdp">
+        android:paddingVertical="12dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/download_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_download"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/checkLibraries_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/checkLibraries_title"
@@ -53,7 +57,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/checkLibraries"
-                    android:text="@string/setting_check_libraries_desc" />
+                    android:text="@string/setting_check_libraries_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/checkLibraries"
@@ -61,15 +66,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true"/>
+                    android:checked="true"android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/verifyManifest_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/verifyManifest_title"
@@ -89,7 +97,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/verifyManifest"
-                    android:text="@string/setting_verify_manifest_desc" />
+                    android:text="@string/setting_verify_manifest_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/verifyManifest"
@@ -97,15 +106,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" />
+                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/resourceImageCache_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/resourceImageCache_title"
@@ -125,22 +137,26 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/resourceImageCache"
-                    android:text="@string/setting_resource_image_cache_desc" />
+                    android:text="@string/setting_resource_image_cache_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/resourceImageCache"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/addFullResourceName_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/addFullResourceName_title"
@@ -160,7 +176,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/addFullResourceName"
-                    android:text="@string/setting_resource_full_name_desc" />
+                    android:text="@string/setting_resource_full_name_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/addFullResourceName"
@@ -168,15 +185,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" />
+                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/downloadSource_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/downloadSource_title"
@@ -194,7 +214,8 @@
                     android:layout_below="@+id/downloadSource_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/setting_download_source_desc" />
+                    android:text="@string/setting_download_source_desc" /
+                    android:maxLines="2"
 
                 <TextView
                     android:id="@+id/downloadSource_value"
@@ -210,7 +231,8 @@
                 android:id="@+id/maxDownloadThreads_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/maxDownloadThreads_title"
@@ -218,8 +240,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_max_download_threads_title"
                     android:textColor="@color/black_or_white" />
 
@@ -230,8 +252,9 @@
                     android:layout_below="@+id/maxDownloadThreads_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_max_download_threads_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_max_download_threads_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
                     android:id="@+id/maxDownloadThreads"
@@ -242,7 +265,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/maxDownloadThreads_value"
                     android:max="128"
-                    android:min="1" />
+                    android:min="1" android:progressTint="#FFE34B62"
+                android:thumbTint="#FFFF6B7E"
+                android:progressBackgroundTint="#553C4654"
+                />
 
                 <TextView
                     android:id="@+id/maxDownloadThreads_value"
@@ -261,25 +287,26 @@
             android:id="@+id/personalization_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_personalization"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/launcherTheme_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/launcherTheme_title"
@@ -304,8 +331,9 @@
                 android:id="@+id/custom_background_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/custom_background_title"
@@ -323,15 +351,17 @@
                     android:layout_below="@+id/custom_background_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/custom_background_desc" />
+                    android:text="@string/custom_background_desc" /
+                    android:maxLines="2"
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/animation_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/animation_title"
@@ -351,7 +381,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/animation"
-                    android:text="@string/setting_animation_desc" />
+                    android:text="@string/setting_animation_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/animation"
@@ -359,14 +390,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" />
+                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/animationSpeed_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/animationSpeed_title"
@@ -374,8 +408,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_animation_speed_title"
                     android:textColor="@color/black_or_white" />
 
@@ -386,8 +420,9 @@
                     android:layout_below="@+id/animationSpeed_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_animation_speed_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_animation_speed_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
                     android:id="@+id/animationSpeed"
@@ -398,7 +433,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/animationSpeed_value"
                     android:max="1500"
-                    android:min="300" />
+                    android:min="300" android:progressTint="#FFE34B62"
+                android:thumbTint="#FFFF6B7E"
+                android:progressBackgroundTint="#553C4654"
+                />
 
                 <TextView
                     android:id="@+id/animationSpeed_value"
@@ -415,7 +453,8 @@
                 android:id="@+id/pageOpacity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/pageOpacity_title"
@@ -423,8 +462,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_page_opacity_title"
                     android:textColor="@color/black_or_white" />
 
@@ -435,8 +474,9 @@
                     android:layout_below="@+id/pageOpacity_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_page_opacity_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_page_opacity_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
                     android:id="@+id/pageOpacity"
@@ -447,7 +487,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/pageOpacity_value"
                     android:max="100"
-                    android:min="50" />
+                    android:min="50" android:progressTint="#FFE34B62"
+                android:thumbTint="#FFFF6B7E"
+                android:progressBackgroundTint="#553C4654"
+                />
 
                 <TextView
                     android:id="@+id/pageOpacity_value"
@@ -464,7 +507,8 @@
                 android:id="@+id/launcherBackgroundOpacity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/launcherBackgroundOpacity_title"
@@ -472,8 +516,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_launcher_background_opacity_title"
                     android:textColor="@color/black_or_white" />
 
@@ -484,8 +528,9 @@
                     android:layout_below="@+id/launcherBackgroundOpacity_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_launcher_background_opacity_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_launcher_background_opacity_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
                     android:id="@+id/launcherBackgroundOpacity"
@@ -496,7 +541,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/launcherBackgroundOpacity_value"
                     android:max="100"
-                    android:min="0" />
+                    android:min="0" android:progressTint="#FFE34B62"
+                android:thumbTint="#FFFF6B7E"
+                android:progressBackgroundTint="#553C4654"
+                />
 
                 <TextView
                     android:id="@+id/launcherBackgroundOpacity_value"
@@ -515,25 +563,26 @@
             android:id="@+id/launcher_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_launcher"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/enableLogOutput_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/enableLogOutput_title"
@@ -553,22 +602,26 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/enableLogOutput"
-                    android:text="@string/setting_enable_log_output_desc" />
+                    android:text="@string/setting_enable_log_output_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/enableLogOutput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/quitLauncher_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/quitLauncher_title"
@@ -588,7 +641,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/quitLauncher"
-                    android:text="@string/setting_quit_launcher_desc" />
+                    android:text="@string/setting_quit_launcher_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/quitLauncher"
@@ -596,15 +650,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" />
+                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/clean_up_cache_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/clean_up_cache_title"
@@ -622,15 +679,17 @@
                     android:layout_below="@+id/clean_up_cache_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/clear_up_cache_desc" />
+                    android:text="@string/clear_up_cache_desc" /
+                    android:maxLines="2"
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/check_update_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/check_update_title"
@@ -648,15 +707,17 @@
                     android:layout_below="@+id/check_update_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/update_summary" />
+                    android:text="@string/update_summary" /
+                    android:maxLines="2"
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/acceptPreReleaseUpdates_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/acceptPreReleaseUpdates_title"
@@ -676,7 +737,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/acceptPreReleaseUpdates"
-                    android:text="@string/setting_accept_pre_release_updates_desc" />
+                    android:text="@string/setting_accept_pre_release_updates_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/acceptPreReleaseUpdates"
@@ -684,15 +746,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" />
+                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/notification_permission_request_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/notification_permission_request_title"
@@ -712,14 +777,17 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/notification_permission_request"
-                    android:text="@string/setting_ask_for_notification_desc" />
+                    android:text="@string/setting_ask_for_notification_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/notification_permission_request"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

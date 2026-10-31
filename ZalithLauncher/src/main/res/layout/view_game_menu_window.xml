@@ -39,4 +39,20 @@
         android:textColor="@android:color/white"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:id="@+id/music_toggle"
+        android:layout_width="76dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="6dp"
+        android:background="@drawable/xui_button_music"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="MUSIC OFF"
+        android:textColor="#FFFFFFFF"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

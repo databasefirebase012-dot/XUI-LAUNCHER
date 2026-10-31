@@ -7,6 +7,11 @@
     android:background="@drawable/xui_bg_gradient"
     tools:ignore="ContentDescription">
 
+    <eightbitlab.com.blurview.BlurTarget
+        android:id="@+id/xui_blur_target"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <com.movtery.zalithlauncher.ui.view.XuiVideoBackgroundView
         android:id="@+id/background_video_view"
         android:layout_width="match_parent"
@@ -19,11 +24,13 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
+    </eightbitlab.com.blurview.BlurTarget>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@drawable/xui_glow"
+        android:background="#FF050505"
         android:elevation="2dp"
         android:paddingHorizontal="@dimen/_8sdp"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,7 +56,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_marginEnd="@dimen/_4sdp"
-            android:background="@drawable/xui_ripple"
+            android:background="@drawable/xui_button_outline"
             android:contentDescription="@string/download_classify_mod"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_download"
@@ -74,6 +81,7 @@
 
     <View
         android:id="@+id/xui_top_accent"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#FFFF334F"
@@ -88,6 +96,7 @@
 
     <View
         android:id="@+id/shadowView"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_4sdp"
         android:background="@drawable/shadow_gradient_down"

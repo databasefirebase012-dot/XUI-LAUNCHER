@@ -1,7 +1,9 @@
 package com.movtery.zalithlauncher.utils.xui
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.net.Uri
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import com.movtery.zalithlauncher.feature.accounts.AccountsManager
 import com.movtery.zalithlauncher.utils.path.PathManager
 import java.io.File
 import java.io.FileOutputStream
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 /**
  * XUI user media controls. Audio URI is persisted with the app and the document
@@ -49,9 +53,8 @@ object XuiMediaTools {
         return when (requestCode) {
             AUDIO_REQUEST -> {
                 runCatching {
-                    fragment.requireContext().contentResolver.takePersistableUriPermission(
-                        uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    )
+                    val readFlags = (data.flags and Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    if (readFlags != 0) fragment.requireContext().contentResolver.takePersistableUriPermission(uri, readFlags)
                     fragment.requireContext().getSharedPreferences(PREFS, 0)
                         .edit().putString(AUDIO_URI, uri.toString()).apply()
                     stopAudio()
@@ -69,8 +72,9 @@ object XuiMediaTools {
         }
     }
 
-    @JvmStatic fun playAudio(fragment: Fragment) {
-        val context = fragment.requireContext()
+    @JvmStatic fun playAudio(fragment: Fragment) = playAudio(fragment.requireContext())
+
+    @JvmStatic fun playAudio(context: Context) {
         val raw = context.getSharedPreferences(PREFS, 0).getString(AUDIO_URI, null)
         if (raw.isNullOrBlank()) {
             Toast.makeText(context, "Pilih file audio terlebih dahulu.", Toast.LENGTH_SHORT).show()
@@ -92,6 +96,33 @@ object XuiMediaTools {
         }
     }
 
+    @JvmStatic fun isAudioPlaying(): Boolean = player != null
+
+    @JvmStatic fun toggleAudio(fragment: Fragment): Boolean {
+        val context = fragment.requireContext()
+        val raw = context.getSharedPreferences(PREFS, 0).getString(AUDIO_URI, null)
+        if (raw.isNullOrBlank()) {
+            chooseAudio(fragment)
+            return false
+        }
+        return toggleAudio(context)
+    }
+
+    @JvmStatic fun toggleAudio(context: Context): Boolean {
+        if (player != null) {
+            stopAudio()
+            Toast.makeText(context, "Audio dihentikan.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        val raw = context.getSharedPreferences(PREFS, 0).getString(AUDIO_URI, null)
+        if (raw.isNullOrBlank()) {
+            Toast.makeText(context, "Pilih audio dari pengaturan launcher terlebih dahulu.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        playAudio(context)
+        return player != null
+    }
+
     @JvmStatic fun stopAudio() {
         runCatching { player?.stop() }
         runCatching { player?.release() }
@@ -102,44 +133,79 @@ object XuiMediaTools {
         val context = fragment.requireContext()
         val host = if (root is android.widget.ScrollView) root.getChildAt(0) as? ViewGroup else root
         if (host == null || host.findViewWithTag<ViewGroup>("xui_media_controls") != null) return
+        val density = context.resources.displayMetrics.density
+        fun dp(value: Int) = (value * density + 0.5f).toInt()
         val row = LinearLayout(context).apply {
             tag = "xui_media_controls"
             orientation = LinearLayout.HORIZONTAL
-            setPadding(8, 8, 8, 8)
+            setPadding(dp(8), dp(8), dp(8), dp(8))
+            setBackgroundResource(R.drawable.background_xui_card)
         }
-        fun action(label: String, onClick: () -> Unit) {
-            row.addView(Button(context).apply {
+        fun action(label: String, background: Int, onClick: () -> Unit) {
+            val button = Button(context).apply {
                 text = label
+                setAllCaps(false)
+                textSize = 12f
+                setTextColor(Color.WHITE)
+                setBackgroundResource(background)
+                backgroundTintList = null
+                minHeight = dp(42)
+                minimumHeight = dp(42)
+                setPadding(dp(6), 0, dp(6), 0)
+                stateListAnimator = null
                 setOnClickListener { onClick() }
-            }, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
+            }
+            val params = LinearLayout.LayoutParams(0, dp(42), 1f)
+            params.setMargins(dp(4), dp(3), dp(4), dp(3))
+            row.addView(button, params)
         }
-        action("Pilih audio") { chooseAudio(fragment) }
-        action("Play") { playAudio(fragment) }
-        action("Stop") { stopAudio(); Toast.makeText(context, "Audio dihentikan.", Toast.LENGTH_SHORT).show() }
+        action("Pilih audio", R.drawable.xui_button_outline) { chooseAudio(fragment) }
+        action("Play", R.drawable.xui_button_primary) { playAudio(fragment) }
+        action("Stop", R.drawable.xui_button_stop) {
+            stopAudio()
+            Toast.makeText(context, "Audio dihentikan.", Toast.LENGTH_SHORT).show()
+        }
         host.addView(row, 0, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
     }
 
     private fun importSkin(fragment: Fragment, uri: Uri) {
         val context = fragment.requireContext()
+        var temp: File? = null
         runCatching {
-            val bitmap = context.contentResolver.openInputStream(uri).use { BitmapFactory.decodeStream(it) }
-                ?: error("File PNG tidak valid")
-            val valid = (bitmap.width == bitmap.height && bitmap.width >= 64 &&
-                bitmap.width % 64 == 0) || (bitmap.width == 64 && bitmap.height == 32)
-            if (!valid) {
-                bitmap.recycle()
-                error("Ukuran skin harus 64x64 (atau skin legacy 64x32); resolusi lebih besar harus kelipatan 64")
+            val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                BitmapFactory.decodeStream(input, null, bounds)
+            } ?: error("File tidak dapat dibaca dari penyimpanan.")
+            val width = bounds.outWidth
+            val height = bounds.outHeight
+            val modern = width == height && width >= 64 && width <= 2048 && width % 64 == 0
+            val legacy = width == 64 && height == 32
+            if (bounds.outMimeType != "image/png" || !(modern || legacy)) {
+                error("PNG skin harus 64x64, 64x32, atau ukuran persegi kelipatan 64 (maks. 2048px).")
             }
-            val account = AccountsManager.currentAccount ?: error("Pilih/login akun terlebih dahulu")
-            val target = File(PathManager.DIR_USER_SKIN, account.uniqueUUID + ".png")
-            target.parentFile?.mkdirs()
-            context.contentResolver.openInputStream(uri).use { input ->
-                FileOutputStream(target).use { output -> input!!.copyTo(output) }
+            val account = AccountsManager.currentAccount ?: error("Pilih akun launcher terlebih dahulu.")
+            val accountId = account.uniqueUUID.toString().takeIf { it.isNotBlank() }
+                ?: error("ID akun tidak valid.")
+            val target = File(PathManager.DIR_USER_SKIN, "$accountId.png")
+            val parent = target.parentFile ?: error("Folder skin tidak tersedia.")
+            if (!parent.exists() && !parent.mkdirs()) error("Folder skin tidak dapat dibuat.")
+            temp = File(parent, "$accountId.png.importing")
+            FileOutputStream(temp!!).use { output ->
+                context.contentResolver.openInputStream(uri)?.use { input -> input.copyTo(output) }
+                    ?: error("File PNG tidak dapat dibuka.")
+                output.fd.sync()
             }
-            bitmap.recycle()
-            Toast.makeText(context, "Skin PNG tersimpan untuk avatar akun ${account.username}. Skin server dalam game bergantung pada autentikasi akun.", Toast.LENGTH_LONG).show()
+            val copied = BitmapFactory.Options().apply { inJustDecodeBounds = true }
+            BitmapFactory.decodeFile(temp!!.absolutePath, null, copied)
+            if (copied.outMimeType != "image/png" || copied.outWidth != width || copied.outHeight != height) {
+                error("File PNG rusak atau berubah saat disalin.")
+            }
+            Files.move(temp!!.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            temp = null
+            Toast.makeText(context, "Avatar launcher berhasil diperbarui untuk " + account.username + ". Skin server Minecraft tetap mengikuti profil akun Microsoft/Mojang.", Toast.LENGTH_LONG).show()
         }.onFailure {
-            Toast.makeText(context, "Skin gagal diimpor: ${it.message}", Toast.LENGTH_LONG).show()
+            temp?.delete()
+            Toast.makeText(context, "Skin gagal diimpor: " + it.message, Toast.LENGTH_LONG).show()
         }
     }
-}
+

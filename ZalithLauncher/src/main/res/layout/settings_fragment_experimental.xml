@@ -3,37 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginHorizontal="16dp"
         android:orientation="vertical"
-        android:paddingVertical="@dimen/_12sdp">
+        android:paddingVertical="12dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/experimental_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/background_card"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_experimental_patches"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/dump_shaders_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/dump_shaders_title"
@@ -53,22 +57,26 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/dump_shaders"
-                    android:text="@string/setting_shader_dump_desc" />
+                    android:text="@string/setting_shader_dump_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/dump_shaders"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/bigCoreAffinity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/bigCoreAffinity_title"
@@ -88,14 +96,17 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/bigCoreAffinity"
-                    android:text="@string/setting_force_big_core_desc" />
+                    android:text="@string/setting_force_big_core_desc" /
+                    android:maxLines="2"
 
                 <Switch
                     android:id="@+id/bigCoreAffinity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -104,24 +115,25 @@
             android:id="@+id/support_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_support"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/tcVibrateDuration_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/tcVibrateDuration_title"
@@ -129,8 +141,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_touch_controller_vibrate_duration_title"
                     android:textColor="@color/black_or_white" />
 
@@ -141,8 +153,9 @@
                     android:layout_below="@+id/tcVibrateDuration_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_touch_controller_vibrate_duration_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_touch_controller_vibrate_duration_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
                     android:id="@+id/tcVibrateDuration"
@@ -153,7 +166,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/tcVibrateDuration_value"
                     android:max="500"
-                    android:min="80" />
+                    android:min="80" android:progressTint="#FFE34B62"
+                android:thumbTint="#FFFF6B7E"
+                android:progressBackgroundTint="#553C4654"
+                />
 
                 <TextView
                     android:id="@+id/tcVibrateDuration_value"

@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:scrollbarStyle="outsideOverlay"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -18,15 +21,15 @@
             android:layout_height="wrap_content"
             android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_control"
-                android:textColor="#FFEF4444"
+                android:textColor="#FFFF6678"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -34,8 +37,9 @@
                 android:id="@+id/disableGestures_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/disableGestures_title"
@@ -55,11 +59,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/disableGestures"
-                    android:text="@string/setting_disable_gestures_desc" />
+                    android:text="@string/setting_disable_gestures_desc" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/disableGestures"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,8 +76,9 @@
                 android:id="@+id/disableDoubleTap_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/disableDoubleTap_title"
@@ -92,11 +98,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/disableDoubleTap"
-                    android:text="@string/setting_disable_swap_hand_desc" />
+                    android:text="@string/setting_disable_swap_hand_desc" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/disableDoubleTap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -108,7 +115,8 @@
                 android:id="@+id/timeLongPressTrigger_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/timeLongPressTrigger_title"
@@ -116,8 +124,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_longpress_trigger_title"
                     android:textColor="@color/black_or_white" />
 
@@ -128,13 +136,14 @@
                     android:layout_below="@+id/timeLongPressTrigger_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_longpress_trigger_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_longpress_trigger_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/timeLongPressTrigger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -162,24 +171,25 @@
             android:id="@+id/controls_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/pedit_control"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/buttonscale_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/buttonscale_title"
@@ -187,8 +197,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_button_scale_title"
                     android:textColor="@color/black_or_white" />
 
@@ -199,13 +209,14 @@
                     android:layout_below="@+id/buttonscale_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_button_scale_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_button_scale_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/buttonscale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -231,8 +242,9 @@
                 android:id="@+id/buttonAllCaps_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/buttonAllCaps_title"
@@ -252,11 +264,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/buttonAllCaps"
-                    android:text="@string/setting_button_allcaps_desc" />
+                    android:text="@string/setting_button_allcaps_desc" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/buttonAllCaps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -270,24 +283,25 @@
             android:id="@+id/mouse_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_virtual_mouse"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/mousescale_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/mousescale_title"
@@ -295,8 +309,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/mouse_settings_scale_name"
                     android:textColor="@color/black_or_white" />
 
@@ -307,13 +321,14 @@
                     android:layout_below="@+id/mousescale_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_mouse_scale_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_mouse_scale_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/mousescale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -339,7 +354,8 @@
                 android:id="@+id/mousespeed_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/mousespeed_title"
@@ -347,8 +363,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/mouse_settings_speed_name"
                     android:textColor="@color/black_or_white" />
 
@@ -359,13 +375,14 @@
                     android:layout_below="@+id/mousespeed_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_mouse_speed_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_mouse_speed_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/mousespeed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -391,8 +408,9 @@
                 android:id="@+id/mouse_start_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/mouse_start_title"
@@ -409,11 +427,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/mouse_start"
-                    android:text="@string/setting_mouse_start_desc" />
+                    android:text="@string/setting_mouse_start_desc" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/mouse_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -426,8 +445,9 @@
                 android:id="@+id/custom_mouse_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/custom_mouse_title"
@@ -445,7 +465,8 @@
                     android:layout_below="@+id/custom_mouse_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/custom_mouse_desc" />
+                    android:text="@string/custom_mouse_desc" /
+                    android:maxLines="2"
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -454,25 +475,26 @@
             android:id="@+id/enableGyro_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_gyro_controls"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/enableGyro_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/enableGyro_title"
@@ -492,11 +514,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/enableGyro"
-                    android:text="@string/setting_enable_gyro_desc" />
+                    android:text="@string/setting_enable_gyro_desc" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/enableGyro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -508,7 +531,8 @@
                 android:id="@+id/gyroSensitivity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/gyroSensitivity_title"
@@ -516,8 +540,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_gyro_sensitivity_title"
                     android:textColor="@color/black_or_white" />
 
@@ -528,13 +552,14 @@
                     android:layout_below="@+id/gyroSensitivity_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_gyro_sensitivity_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_gyro_sensitivity_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/gyroSensitivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -560,7 +585,8 @@
                 android:id="@+id/gyroSampleRate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/gyroSampleRate_title"
@@ -568,8 +594,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_gyro_sample_rate_title"
                     android:textColor="@color/black_or_white" />
 
@@ -580,13 +606,14 @@
                     android:layout_below="@+id/gyroSampleRate_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_gyro_sample_rate_description" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_gyro_sample_rate_description" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/gyroSampleRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -612,8 +639,9 @@
                 android:id="@+id/gyroSmoothing_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/gyroSmoothing_title"
@@ -633,11 +661,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroSmoothing"
-                    android:text="@string/setting_gyro_smoothing_desc" />
+                    android:text="@string/setting_gyro_smoothing_desc" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/gyroSmoothing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -650,8 +679,9 @@
                 android:id="@+id/gyroInvertX_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/gyroInvertX_title"
@@ -671,11 +701,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroInvertX"
-                    android:text="@string/setting_gyro_invert_x_axis_description" />
+                    android:text="@string/setting_gyro_invert_x_axis_description" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/gyroInvertX"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -687,8 +718,9 @@
                 android:id="@+id/gyroInvertY_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/gyroInvertY_title"
@@ -708,11 +740,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroInvertY"
-                    android:text="@string/setting_gyro_invert_y_axis_description" />
+                    android:text="@string/setting_gyro_invert_y_axis_description" /
+                    android:maxLines="2"
 
                 <Switch
-                    android:thumbTint="#FFFFFFFF"
-                    android:trackTint="#FFDC2626"
+                    android:thumbTint="#FFF8FAFC"
+                    android:trackTint="#FFCF344B"
                     android:id="@+id/gyroInvertY"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -726,25 +759,26 @@
             android:id="@+id/controller_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/background_card"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/background_xui_card"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_2sdp"
-            android:paddingVertical="@dimen/_12sdp">
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginHorizontal="16dp"
                 android:text="@string/setting_category_controller_settings"
-                android:textColor="@color/settings_category" />
+                android:textColor="#FFFF6678" />
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/changeControllerBindings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/changeControllerBindings_title"
@@ -762,15 +796,17 @@
                     android:layout_below="@+id/changeControllerBindings_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/setting_remap_controller_desc" />
+                    android:text="@string/setting_remap_controller_desc" /
+                    android:maxLines="2"
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/resetControllerBindings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="@dimen/_12sdp">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row"
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/resetControllerBindings_title"
@@ -788,14 +824,16 @@
                     android:layout_below="@+id/resetControllerBindings_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/setting_wipe_controller_desc" />
+                    android:text="@string/setting_wipe_controller_desc" /
+                    android:maxLines="2"
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
                 android:id="@+id/gamepad_deadzone_scale_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground">
+                android:layout_marginVertical="2dp"
+                android:background="@drawable/xui_settings_row">
 
                 <TextView
                     android:id="@+id/gamepad_deadzone_scale_title"
@@ -803,8 +841,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@string/setting_deadzone_scale_title"
                     android:textColor="@color/black_or_white" />
 
@@ -815,13 +853,14 @@
                     android:layout_below="@+id/gamepad_deadzone_scale_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_12sdp"
-                    android:text="@string/setting_deadzone_scale_desc" />
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@string/setting_deadzone_scale_desc" /
+                    android:maxLines="2"
 
                 <SeekBar
-                    android:progressTint="#FFDC2626"
-                    android:thumbTint="#FFDC2626"
-                    android:progressBackgroundTint="#FF333333"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                     android:id="@+id/gamepad_deadzone_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
