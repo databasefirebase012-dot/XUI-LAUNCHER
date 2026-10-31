@@ -57,15 +57,20 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/dump_shaders"
-                    android:text="@string/setting_shader_dump_desc" /
+                    android:text="@string/setting_shader_dump_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/dump_shaders"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:layout_centerVertical="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -96,15 +101,20 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/bigCoreAffinity"
-                    android:text="@string/setting_force_big_core_desc" /
+                    android:text="@string/setting_force_big_core_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/bigCoreAffinity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:layout_centerVertical="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -154,8 +164,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_touch_controller_vibrate_duration_desc" /
+                    android:text="@string/setting_touch_controller_vibrate_duration_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:id="@+id/tcVibrateDuration"
@@ -166,9 +180,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/tcVibrateDuration_value"
                     android:max="500"
-                    android:min="80" android:progressTint="#FFE34B62"
-                android:thumbTint="#FFFF6B7E"
-                android:progressBackgroundTint="#553C4654"
+                    android:min="80"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                 />
 
                 <TextView

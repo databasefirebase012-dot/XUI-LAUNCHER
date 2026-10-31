@@ -57,8 +57,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/checkLibraries"
-                    android:text="@string/setting_check_libraries_desc" /
+                    android:text="@string/setting_check_libraries_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/checkLibraries"
@@ -66,7 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true"android:thumbTint="#FFF8FAFC"
+                    android:checked="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -97,8 +102,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/verifyManifest"
-                    android:text="@string/setting_verify_manifest_desc" /
+                    android:text="@string/setting_verify_manifest_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/verifyManifest"
@@ -106,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:checked="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -137,15 +147,20 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/resourceImageCache"
-                    android:text="@string/setting_resource_image_cache_desc" /
+                    android:text="@string/setting_resource_image_cache_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/resourceImageCache"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:layout_centerVertical="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -176,8 +191,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/addFullResourceName"
-                    android:text="@string/setting_resource_full_name_desc" /
+                    android:text="@string/setting_resource_full_name_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/addFullResourceName"
@@ -185,7 +204,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:checked="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -214,8 +234,12 @@
                     android:layout_below="@+id/downloadSource_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/setting_download_source_desc" /
+                    android:text="@string/setting_download_source_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <TextView
                     android:id="@+id/downloadSource_value"
@@ -253,8 +277,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_max_download_threads_desc" /
+                    android:text="@string/setting_max_download_threads_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:id="@+id/maxDownloadThreads"
@@ -265,9 +293,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/maxDownloadThreads_value"
                     android:max="128"
-                    android:min="1" android:progressTint="#FFE34B62"
-                android:thumbTint="#FFFF6B7E"
-                android:progressBackgroundTint="#553C4654"
+                    android:min="1"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                 />
 
                 <TextView
@@ -351,8 +380,12 @@
                     android:layout_below="@+id/custom_background_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/custom_background_desc" /
+                    android:text="@string/custom_background_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -381,8 +414,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/animation"
-                    android:text="@string/setting_animation_desc" /
+                    android:text="@string/setting_animation_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/animation"
@@ -390,7 +427,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:checked="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -421,8 +459,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_animation_speed_desc" /
+                    android:text="@string/setting_animation_speed_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:id="@+id/animationSpeed"
@@ -433,9 +475,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/animationSpeed_value"
                     android:max="1500"
-                    android:min="300" android:progressTint="#FFE34B62"
-                android:thumbTint="#FFFF6B7E"
-                android:progressBackgroundTint="#553C4654"
+                    android:min="300"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                 />
 
                 <TextView
@@ -475,8 +518,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_page_opacity_desc" /
+                    android:text="@string/setting_page_opacity_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:id="@+id/pageOpacity"
@@ -487,9 +534,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/pageOpacity_value"
                     android:max="100"
-                    android:min="50" android:progressTint="#FFE34B62"
-                android:thumbTint="#FFFF6B7E"
-                android:progressBackgroundTint="#553C4654"
+                    android:min="50"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                 />
 
                 <TextView
@@ -529,8 +577,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_launcher_background_opacity_desc" /
+                    android:text="@string/setting_launcher_background_opacity_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:id="@+id/launcherBackgroundOpacity"
@@ -541,9 +593,10 @@
                     android:layout_alignParentStart="true"
                     android:layout_toStartOf="@id/launcherBackgroundOpacity_value"
                     android:max="100"
-                    android:min="0" android:progressTint="#FFE34B62"
-                android:thumbTint="#FFFF6B7E"
-                android:progressBackgroundTint="#553C4654"
+                    android:min="0"
+                    android:progressTint="#FFE34B62"
+                    android:thumbTint="#FFFF6B7E"
+                    android:progressBackgroundTint="#553C4654"
                 />
 
                 <TextView
@@ -602,15 +655,20 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/enableLogOutput"
-                    android:text="@string/setting_enable_log_output_desc" /
+                    android:text="@string/setting_enable_log_output_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/enableLogOutput"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:layout_centerVertical="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -641,8 +699,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/quitLauncher"
-                    android:text="@string/setting_quit_launcher_desc" /
+                    android:text="@string/setting_quit_launcher_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/quitLauncher"
@@ -650,7 +712,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:checked="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -679,8 +742,12 @@
                     android:layout_below="@+id/clean_up_cache_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/clear_up_cache_desc" /
+                    android:text="@string/clear_up_cache_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -707,8 +774,12 @@
                     android:layout_below="@+id/check_update_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/update_summary" /
+                    android:text="@string/update_summary"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -737,8 +808,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/acceptPreReleaseUpdates"
-                    android:text="@string/setting_accept_pre_release_updates_desc" /
+                    android:text="@string/setting_accept_pre_release_updates_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/acceptPreReleaseUpdates"
@@ -746,7 +821,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="true" android:thumbTint="#FFF8FAFC"
+                    android:checked="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
@@ -777,15 +853,20 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/notification_permission_request"
-                    android:text="@string/setting_ask_for_notification_desc" /
+                    android:text="@string/setting_ask_for_notification_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:id="@+id/notification_permission_request"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true" android:thumbTint="#FFF8FAFC"
+                    android:layout_centerVertical="true"
+                    android:thumbTint="#FFF8FAFC"
                     android:trackTint="#FFCF344B"
                 />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>

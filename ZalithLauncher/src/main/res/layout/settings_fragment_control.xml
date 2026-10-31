@@ -59,8 +59,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/disableGestures"
-                    android:text="@string/setting_disable_gestures_desc" /
+                    android:text="@string/setting_disable_gestures_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -98,8 +102,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/disableDoubleTap"
-                    android:text="@string/setting_disable_swap_hand_desc" /
+                    android:text="@string/setting_disable_swap_hand_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -137,8 +145,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_longpress_trigger_desc" /
+                    android:text="@string/setting_longpress_trigger_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
@@ -210,8 +222,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_button_scale_desc" /
+                    android:text="@string/setting_button_scale_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
@@ -264,8 +280,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/buttonAllCaps"
-                    android:text="@string/setting_button_allcaps_desc" /
+                    android:text="@string/setting_button_allcaps_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -322,8 +342,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_mouse_scale_desc" /
+                    android:text="@string/setting_mouse_scale_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
@@ -376,8 +400,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_mouse_speed_desc" /
+                    android:text="@string/setting_mouse_speed_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
@@ -427,8 +455,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/mouse_start"
-                    android:text="@string/setting_mouse_start_desc" /
+                    android:text="@string/setting_mouse_start_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -465,8 +497,12 @@
                     android:layout_below="@+id/custom_mouse_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/custom_mouse_desc" /
+                    android:text="@string/custom_mouse_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -514,8 +550,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/enableGyro"
-                    android:text="@string/setting_enable_gyro_desc" /
+                    android:text="@string/setting_enable_gyro_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -553,8 +593,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_gyro_sensitivity_desc" /
+                    android:text="@string/setting_gyro_sensitivity_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
@@ -607,8 +651,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_gyro_sample_rate_description" /
+                    android:text="@string/setting_gyro_sample_rate_description"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
@@ -661,8 +709,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroSmoothing"
-                    android:text="@string/setting_gyro_smoothing_desc" /
+                    android:text="@string/setting_gyro_smoothing_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -701,8 +753,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroInvertX"
-                    android:text="@string/setting_gyro_invert_x_axis_description" /
+                    android:text="@string/setting_gyro_invert_x_axis_description"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -740,8 +796,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_toStartOf="@+id/gyroInvertY"
-                    android:text="@string/setting_gyro_invert_y_axis_description" /
+                    android:text="@string/setting_gyro_invert_y_axis_description"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <Switch
                     android:thumbTint="#FFF8FAFC"
@@ -796,8 +856,12 @@
                     android:layout_below="@+id/changeControllerBindings_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/setting_remap_controller_desc" /
+                    android:text="@string/setting_remap_controller_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -824,8 +888,12 @@
                     android:layout_below="@+id/resetControllerBindings_title"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:text="@string/setting_wipe_controller_desc" /
+                    android:text="@string/setting_wipe_controller_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
 
             <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
@@ -854,8 +922,12 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@string/setting_deadzone_scale_desc" /
+                    android:text="@string/setting_deadzone_scale_desc"
                     android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textSize="12sp"
+                    android:textColor="#FF9CA3AF"
+                />
 
                 <SeekBar
                     android:progressTint="#FFE34B62"
