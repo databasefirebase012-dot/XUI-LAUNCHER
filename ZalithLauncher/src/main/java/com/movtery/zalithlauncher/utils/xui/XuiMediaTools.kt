@@ -78,7 +78,6 @@ object XuiMediaTools {
         val raw = context.getSharedPreferences(PREFS, 0).getString(AUDIO_URI, null)
         if (raw.isNullOrBlank()) {
             Toast.makeText(context, "Pilih file audio terlebih dahulu.", Toast.LENGTH_SHORT).show()
-            chooseAudio(fragment)
             return
         }
         runCatching {

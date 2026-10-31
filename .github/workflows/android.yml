@@ -26,9 +26,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq 'xui_tab_indicator_bottom' ZalithLauncher/src/main/res/layout/fragment_settings.xml
-          grep -Fq '@drawable/xui_bg_card' ZalithLauncher/src/main/res/layout/fragment_settings.xml
-          test -f ZalithLauncher/src/main/res/drawable/xui_tab_indicator_bottom.xml
+          grep -Fq 'xui_tab_chip' ZalithLauncher/src/main/res/layout/fragment_settings.xml
+          grep -Fq '@drawable/background_xui_card' ZalithLauncher/src/main/res/layout/fragment_settings.xml
+          test -f ZalithLauncher/src/main/res/drawable/xui_tab_chip.xml
           echo "PASS: building the XUI redesign UI source from branch xui-redesign."
 
       - name: Verify bundled JRE archives for both ARM ABIs
