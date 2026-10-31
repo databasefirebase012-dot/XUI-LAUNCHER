@@ -32,9 +32,6 @@ class InstallableAdapter(
      * This is only a scan. It must never invoke the completion callback, or SplashActivity
      * can jump to the launcher before the user presses Start.
      */
-    fun areAllTasksFinished(): Boolean =
-        items.all { it.isFinished && !it.isFailed && !it.isRunning }
-
     fun checkAllTask() {
         items.forEachIndexed { index, item ->
             val needsWork = runCatching { item.task.isNeedUnpack() }.getOrDefault(true)

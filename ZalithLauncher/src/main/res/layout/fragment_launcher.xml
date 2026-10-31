@@ -5,8 +5,8 @@
     android:id="@+id/fragment_menu_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/xui_bg_gradient"
-    android:padding="12dp"
+    android:background="@android:color/transparent"
+    android:padding="10dp"
     tools:ignore="ContentDescription">
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/xui_bg_card"
+        android:background="@drawable/xui_bg_glass"
         android:orientation="vertical"
         android:padding="18dp"
         app:layout_constraintWidth_percent="0.34"
@@ -27,7 +27,7 @@
             android:id="@+id/xui_hero_kicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XUI  /  SERVER STATUS"
+            android:text="XUI  /  DESKTOP CONTROL CENTER"
             android:textColor="#FFFF405A"
             android:textSize="11sp"
             android:letterSpacing="0.10"
@@ -40,7 +40,7 @@
             android:layout_marginTop="10dp"
             android:text="13:47"
             android:textColor="#FFFFFFFF"
-            android:textSize="48sp"
+            android:textSize="46sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
 
@@ -88,7 +88,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/xui_bg_card"
+        android:background="@drawable/xui_bg_glass"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="12dp"
@@ -163,7 +163,7 @@
         android:id="@+id/launcher_menu"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/xui_bg_card"
+        android:background="@drawable/xui_bg_glass"
         android:orientation="vertical"
         android:padding="8dp"
         app:layout_constraintWidth_percent="0.36"
@@ -326,9 +326,15 @@
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/xui_button_outline"
-                android:text="Skin"
-                android:textColor="@color/xui_text_primary"
+                android:background="@drawable/xui_button_skin"
+                android:backgroundTint="@null"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="0dp"
+                android:text="SKIN"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 android:textAllCaps="false" />
             <Button
                 android:id="@+id/music_button"
@@ -336,9 +342,15 @@
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:background="@drawable/xui_button_outline"
-                android:text="Music"
-                android:textColor="@color/xui_text_primary"
+                android:background="@drawable/xui_button_music"
+                android:backgroundTint="@null"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="0dp"
+                android:text="MUSIC"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 android:textAllCaps="false" />
         </LinearLayout>
     </LinearLayout>

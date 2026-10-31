@@ -10,7 +10,6 @@ import com.movtery.zalithlauncher.InfoCenter
 import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.databinding.ActivityErrorBinding
 import com.movtery.zalithlauncher.utils.ZHTools
-import com.movtery.zalithlauncher.utils.error.XuiErrorAnalyzer
 import net.kdt.pojavlaunch.Tools
 
 class ErrorActivity : BaseActivity() {
@@ -58,24 +57,11 @@ class ErrorActivity : BaseActivity() {
         val stackTrace = if (throwable != null) Tools.printToString(throwable) else "<null>"
         val strSavePath = extras.getString(BUNDLE_SAVE_PATH)
         val diagnosis = diagnoseCrash(stackTrace)
-        val report = runCatching { XuiErrorAnalyzer.analyze(-1) }.getOrNull()
         val errorText = buildString {
-            appendLine("XUI SMART ERROR ANALYZER")
+            appendLine("XUI CRASH ANALYSIS")
             appendLine()
             appendLine("Likely cause: ${diagnosis.first}")
             appendLine("Suggested action: ${diagnosis.second}")
-            if (report != null) {
-                appendLine()
-                appendLine("Renderer aktif: ${report.renderer}")
-                appendLine("Kemungkinan tambahan:")
-                report.findings.forEachIndexed { index, finding -> appendLine("${index + 1}. $finding") }
-                appendLine("Saran:")
-                report.actions.forEachIndexed { index, action -> appendLine("${index + 1}. $action") }
-                if (report.logExcerpt.isNotBlank()) {
-                    appendLine()
-                    appendLine("Baris log terkait: ${report.logExcerpt}")
-                }
-            }
             appendLine()
             appendLine("Log path: ${strSavePath ?: "not provided"}")
             appendLine()
@@ -133,42 +119,19 @@ class ErrorActivity : BaseActivity() {
             finish()
             return
         }
-        val errorTextRes = if (extras.getBoolean(BUNDLE_IS_SIGNAL)) R.string.game_singnal_message else R.string.game_exit_message
-        val report = runCatching { XuiErrorAnalyzer.analyze(code) }.getOrNull()
-        val errorText = buildString {
-            appendLine("XUI SMART ERROR ANALYZER")
-            appendLine()
-            appendLine(getString(errorTextRes, code))
-            appendLine()
-            appendLine("Renderer aktif: ${report?.renderer ?: "Tidak diketahui"}")
-            appendLine()
-            appendLine("HASIL DETEKSI")
-            (report?.findings ?: listOf("Analisis otomatis gagal membaca log.")).forEachIndexed { index, finding ->
-                appendLine("${index + 1}. $finding")
-            }
-            appendLine()
-            appendLine("SARAN PERBAIKAN")
-            (report?.actions ?: listOf("Tekan Share Log Files dan periksa latest.log/crash report.")).forEachIndexed { index, action ->
-                appendLine("${index + 1}. $action")
-            }
-            if (!report?.logExcerpt.isNullOrBlank()) {
-                appendLine()
-                appendLine("BARIS LOG TERKAIT")
-                appendLine(report?.logExcerpt)
-            }
-            appendLine()
-            appendLine("Catatan: diagnosis berdasarkan pola log; kemungkinan penyebab perlu dikonfirmasi lewat Share Log Files.")
-        }
+        val errorText = if (extras.getBoolean(BUNDLE_IS_SIGNAL)) R.string.game_singnal_message else R.string.game_exit_message
 
         val context = this
+
         binding.apply {
             this.errorTitle.setText(R.string.generic_wrong_tip)
             this.errorText.apply {
-                text = errorText
+                text = getString(errorText, code)
                 textSize = 14f
             }
             this.errorTip.visibility = View.VISIBLE
             this.errorNoScreenshot.visibility = View.VISIBLE
+
             this.topView.setBackgroundColor(ContextCompat.getColor(context, R.color.background_menu_top))
             this.background.setBackgroundColor(ContextCompat.getColor(context, R.color.background_app))
         }

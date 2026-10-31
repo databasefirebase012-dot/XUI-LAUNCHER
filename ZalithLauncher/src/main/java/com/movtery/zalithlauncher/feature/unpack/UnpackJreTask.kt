@@ -38,22 +38,7 @@ class UnpackJreTask(val context: Context, val jre: Jre) : AbstractUnpackTask() {
         val home = runCatching { MultiRTUtils.getRuntimeHome(jre.jreName) }.getOrNull() ?: return false
         // The marker alone is not proof that the runtime is usable. A partial extraction
         // can leave pojav_version behind while the Java executable or release metadata is missing.
-        val javaExecutable = File(home, "bin/java")
-        val libDirectory = File(home, "lib")
-        val jvmLibraries = listOf(
-            File(home, "lib/server/libjvm.so"),
-            File(home, "lib/arm/server/libjvm.so"),
-            File(home, "lib/aarch64/server/libjvm.so"),
-            File(home, "lib/arm64/server/libjvm.so")
-        )
-
-        // Catch partial extractions that left the version marker and java launcher
-        // behind but lost the actual JVM/native runtime libraries.
-        return File(home, "release").isFile &&
-            javaExecutable.isFile &&
-            libDirectory.isDirectory &&
-            libDirectory.listFiles()?.isNotEmpty() == true &&
-            jvmLibraries.any { it.isFile }
+        return File(home, "release").isFile && File(home, "bin/java").exists()
     }
 
     override fun isNeedUnpack(): Boolean {
