@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.feature.accounts.AccountsManager
 import com.movtery.zalithlauncher.utils.path.PathManager
 import java.io.File
@@ -195,7 +196,7 @@ object XuiMediaTools {
                 output.fd.sync()
             }
             val copied = BitmapFactory.Options().apply { inJustDecodeBounds = true }
-            BitmapFactory.decodeFile(temp!!.absolutePath, null, copied)
+            BitmapFactory.decodeFile(temp!!.absolutePath, copied)
             if (copied.outMimeType != "image/png" || copied.outWidth != width || copied.outHeight != height) {
                 error("File PNG rusak atau berubah saat disalin.")
             }
@@ -207,4 +208,4 @@ object XuiMediaTools {
             Toast.makeText(context, "Skin gagal diimpor: " + it.message, Toast.LENGTH_LONG).show()
         }
     }
-
+}
