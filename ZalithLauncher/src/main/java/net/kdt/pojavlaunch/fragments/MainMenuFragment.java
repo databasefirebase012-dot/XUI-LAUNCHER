@@ -111,19 +111,9 @@ public class MainMenuFragment extends FragmentWithAnim {
         installGlassLayer(binding.playLayout, R.drawable.xui_bg_glass, true);
         installGlassLayer(binding.launcherMenu, R.drawable.xui_bg_glass, true);
 
-        // Individual dashboard controls: keep their original ripple/background on top,
-        // while adding a real blurred-glass layer directly underneath each control.
-        installGlassLayer(binding.viewAccount.getRoot(), R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.version, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.managerProfileButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.playButton, R.drawable.xui_button_primary, false);
-        installGlassLayer(binding.customControlButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.openMainDirButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.installJarButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.shareLogsButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.aboutButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.skinButton, R.drawable.xui_button_outline, false);
-        installGlassLayer(binding.musicButton, R.drawable.xui_button_outline, false);
+        // Do not insert BlurViews as siblings inside weighted LinearLayouts.
+        // That creates extra weighted children and pushes button text/icons out of place.
+        // Buttons keep their existing translucent XUI glass/ripple drawables above these panels.
 
         binding.version.setOnClickListener(v -> {
             if (!isTaskRunning()) {
@@ -181,7 +171,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         blur.setClickable(false);
         blur.setFocusable(false);
         blur.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        blur.setupWith(target).setBlurRadius(32f)
+        blur.setupWith(target).setBlurRadius(24f)
                 .setOverlayColor(Color.argb(10, 255, 255, 255));
         parent.addView(blur, index, params);
 
