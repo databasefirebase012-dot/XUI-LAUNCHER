@@ -8,12 +8,17 @@
     android:background="@drawable/no_focus_shown"
     android:keepScreenOn="true">
 
-    <ImageView
-        android:id="@+id/background_view"
+    <eightbitlab.com.blurview.BlurTarget
+        android:id="@+id/xui_blur_target"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:translationZ="-2dp"
-        tools:ignore="ContentDescription" />
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/background_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationZ="-2dp"
+            tools:ignore="ContentDescription" />
+    </eightbitlab.com.blurview.BlurTarget>
 
     <FrameLayout
         android:id="@+id/content_frame"

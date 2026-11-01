@@ -84,7 +84,7 @@
             android:id="@+id/shadowView"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#33DC2626"
+            android:background="#33FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +93,7 @@
             android:id="@+id/operate_main_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#FF1A1A1A"
+            android:background="@drawable/xui_bg_glass"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

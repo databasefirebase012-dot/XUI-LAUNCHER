@@ -12,6 +12,7 @@ import com.movtery.zalithlauncher.databinding.ViewControlMenuBinding;
 import com.movtery.zalithlauncher.feature.background.BackgroundManager;
 import com.movtery.zalithlauncher.feature.background.BackgroundType;
 import com.movtery.zalithlauncher.setting.AllSettings;
+import com.movtery.zalithlauncher.utils.xui.XuiGlassBinder;
 import com.movtery.zalithlauncher.ui.activity.BaseActivity;
 import com.movtery.zalithlauncher.ui.subassembly.menu.ControlMenu;
 import com.movtery.zalithlauncher.ui.subassembly.view.GameMenuViewWrapper;
@@ -32,6 +33,7 @@ public class CustomControlsActivity extends BaseActivity implements EditorExitab
 		parseBundle();
 		binding = ActivityCustomControlsBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+		XuiGlassBinder.bind(binding.getRoot(), binding.xuiBlurTarget);
 
 		ControlLayout controlLayout = binding.customctrlControllayout;
 		DrawerLayout drawerLayout = binding.customctrlDrawerlayout;
@@ -53,6 +55,7 @@ public class CustomControlsActivity extends BaseActivity implements EditorExitab
 		new ControlMenu(this, this, controlMenuBinding, controlLayout, true);
 
 		drawerNavigationView.addView(controlMenuBinding.getRoot());
+		XuiGlassBinder.bind(binding.getRoot(), binding.xuiBlurTarget);
 		controlLayout.setModifiable(true);
 		try {
 			if (mControlPath == null) controlLayout.loadLayout((String) null);

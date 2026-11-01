@@ -76,6 +76,7 @@ import com.movtery.zalithlauncher.utils.anim.AnimUtils;
 import com.movtery.zalithlauncher.utils.file.FileTools;
 import com.movtery.zalithlauncher.utils.stringutils.StringUtils;
 import com.movtery.zalithlauncher.utils.xui.XuiMediaTools;
+import com.movtery.zalithlauncher.utils.xui.XuiGlassBinder;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 
 import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
@@ -152,6 +153,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         mControlSettingsBinding = ViewControlMenuBinding.inflate(getLayoutInflater());
         new ControlMenu(this, this, mControlSettingsBinding, controlLayout, false);
         mControlSettingsBinding.saveAndExport.setVisibility(View.GONE);
+        XuiGlassBinder.bind(binding.getRoot(), binding.xuiBlurTarget);
 
         binding.mainControlLayout.setModifiable(false);
 
@@ -166,6 +168,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     protected void initLayout() {
         binding = ActivityGameBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        XuiGlassBinder.bind(binding.getRoot(), binding.xuiBlurTarget);
 
         mGameMenuWrapper = new GameMenuViewWrapper(this, v -> onClickedMenu(), true);
         touchCharInput = binding.mainTouchCharInput;

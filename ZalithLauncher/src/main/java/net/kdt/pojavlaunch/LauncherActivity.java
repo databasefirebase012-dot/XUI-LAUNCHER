@@ -51,6 +51,7 @@ import com.movtery.zalithlauncher.feature.accounts.LocalAccountUtils;
 import com.movtery.zalithlauncher.feature.background.BackgroundManager;
 import com.movtery.zalithlauncher.feature.background.BackgroundType;
 import com.movtery.zalithlauncher.utils.XuiBackgroundOpacity;
+import com.movtery.zalithlauncher.utils.xui.XuiGlassBinder;
 import com.movtery.zalithlauncher.feature.download.item.ModLoaderWrapper;
 import com.movtery.zalithlauncher.feature.log.Logging;
 import com.movtery.zalithlauncher.feature.mod.modpack.install.InstallExtra;
@@ -137,6 +138,7 @@ public class LauncherActivity extends BaseActivity {
             } else {
                 mSettingsButtonWrapper.setButtonType(ButtonType.HOME);
             }
+            if (f.getView() != null && binding != null) XuiGlassBinder.bind(f.getView(), binding.xuiBlurTarget);
         }
     };
 
@@ -363,6 +365,7 @@ public class LauncherActivity extends BaseActivity {
 
         processFragment();
         processViews();
+        binding.getRoot().post(() -> XuiGlassBinder.bind(binding.getRoot(), binding.xuiBlurTarget));
 
         mRequestNotificationPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),

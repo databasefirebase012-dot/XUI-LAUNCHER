@@ -30,7 +30,7 @@
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="#FF050505"
+        android:background="@drawable/xui_bg_glass"
         android:elevation="2dp"
         android:paddingHorizontal="@dimen/_8sdp"
         app:layout_constraintTop_toTopOf="parent">
