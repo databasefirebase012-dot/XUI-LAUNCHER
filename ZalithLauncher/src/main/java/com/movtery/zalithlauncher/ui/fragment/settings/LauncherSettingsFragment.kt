@@ -1,0 +1,219 @@
+package com.movtery.zalithlauncher.ui.fragment.settings
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.movtery.anim.AnimPlayer
+import com.movtery.anim.animations.Animations
+import com.movtery.zalithlauncher.R
+import com.movtery.zalithlauncher.databinding.SettingsFragmentLauncherBinding
+import com.movtery.zalithlauncher.event.single.BackgroundOpacityChangeEvent
+import com.movtery.zalithlauncher.event.single.PageOpacityChangeEvent
+import com.movtery.zalithlauncher.setting.AllSettings
+import com.movtery.zalithlauncher.ui.fragment.CustomBackgroundFragment
+import com.movtery.zalithlauncher.ui.fragment.FragmentWithAnim
+import com.movtery.zalithlauncher.ui.fragment.settings.wrapper.BaseSettingsWrapper
+import com.movtery.zalithlauncher.ui.fragment.settings.wrapper.ListSettingsWrapper
+import com.movtery.zalithlauncher.ui.fragment.settings.wrapper.SeekBarSettingsWrapper
+import com.movtery.zalithlauncher.ui.fragment.settings.wrapper.SwitchSettingsWrapper
+import com.movtery.zalithlauncher.utils.CleanUpCache.Companion.start
+import com.movtery.zalithlauncher.utils.ZHTools
+import net.kdt.pojavlaunch.LauncherActivity
+import org.greenrobot.eventbus.EventBus
+import android.content.Intent
+import com.movtery.zalithlauncher.utils.xui.XuiMediaTools
+
+class LauncherSettingsFragment() : AbstractSettingsFragment(R.layout.settings_fragment_launcher, SettingCategory.LAUNCHER) {
+    private lateinit var binding: SettingsFragmentLauncherBinding
+    private var parentFragment: FragmentWithAnim? = null
+
+    constructor(parentFragment: FragmentWithAnim?) : this() {
+        this.parentFragment = parentFragment
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = SettingsFragmentLauncherBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val context = requireContext()
+        XuiMediaTools.addControls(this, binding.root)
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.checkLibraries,
+            binding.checkLibrariesLayout,
+            binding.checkLibraries
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.verifyManifest,
+            binding.verifyManifestLayout,
+            binding.verifyManifest
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.resourceImageCache,
+            binding.resourceImageCacheLayout,
+            binding.resourceImageCache
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.addFullResourceName,
+            binding.addFullResourceNameLayout,
+            binding.addFullResourceName
+        )
+
+        ListSettingsWrapper(
+            context,
+            AllSettings.downloadSource,
+            binding.downloadSourceLayout,
+            binding.downloadSourceTitle,
+            binding.downloadSourceValue,
+            R.array.download_source_names, R.array.download_source_values
+        )
+
+        SeekBarSettingsWrapper(
+            context,
+            AllSettings.maxDownloadThreads,
+            binding.maxDownloadThreadsLayout,
+            binding.maxDownloadThreadsTitle,
+            binding.maxDownloadThreadsSummary,
+            binding.maxDownloadThreadsValue,
+            binding.maxDownloadThreads,
+            ""
+        )
+
+        ListSettingsWrapper(
+            context,
+            AllSettings.launcherTheme,
+            binding.launcherThemeLayout,
+            binding.launcherThemeTitle,
+            binding.launcherThemeValue,
+            R.array.launcher_theme_names, R.array.launcher_theme_values
+        ).setRequiresReboot()
+
+        BaseSettingsWrapper(
+            context,
+            binding.customBackgroundLayout
+        ) {
+            parentFragment?.apply {
+                ZHTools.swapFragmentWithAnim(
+                    this,
+                    CustomBackgroundFragment::class.java,
+                    CustomBackgroundFragment.TAG,
+                    null
+                )
+            }
+        }
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.animation,
+            binding.animationLayout,
+            binding.animation
+        )
+
+        SeekBarSettingsWrapper(
+            context,
+            AllSettings.animationSpeed,
+            binding.animationSpeedLayout,
+            binding.animationSpeedTitle,
+            binding.animationSpeedSummary,
+            binding.animationSpeedValue,
+            binding.animationSpeed,
+            "ms"
+        )
+
+        SeekBarSettingsWrapper(
+            context,
+            AllSettings.pageOpacity,
+            binding.pageOpacityLayout,
+            binding.pageOpacityTitle,
+            binding.pageOpacitySummary,
+            binding.pageOpacityValue,
+            binding.pageOpacity,
+            "%"
+        ).setOnSeekBarProgressChangeListener {
+            EventBus.getDefault().post(PageOpacityChangeEvent(it))
+        }
+
+        SeekBarSettingsWrapper(
+            context,
+            AllSettings.launcherBackgroundOpacity,
+            binding.launcherBackgroundOpacityLayout,
+            binding.launcherBackgroundOpacityTitle,
+            binding.launcherBackgroundOpacitySummary,
+            binding.launcherBackgroundOpacityValue,
+            binding.launcherBackgroundOpacity,
+            "%"
+        ).setOnSeekBarProgressChangeListener {
+            EventBus.getDefault().post(BackgroundOpacityChangeEvent(it))
+        }
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.enableLogOutput,
+            binding.enableLogOutputLayout,
+            binding.enableLogOutput
+        )
+
+        SwitchSettingsWrapper(
+            context,
+            AllSettings.quitLauncher,
+            binding.quitLauncherLayout,
+            binding.quitLauncher
+        )
+
+        BaseSettingsWrapper(
+            context,
+            binding.cleanUpCacheLayout
+        ) {
+            start(context)
+        }
+
+        // Upstream self-updates are disabled in the XUI fork.
+        binding.checkUpdateLayout.visibility = View.GONE
+        binding.acceptPreReleaseUpdatesLayout.visibility = View.GONE
+
+        val notificationPermissionRequest = SwitchSettingsWrapper(
+            context,
+            AllSettings.notificationPermissionRequest,
+            binding.notificationPermissionRequestLayout,
+            binding.notificationPermissionRequest
+        )
+        setupNotificationRequestPreference(notificationPermissionRequest)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        XuiMediaTools.handleResult(this, requestCode, resultCode, data)
+    }
+
+    override fun slideIn(animPlayer: AnimPlayer) {
+        animPlayer.apply(AnimPlayer.Entry(binding.root, Animations.BounceInDown))
+    }
+
+    private fun setupNotificationRequestPreference(notificationPermissionRequest: SwitchSettingsWrapper) {
+        val activity = requireActivity()
+        if (activity is LauncherActivity) {
+            if (ZHTools.checkForNotificationPermission()) notificationPermissionRequest.setGone()
+            notificationPermissionRequest.switchView.setOnCheckedChangeListener { _, _ ->
+                activity.askForNotificationPermission {
+                    notificationPermissionRequest.mainView.visibility = View.GONE
+                }
+            }
+        } else {
+            notificationPermissionRequest.mainView.visibility = View.GONE
+        }
+    }
+}

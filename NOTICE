@@ -1,0 +1,19 @@
+XUI Launcher — NOTICE AND ATTRIBUTION
+=====================================
+
+XUI Launcher is an unofficial community fork of the open-source Zalith Launcher project, which itself is based on PojavLauncher and related upstream projects.
+
+This repository retains upstream code, resources, and dependencies. Copyright in those components remains with their respective authors and contributors. XUI-specific interface changes do not replace or remove original copyright notices or license terms.
+
+License
+-------
+The project is distributed under the GNU General Public License version 3 (GPL-3.0), subject to applicable licenses of bundled dependencies and upstream components. See LICENSE and upstream project notices for full terms.
+
+Upstream projects
+-----------------
+- Zalith Launcher: https://github.com/ZalithLauncher/ZalithLauncher
+- PojavLauncher: https://github.com/PojavLauncherTeam/PojavLauncher
+
+Trademark and affiliation
+-------------------------
+XUI Launcher is not affiliated with, endorsed by, or sponsored by Mojang or Microsoft. Minecraft is a trademark of its respective owner. This fork is community-maintained and is provided without warranty, to the extent permitted by law.

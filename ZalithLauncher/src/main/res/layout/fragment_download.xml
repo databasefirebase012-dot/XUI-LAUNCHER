@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:ignore="ContentDescription">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/download_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/classify_layout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/classify_layout"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/xui_bg_glass"
+        android:elevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/classify_shadowView"
+            android:visibility="gone"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="0dp"
+            android:background="@drawable/shadow_gradient_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.angcyo.tablayout.DslTabLayout
+            android:id="@+id/classify_tab"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/classify_shadowView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tab_draw_indicator="false"
+            app:tab_indicator_enable_flow="false"
+            app:tab_indicator_x_offset="@dimen/_4sdp"
+            app:tab_orientation="HORIZONTAL"
+            app:tab_item_is_equ_width="false"
+            app:tab_item_auto_equ_width="false">
+
+                        <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="2dp"
+                android:padding="2dp"
+                android:background="@drawable/xui_tab_outline">
+                <ImageView
+                    android:id="@+id/mod_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/download_classify_mod"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:srcCompat="@drawable/ic_profile_mods" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mod_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="1dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="10sp"
+                    android:text="@string/download_classify_mod"
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
+            </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
+
+                        <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="2dp"
+                android:padding="2dp"
+                android:background="@drawable/xui_tab_outline">
+                <ImageView
+                    android:id="@+id/modpack_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/download_classify_modpack"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.82"
+                    android:scaleY="0.82"
+                    app:srcCompat="@drawable/ic_zip" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/modpack_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="1dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="10sp"
+                    android:text="@string/download_classify_modpack"
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
+            </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
+
+                        <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="2dp"
+                android:padding="2dp"
+                android:background="@drawable/xui_tab_outline">
+                <ImageView
+                    android:id="@+id/resource_pack_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/download_classify_resource_pack"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.82"
+                    android:scaleY="0.82"
+                    app:srcCompat="@drawable/ic_profile_resource_pack" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/resource_pack_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="1dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="10sp"
+                    android:text="@string/download_classify_resource_pack"
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
+            </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
+
+                        <com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout
+                android:layout_width="0dp"
+                app:layout_tab_weight="0.25"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="2dp"
+                android:padding="2dp"
+                android:background="@drawable/xui_tab_outline">
+                <ImageView
+                    android:id="@+id/shader_pack_image"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="3dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/download_classify_shader_pack"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.95"
+                    android:scaleY="0.95"
+                    app:srcCompat="@drawable/ic_profile_shader_pack" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/shader_pack_image"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="1dp"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textSize="10sp"
+                    android:text="@string/download_classify_shader_pack"
+                    android:textColor="@color/xui_text_primary"
+                    android:textStyle="bold" />
+            </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
+        </com.angcyo.tablayout.DslTabLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
