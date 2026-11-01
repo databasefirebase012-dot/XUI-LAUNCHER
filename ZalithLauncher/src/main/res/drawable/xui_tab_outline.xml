@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-    <corners android:radius="10dp" />
-    <solid android:color="@color/xui_bg_card" />
-    <stroke android:width="1dp" android:color="#FFFF334F" />
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="#44EF4444">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="#8F171D28" />
+            <stroke android:width="1dp" android:color="#66FFFFFF" />
+        </shape>
+    </item>
+</ripple>

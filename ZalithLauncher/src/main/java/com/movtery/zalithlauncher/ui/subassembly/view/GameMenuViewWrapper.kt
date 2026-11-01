@@ -8,7 +8,6 @@ import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.setting.AllSettings
 import com.movtery.zalithlauncher.task.TaskExecutors
 import com.movtery.zalithlauncher.utils.NewbieGuideUtils
-import com.movtery.zalithlauncher.utils.xui.XuiMediaTools
 import com.movtery.zalithlauncher.utils.file.FileTools.Companion.formatFileSize
 import com.movtery.zalithlauncher.utils.platform.MemoryUtils
 import com.petterp.floatingx.assist.FxGravity
@@ -54,12 +53,6 @@ class GameMenuViewWrapper(
                     holder.view.alpha = AllSettings.gameMenuAlpha.getValue().toFloat() / 100f
 
                     updateInfoText(holder.view)
-                    holder.view.findViewById<TextView>(R.id.music_toggle)?.apply {
-                        text = if (XuiMediaTools.isAudioPlaying()) "MUSIC ON" else "MUSIC OFF"
-                        setOnClickListener {
-                            text = if (XuiMediaTools.toggleAudio(activity)) "MUSIC ON" else "MUSIC OFF"
-                        }
-                    }
                 }
 
                 override fun detached(view: View) {

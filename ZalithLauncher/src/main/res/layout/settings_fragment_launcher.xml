@@ -35,7 +35,7 @@
                 android:id="@+id/checkLibraries_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -80,7 +80,7 @@
                 android:id="@+id/verifyManifest_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -125,7 +125,7 @@
                 android:id="@+id/resourceImageCache_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -169,7 +169,7 @@
                 android:id="@+id/addFullResourceName_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -214,7 +214,7 @@
                 android:id="@+id/downloadSource_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -255,7 +255,7 @@
                 android:id="@+id/maxDownloadThreads_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -333,7 +333,7 @@
                 android:id="@+id/launcherTheme_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -360,7 +360,7 @@
                 android:id="@+id/custom_background_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -392,7 +392,7 @@
                 android:id="@+id/animation_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -437,7 +437,7 @@
                 android:id="@+id/animationSpeed_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -496,7 +496,7 @@
                 android:id="@+id/pageOpacity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -555,7 +555,7 @@
                 android:id="@+id/launcherBackgroundOpacity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -633,7 +633,7 @@
                 android:id="@+id/enableLogOutput_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -677,7 +677,7 @@
                 android:id="@+id/quitLauncher_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -722,7 +722,7 @@
                 android:id="@+id/clean_up_cache_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -754,7 +754,7 @@
                 android:id="@+id/check_update_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -786,7 +786,7 @@
                 android:id="@+id/acceptPreReleaseUpdates_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -831,7 +831,7 @@
                 android:id="@+id/notification_permission_request_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 

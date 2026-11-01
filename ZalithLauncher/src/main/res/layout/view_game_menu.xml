@@ -27,6 +27,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/music_toggle"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/xui_button_music"
+                android:gravity="center"
+                android:text="MUSIC OFF"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"

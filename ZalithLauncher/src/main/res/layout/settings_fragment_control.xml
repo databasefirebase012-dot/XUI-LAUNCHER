@@ -37,7 +37,7 @@
                 android:id="@+id/disableGestures_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -80,7 +80,7 @@
                 android:id="@+id/disableDoubleTap_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -123,7 +123,7 @@
                 android:id="@+id/timeLongPressTrigger_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -200,7 +200,7 @@
                 android:id="@+id/buttonscale_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -258,7 +258,7 @@
                 android:id="@+id/buttonAllCaps_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -320,7 +320,7 @@
                 android:id="@+id/mousescale_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -378,7 +378,7 @@
                 android:id="@+id/mousespeed_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -436,7 +436,7 @@
                 android:id="@+id/mouse_start_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -477,7 +477,7 @@
                 android:id="@+id/custom_mouse_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -528,7 +528,7 @@
                 android:id="@+id/enableGyro_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -571,7 +571,7 @@
                 android:id="@+id/gyroSensitivity_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -629,7 +629,7 @@
                 android:id="@+id/gyroSampleRate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -687,7 +687,7 @@
                 android:id="@+id/gyroSmoothing_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -731,7 +731,7 @@
                 android:id="@+id/gyroInvertX_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -774,7 +774,7 @@
                 android:id="@+id/gyroInvertY_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -836,7 +836,7 @@
                 android:id="@+id/changeControllerBindings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -868,7 +868,7 @@
                 android:id="@+id/resetControllerBindings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -900,7 +900,7 @@
                 android:id="@+id/gamepad_deadzone_scale_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView

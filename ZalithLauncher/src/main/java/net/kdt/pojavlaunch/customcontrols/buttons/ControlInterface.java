@@ -95,8 +95,19 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
     @CallSuper
     default void setProperties(ControlData properties, boolean changePos) {
         if (changePos) {
-            getControlView().setX(properties.insertDynamicPos(getProperties().dynamicX));
-            getControlView().setY(properties.insertDynamicPos(getProperties().dynamicY));
+            float edge = Tools.dpToPx(8f);
+            float x = properties.insertDynamicPos(getProperties().dynamicX);
+            float y = properties.insertDynamicPos(getProperties().dynamicY);
+            if (CallbackBridge.physicalWidth > 0) {
+                float maxX = Math.max(edge, CallbackBridge.physicalWidth - properties.getWidth() - edge);
+                x = MathUtils.clamp(x, edge, maxX);
+            }
+            if (CallbackBridge.physicalHeight > 0) {
+                float maxY = Math.max(edge, CallbackBridge.physicalHeight - properties.getHeight() - edge);
+                y = MathUtils.clamp(y, edge, maxY);
+            }
+            getControlView().setX(x);
+            getControlView().setY(y);
         }
 
         // Recycle layout params
@@ -115,9 +126,11 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         GradientDrawable gd = getControlView().getBackground() instanceof GradientDrawable
                 ? (GradientDrawable) getControlView().getBackground()
                 : new GradientDrawable();
-        gd.setColor(getProperties().bgColor);
-        gd.setStroke(Math.max(1, (int) Tools.dpToPx(1.4f)), 0xFFFF334F);
-        gd.setCornerRadius(Tools.dpToPx(7f));
+        int baseColor = getProperties().bgColor;
+        int alpha = Math.min(205, Math.max(96, (baseColor >>> 24) & 0xFF));
+        gd.setColor((baseColor & 0x00FFFFFF) | (alpha << 24));
+        gd.setStroke(Math.max(1, (int) Tools.dpToPx(1.2f)), 0x99FFFFFF);
+        gd.setCornerRadius(Tools.dpToPx(9f));
 
         getControlView().setBackground(gd);
     }
@@ -374,9 +387,12 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
                         if (Math.abs(event.getRawX() - downRawX) > 8 || Math.abs(event.getRawY() - downRawY) > 8)
                             mCanTriggerLongClick = false;
                         getControlLayoutParent().adaptPanelPosition();
+                        float edge = Tools.dpToPx(8f);
+                        float maxX = Math.max(edge, CallbackBridge.physicalWidth - view.getWidth() - edge);
+                        float maxY = Math.max(edge, CallbackBridge.physicalHeight - view.getHeight() - edge);
                         snapAndAlign(
-                                MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - view.getWidth()),
-                                MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - view.getHeight())
+                                MathUtils.clamp(event.getRawX() - downX, edge, maxX),
+                                MathUtils.clamp(event.getRawY() - downY, edge, maxY)
                         );
                         break;
                 }

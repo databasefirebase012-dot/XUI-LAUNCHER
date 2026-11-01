@@ -75,6 +75,7 @@ import com.movtery.zalithlauncher.utils.ZHTools;
 import com.movtery.zalithlauncher.utils.anim.AnimUtils;
 import com.movtery.zalithlauncher.utils.file.FileTools;
 import com.movtery.zalithlauncher.utils.stringutils.StringUtils;
+import com.movtery.zalithlauncher.utils.xui.XuiMediaTools;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 
 import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
@@ -621,6 +622,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             //初始化Switch的状态
             this.binding.openMemoryInfo.setChecked(AllSettings.getGameMenuShowMemory().getValue());
             this.binding.openFpsInfo.setChecked(AllSettings.getGameMenuShowFPS().getValue());
+            this.binding.musicToggle.setText(XuiMediaTools.isAudioPlaying() ? "MUSIC ON" : "MUSIC OFF");
             this.binding.resolutionSmart.setChecked(AllSettings.getResolutionSmart().getValue());
             this.binding.fpsStable.setChecked(AllSettings.getFpsStable().getValue());
             this.binding.disableGestures.setChecked(AllSettings.getDisableGestures().getValue());
@@ -636,6 +638,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             this.binding.forceClose.setOnClickListener(this);
             this.binding.logOutput.setOnClickListener(this);
             this.binding.sendCustomKey.setOnClickListener(this);
+            this.binding.musicToggle.setOnClickListener(this);
             this.binding.openMemoryInfo.setOnCheckedChangeListener(this);
             this.binding.openMemoryInfoLayout.setOnClickListener(this);
             this.binding.resolutionSmart.setOnCheckedChangeListener(this);
@@ -749,6 +752,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             if (v == binding.forceClose) ZHTools.dialogForceClose(MainActivity.this);
             else if (v == binding.logOutput) MainActivity.binding.mainLoggerView.toggleViewWithAnim();
             else if (v == binding.sendCustomKey) dialogSendCustomKey();
+            else if (v == binding.musicToggle) binding.musicToggle.setText(XuiMediaTools.toggleAudio(MainActivity.this) ? "MUSIC ON" : "MUSIC OFF");
             else if (v == binding.openMemoryInfoLayout) MenuUtils.toggleSwitchState(binding.openMemoryInfo);
             else if (v == binding.openFpsInfoLayout) MenuUtils.toggleSwitchState(binding.openFpsInfo);
             else if (v == binding.resolutionSmartLayout) MenuUtils.toggleSwitchState(binding.resolutionSmart);

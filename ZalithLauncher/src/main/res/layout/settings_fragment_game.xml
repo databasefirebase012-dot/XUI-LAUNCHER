@@ -35,7 +35,7 @@
                 android:id="@+id/version_isolation_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -79,7 +79,7 @@
                 android:id="@+id/versionCustomInfo_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -139,7 +139,7 @@
                 android:id="@+id/autoSetGameLanguage_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -184,7 +184,7 @@
                 android:id="@+id/gameLanguageOverridden_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -228,7 +228,7 @@
                 android:id="@+id/setGameLanguage_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -274,7 +274,7 @@
                 android:id="@+id/install_jre_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -306,7 +306,7 @@
                 android:id="@+id/selectRuntimeMode_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -347,7 +347,7 @@
                 android:id="@+id/javaArgs_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -388,7 +388,7 @@
                 android:id="@+id/allocation_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -455,7 +455,7 @@
                 android:id="@+id/java_sandbox_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -518,7 +518,7 @@
                 android:id="@+id/gameMenuShowMemory_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -562,7 +562,7 @@
                 android:id="@+id/gameMenuShowFPS_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -606,7 +606,7 @@
                 android:id="@+id/gameMenuMemoryText_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -647,7 +647,7 @@
                 android:id="@+id/gameMenuLocation_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row"
                 android:padding="14dp">
 
@@ -674,7 +674,7 @@
                 android:id="@+id/gameMenuInfoRefreshRate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
@@ -733,7 +733,7 @@
                 android:id="@+id/gameMenuAlpha_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="2dp"
+                android:layout_marginVertical="5dp"
                 android:background="@drawable/xui_settings_row">
 
                 <TextView
