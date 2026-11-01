@@ -9,13 +9,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.movtery.zalithlauncher.R;
 import com.movtery.zalithlauncher.setting.AllSettings;
 
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
@@ -28,7 +26,9 @@ import org.lwjgl.glfw.CallbackBridge;
 
 @SuppressLint({"ViewConstructor", "AppCompatCustomView"})
 public class ControlButton extends TextView implements ControlInterface {
-    private final Paint mRectPaint = new Paint();
+    private final Paint mRectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mGlassPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mGlassBorderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     protected ControlData mProperties;
     private final ControlLayout mControlLayout;
 
@@ -45,15 +45,22 @@ public class ControlButton extends TextView implements ControlInterface {
         setAllCaps(AllSettings.getButtonAllCaps().getValue());
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
-        setTextSize(12); // Compact label for the XUI controller style
+        setTextSize(12);
         setTypeface(Typeface.DEFAULT_BOLD);
-        setOutlineProvider(null); // Disable shadow casting, removing one drawing pass
+        setOutlineProvider(null);
 
-        //setOnLongClickListener(this);
+        // Neutral iOS-style clear-glass surface. The game SurfaceView itself
+        // cannot be sampled by BlurView, so controls use a translucent fill
+        // and a fine highlight border without intercepting additional touches.
+        mGlassPaint.setStyle(Paint.Style.FILL);
+        mGlassPaint.setColor(Color.argb(30, 255, 255, 255));
+        mGlassBorderPaint.setStyle(Paint.Style.STROKE);
+        mGlassBorderPaint.setStrokeWidth(getResources().getDisplayMetrics().density);
+        mGlassBorderPaint.setColor(Color.argb(155, 255, 255, 255));
+        mRectPaint.setStyle(Paint.Style.FILL);
+        mRectPaint.setColor(Color.argb(72, 255, 255, 255));
 
-        //When a button is created, the width/height has yet to be processed to fit the scaling.
         setProperties(preProcessProperties(properties, layout));
-
         injectBehaviors();
     }
 
@@ -68,28 +75,22 @@ public class ControlButton extends TextView implements ControlInterface {
         mProperties = properties;
         ControlInterface.super.setProperties(properties, changePos);
         mComputedRadius = ControlInterface.super.computeCornerRadius(mProperties.cornerRadius);
-
-        if (mProperties.isToggle) {
-            //For the toggle layer
-            final TypedValue value = new TypedValue();
-            getContext().getTheme().resolveAttribute(R.attr.colorAccent, value, true);
-            mRectPaint.setColor(value.data);
-            mRectPaint.setAlpha(128);
-        } else {
-            mRectPaint.setColor(Color.WHITE);
-            mRectPaint.setAlpha(60);
-        }
-
         setText(properties.name);
+        invalidate();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
+        float right = getWidth();
+        float bottom = getHeight();
+        canvas.drawRoundRect(0, 0, right, bottom, mComputedRadius, mComputedRadius, mGlassPaint);
+        if (mIsToggled || (!mProperties.isToggle && isActivated())) {
+            canvas.drawRoundRect(0, 0, right, bottom, mComputedRadius, mComputedRadius, mRectPaint);
+        }
         super.onDraw(canvas);
-        if (mIsToggled || (!mProperties.isToggle && isActivated()))
-            canvas.drawRoundRect(0, 0, getWidth(), getHeight(), mComputedRadius, mComputedRadius, mRectPaint);
+        canvas.drawRoundRect(0.5f, 0.5f, right - 0.5f, bottom - 0.5f,
+                mComputedRadius, mComputedRadius, mGlassBorderPaint);
     }
-
 
     public void loadEditValues(EditControlPopup editControlPopup){
         editControlPopup.loadValues(getProperties());
@@ -103,83 +104,62 @@ public class ControlButton extends TextView implements ControlInterface {
         ((ControlLayout) getParent()).addControlButton(cloneData);
     }
 
-    /** Remove any trace of this button from the layout */
+    /** Remove any trace of the button from the layout */
     public void removeButton() {
         getControlLayoutParent().getLayout().mControlDataList.remove(getProperties());
         getControlLayoutParent().removeView(this);
     }
-
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()){
             case MotionEvent.ACTION_MOVE:
-                //Send the event to be taken as a mouse action
                 if(getProperties().passThruEnabled && CallbackBridge.isGrabbing()){
                     View gameSurface = getControlLayoutParent().getGameSurface();
                     if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
-
-                //If out of bounds
                 if(event.getX() < getControlView().getLeft() || event.getX() > getControlView().getRight() ||
                         event.getY() < getControlView().getTop()  || event.getY() > getControlView().getBottom()){
                     if(getProperties().isSwipeable && !mIsPointerOutOfBounds){
-                        //Remove keys
-                        if(!triggerToggle()) {
-                            sendKeyPresses(false);
-                        }
+                        if(!triggerToggle()) sendKeyPresses(false);
                     }
                     mIsPointerOutOfBounds = true;
                     getControlLayoutParent().onTouch(this, event);
                     break;
                 }
-
-                //Else if we now are in bounds
                 if(mIsPointerOutOfBounds) {
                     getControlLayoutParent().onTouch(this, event);
-                    //RE-press the button
-                    if(getProperties().isSwipeable && !getProperties().isToggle){
-                        sendKeyPresses(true);
-                    }
+                    if(getProperties().isSwipeable && !getProperties().isToggle) sendKeyPresses(true);
                 }
                 mIsPointerOutOfBounds = false;
                 break;
 
-            case MotionEvent.ACTION_DOWN: // 0
-            case MotionEvent.ACTION_POINTER_DOWN: // 5
-                if(!getProperties().isToggle){
-                    sendKeyPresses(true);
-                }
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
+                if(!getProperties().isToggle) sendKeyPresses(true);
                 break;
 
-            case MotionEvent.ACTION_UP: // 1
-            case MotionEvent.ACTION_CANCEL: // 3
-            case MotionEvent.ACTION_POINTER_UP: // 6
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_POINTER_UP:
                 if(getProperties().passThruEnabled){
                     View gameSurface = getControlLayoutParent().getGameSurface();
                     if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
                 if(mIsPointerOutOfBounds) getControlLayoutParent().onTouch(this, event);
                 mIsPointerOutOfBounds = false;
-
-                if(!triggerToggle()) {
-                    sendKeyPresses(false);
-                }
+                if(!triggerToggle()) sendKeyPresses(false);
                 break;
 
             default:
                 return false;
         }
-
         return super.onTouchEvent(event);
     }
 
-
-
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean triggerToggle(){
-        //returns true a the toggle system is triggered
         if(mProperties.isToggle){
             mIsToggled = !mIsToggled;
             invalidate();
@@ -206,31 +186,24 @@ public class ControlButton extends TextView implements ControlInterface {
             case ControlData.SPECIALBTN_KEYBOARD:
                 if(isDown) MainActivity.switchKeyboardState();
                 break;
-
             case ControlData.SPECIALBTN_TOGGLECTRL:
                 if(isDown) getControlLayoutParent().toggleControlVisible();
                 break;
-
             case ControlData.SPECIALBTN_VIRTUALMOUSE:
                 if(isDown) MainActivity.toggleMouse(getContext());
                 break;
-
             case ControlData.SPECIALBTN_MOUSEPRI:
                 sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, isDown);
                 break;
-
             case ControlData.SPECIALBTN_MOUSEMID:
                 sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_MIDDLE, isDown);
                 break;
-
             case ControlData.SPECIALBTN_MOUSESEC:
                 sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, isDown);
                 break;
-
             case ControlData.SPECIALBTN_SCROLLDOWN:
                 if (!isDown) CallbackBridge.sendScroll(0, 1d);
                 break;
-
             case ControlData.SPECIALBTN_SCROLLUP:
                 if (!isDown) CallbackBridge.sendScroll(0, -1d);
                 break;
