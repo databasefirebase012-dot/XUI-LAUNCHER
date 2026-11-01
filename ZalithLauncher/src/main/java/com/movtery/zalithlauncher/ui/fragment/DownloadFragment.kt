@@ -33,7 +33,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDownloadBinding.inflate(layoutInflater)
+        binding = FragmentDownloadBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -79,7 +79,7 @@ class DownloadFragment : FragmentWithAnim(R.layout.fragment_download) {
         super.onDestroyView()
     }
 
-    private class ViewPagerAdapter(private val fragment: Fragment) : FragmentStateAdapter(fragment.requireActivity()) {
+    private class ViewPagerAdapter(private val fragment: Fragment) : FragmentStateAdapter(fragment) {
         override fun getItemCount(): Int = 4
 
         override fun createFragment(position: Int): Fragment {

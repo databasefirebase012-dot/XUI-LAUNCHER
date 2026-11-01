@@ -12,5 +12,5 @@ public final class XuiGlassBinder{
  if(parent instanceof ConstraintLayout){ConstraintLayout.LayoutParams lp=new ConstraintLayout.LayoutParams(-1,-1);lp.leftToLeft=ConstraintLayout.LayoutParams.PARENT_ID;lp.rightToRight=ConstraintLayout.LayoutParams.PARENT_ID;lp.topToTop=ConstraintLayout.LayoutParams.PARENT_ID;lp.bottomToBottom=ConstraintLayout.LayoutParams.PARENT_ID;params=lp;}
  else if(parent instanceof RelativeLayout){RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(-1,-1);lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);lp.addRule(RelativeLayout.ALIGN_PARENT_START);lp.addRule(RelativeLayout.ALIGN_PARENT_END);params=lp;}
  else if(parent instanceof DrawerLayout){DrawerLayout.LayoutParams lp=new DrawerLayout.LayoutParams(-1,-1);lp.gravity=Gravity.NO_GRAVITY;params=lp;}else params=new FrameLayout.LayoutParams(-1,-1,Gravity.TOP|Gravity.START);
- parent.setBackgroundColor(Color.TRANSPARENT);parent.addView(blur,0,params);BOUND.add(parent);blur.setupWith(target).setBlurRadius(30f).setOverlayColor(Color.argb(8,255,255,255));}
+ parent.setBackgroundColor(Color.TRANSPARENT);parent.addView(blur,0,params);BOUND.add(parent);blur.setupWith(target).setBlurRadius(42f).setOverlayColor(Color.argb(12,255,255,255));}
 }

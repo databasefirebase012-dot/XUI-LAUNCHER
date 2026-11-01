@@ -75,7 +75,7 @@ class CustomBackgroundFragment : FragmentWithAnim(R.layout.fragment_custom_backg
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCustomBackgroundBinding.inflate(layoutInflater)
+        binding = FragmentCustomBackgroundBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -91,10 +91,11 @@ class CustomBackgroundFragment : FragmentWithAnim(R.layout.fragment_custom_backg
 
                 setFileSelectedListener(object : FileSelectedListener() {
                     override fun onFileSelected(file: File?, path: String?) {
-                        val fileName = file!!.name
+                        val selectedFile = file ?: return
+                        val fileName = selectedFile.name
 
-                        val image = isImage(file)
-                        val video = backgroundType == BackgroundType.MAIN_MENU && BackgroundManager.isVideo(file)
+                        val image = isImage(selectedFile)
+                        val video = backgroundType == BackgroundType.MAIN_MENU && BackgroundManager.isVideo(selectedFile)
                         val supportedMedia = image || video
                         val filesButton = FilesButton()
                         filesButton.setButtonVisibility(false, false, true, true, true, supportedMedia)
@@ -112,7 +113,7 @@ class CustomBackgroundFragment : FragmentWithAnim(R.layout.fragment_custom_backg
                             Task.runTask(TaskExecutors.getAndroidUI()) {
                                 refreshPath()
                             },
-                            backgroundPath(), file)
+                            backgroundPath(), selectedFile)
                         filesDialog.setMoreButtonClick {
                             backgroundMap[backgroundType] = fileName
                             BackgroundManager.saveProperties(backgroundMap)

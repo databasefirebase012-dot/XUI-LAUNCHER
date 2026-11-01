@@ -33,7 +33,7 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSettingsBinding.inflate(layoutInflater)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -81,7 +81,7 @@ class SettingsFragment : FragmentWithAnim(R.layout.fragment_settings) {
             .apply(AnimPlayer.Entry(binding.settingsViewpager, Animations.FadeOutUp))
     }
 
-    private class ViewPagerAdapter(val fragment: FragmentWithAnim): FragmentStateAdapter(fragment.requireActivity()) {
+    private class ViewPagerAdapter(val fragment: FragmentWithAnim): FragmentStateAdapter(fragment) {
         override fun getItemCount(): Int = 5
         override fun createFragment(position: Int): Fragment {
             return when(position) {

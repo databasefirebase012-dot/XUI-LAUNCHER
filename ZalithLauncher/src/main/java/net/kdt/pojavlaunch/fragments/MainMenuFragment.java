@@ -3,6 +3,8 @@ package net.kdt.pojavlaunch.fragments;
 import static com.movtery.zalithlauncher.event.single.RefreshVersionsEvent.MODE.END;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -54,6 +56,14 @@ public class MainMenuFragment extends FragmentWithAnim {
     public static final String TAG = "MainMenuFragment";
     private FragmentLauncherBinding binding;
     private AccountViewWrapper accountViewWrapper;
+    private final Handler clockHandler = new Handler(Looper.getMainLooper());
+    private final Runnable clockUpdater = new Runnable() {
+        @Override public void run() {
+            if (!isAdded() || getView() == null || binding == null) return;
+            refreshDeviceClock();
+            clockHandler.postDelayed(this, 1000L);
+        }
+    };
 
     public MainMenuFragment() {
         super(R.layout.fragment_launcher);
@@ -62,7 +72,7 @@ public class MainMenuFragment extends FragmentWithAnim {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentLauncherBinding.inflate(getLayoutInflater());
+        binding = FragmentLauncherBinding.inflate(inflater, container, false);
         accountViewWrapper = new AccountViewWrapper(this, binding.viewAccount);
         accountViewWrapper.refreshAccountInfo();
         return binding.getRoot();
@@ -70,6 +80,7 @@ public class MainMenuFragment extends FragmentWithAnim {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        refreshDeviceClock();
         binding.aboutText.setText("About");
         binding.aboutButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, AboutFragment.class, AboutFragment.TAG, null));
         binding.customControlButton.setOnClickListener(v -> ZHTools.swapFragmentWithAnim(this, ControlButtonFragment.class, ControlButtonFragment.TAG, null));
@@ -133,7 +144,7 @@ public class MainMenuFragment extends FragmentWithAnim {
         blur.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
         blur.setClipToOutline(true);
         blur.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        blur.setupWith(target).setBlurRadius(15f);
+        blur.setupWith(target).setBlurRadius(32f).setOverlayColor(Color.argb(10, 255, 255, 255));
         parent.addView(blur, index, params);
         panel.setBackgroundColor(Color.TRANSPARENT);
     }
@@ -184,14 +195,31 @@ public class MainMenuFragment extends FragmentWithAnim {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        clockHandler.removeCallbacks(clockUpdater);
+        clockHandler.post(clockUpdater);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
+        clockHandler.removeCallbacks(clockUpdater);
     }
 
+    private void refreshDeviceClock() {
+        if (binding == null) return;
+        Date now = new Date();
+        binding.xuiHeroTitle.setText(new SimpleDateFormat("HH:mm", Locale.getDefault()).format(now));
+        binding.xuiHeroSubtitle.setText(new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault()).format(now));
+    }
+
+    @Override
+    public void onDestroyView() {
+        clockHandler.removeCallbacks(clockUpdater);
+        binding = null;
+        accountViewWrapper = null;
+        super.onDestroyView();
+    }
     private void runInstallerWithConfirmation(boolean isCustomArgs) {
         if (ProgressKeeper.getTaskCount() == 0)
             Tools.installMod(requireActivity(), isCustomArgs);
