@@ -52,6 +52,10 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainMenuFragment extends FragmentWithAnim {
     public static final String TAG = "MainMenuFragment";
     private FragmentLauncherBinding binding;
