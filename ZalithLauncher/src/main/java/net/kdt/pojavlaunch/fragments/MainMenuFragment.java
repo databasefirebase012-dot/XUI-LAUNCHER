@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOutlineProvider;
 import android.widget.Toast;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -103,9 +106,24 @@ public class MainMenuFragment extends FragmentWithAnim {
         binding.musicButton.setOnClickListener(v -> XuiMediaTools.toggleAudio(this));
         binding.musicButton.setOnLongClickListener(v -> { XuiMediaTools.chooseAudio(this); return true; });
 
-        installGlassLayer(binding.xuiHeroPanel);
-        installGlassLayer(binding.playLayout);
-        installGlassLayer(binding.launcherMenu);
+        // Main dashboard panels: full frosted-glass blur over the selected wallpaper.
+        installGlassLayer(binding.xuiHeroPanel, R.drawable.xui_bg_glass, true);
+        installGlassLayer(binding.playLayout, R.drawable.xui_bg_glass, true);
+        installGlassLayer(binding.launcherMenu, R.drawable.xui_bg_glass, true);
+
+        // Individual dashboard controls: keep their original ripple/background on top,
+        // while adding a real blurred-glass layer directly underneath each control.
+        installGlassLayer(binding.viewAccount.getRoot(), R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.version, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.managerProfileButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.playButton, R.drawable.xui_button_primary, false);
+        installGlassLayer(binding.customControlButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.openMainDirButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.installJarButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.shareLogsButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.aboutButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.skinButton, R.drawable.xui_button_outline, false);
+        installGlassLayer(binding.musicButton, R.drawable.xui_button_outline, false);
 
         binding.version.setOnClickListener(v -> {
             if (!isTaskRunning()) {
@@ -133,24 +151,45 @@ public class MainMenuFragment extends FragmentWithAnim {
         refreshCurrentVersion();
     }
 
-    private void installGlassLayer(View panel) {
-        if (!(panel.getLayoutParams() instanceof ConstraintLayout.LayoutParams)) return;
+    private void installGlassLayer(View panel, int glassBackground, boolean clearPanelBackground) {
+        if (panel == null || !(panel.getParent() instanceof ViewGroup)) return;
         ViewGroup parent = (ViewGroup) panel.getParent();
-        if (parent == null) return;
         BlurTarget target = requireActivity().findViewById(R.id.xui_blur_target);
         if (target == null) return;
 
         int index = parent.indexOfChild(panel);
-        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
-                (ConstraintLayout.LayoutParams) panel.getLayoutParams());
+        if (index < 0) return;
+
+        ViewGroup.LayoutParams original = panel.getLayoutParams();
+        ViewGroup.LayoutParams params;
+        if (original instanceof ConstraintLayout.LayoutParams) {
+            params = new ConstraintLayout.LayoutParams((ConstraintLayout.LayoutParams) original);
+        } else if (original instanceof LinearLayout.LayoutParams) {
+            params = new LinearLayout.LayoutParams((LinearLayout.LayoutParams) original);
+        } else if (original instanceof RelativeLayout.LayoutParams) {
+            params = new RelativeLayout.LayoutParams((RelativeLayout.LayoutParams) original);
+        } else if (original instanceof FrameLayout.LayoutParams) {
+            params = new FrameLayout.LayoutParams((FrameLayout.LayoutParams) original);
+        } else {
+            params = new ViewGroup.LayoutParams(original);
+        }
+
         BlurView blur = new BlurView(requireContext());
-        blur.setBackgroundResource(R.drawable.xui_bg_glass);
+        blur.setBackgroundResource(glassBackground);
         blur.setOutlineProvider(ViewOutlineProvider.BACKGROUND);
         blur.setClipToOutline(true);
+        blur.setClickable(false);
+        blur.setFocusable(false);
         blur.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        blur.setupWith(target).setBlurRadius(32f).setOverlayColor(Color.argb(10, 255, 255, 255));
+        blur.setupWith(target).setBlurRadius(32f)
+                .setOverlayColor(Color.argb(10, 255, 255, 255));
         parent.addView(blur, index, params);
-        panel.setBackgroundColor(Color.TRANSPARENT);
+
+        // The three large containers use the BlurView as their visible glass surface.
+        // Buttons retain their own ripple drawable, layered above the blurred surface.
+        if (clearPanelBackground) {
+            panel.setBackgroundColor(Color.TRANSPARENT);
+        }
     }
 
     @Override
