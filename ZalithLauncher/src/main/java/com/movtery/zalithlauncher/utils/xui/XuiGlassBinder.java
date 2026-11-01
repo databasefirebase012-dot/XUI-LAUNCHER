@@ -142,7 +142,7 @@ public final class XuiGlassBinder {
         blur.setFocusable(false);
         blur.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
         blur.setupWith(target)
-                .setBlurRadius(36f)
+                .setBlurRadius(24f)
                 .setOverlayColor(Color.argb(8, 255, 255, 255));
         return blur;
     }
