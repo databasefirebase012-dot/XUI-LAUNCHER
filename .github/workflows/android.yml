@@ -46,7 +46,10 @@ jobs:
           grep -Fq 'check(!item.task.isNeedUnpack())' ZalithLauncher/src/main/java/com/movtery/zalithlauncher/ui/activity/InstallableAdapter.kt
           grep -Fq 'getSmartResolutionRatio()' ZalithLauncher/src/main/java/net/kdt/pojavlaunch/utils/JREUtils.java
           grep -Fq 'AllSettings.getFpsStable().getValue()' ZalithLauncher/src/main/java/net/kdt/pojavlaunch/utils/JREUtils.java
-          echo "PASS: startup task validation and both performance setting hooks are present."
+          grep -Fq 'music_toggle' ZalithLauncher/src/main/res/layout/view_game_menu.xml
+          grep -Fq 'XuiMediaTools.toggleAudio(MainActivity.this)' ZalithLauncher/src/main/java/net/kdt/pojavlaunch/MainActivity.java
+          grep -Fq 'Tools.dpToPx(8f)' ZalithLauncher/src/main/java/net/kdt/pojavlaunch/customcontrols/buttons/ControlInterface.java
+          echo "PASS: startup tasks, performance hooks, in-game music control and controller safe margins are present."
 
       - name: Install XML validator
         run: |
