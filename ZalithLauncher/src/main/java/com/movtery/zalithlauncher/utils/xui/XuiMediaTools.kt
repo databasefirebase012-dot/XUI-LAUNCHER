@@ -180,10 +180,10 @@ object XuiMediaTools {
             } ?: error("File tidak dapat dibaca dari penyimpanan.")
             val width = bounds.outWidth
             val height = bounds.outHeight
-            val modern = width == height && width >= 64 && width <= 2048 && width % 64 == 0
+            val modern = width == 64 && height == 64
             val legacy = width == 64 && height == 32
             if (bounds.outMimeType != "image/png" || !(modern || legacy)) {
-                error("PNG skin harus 64x64, 64x32, atau ukuran persegi kelipatan 64 (maks. 2048px).")
+                error("Format skin Minecraft harus PNG 64x64 atau 64x32.")
             }
             val account = AccountsManager.currentAccount ?: error("Pilih akun launcher terlebih dahulu.")
             val accountId = account.uniqueUUID.toString().takeIf { it.isNotBlank() }
