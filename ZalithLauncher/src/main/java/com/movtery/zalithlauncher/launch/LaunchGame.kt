@@ -248,7 +248,7 @@ class LaunchGame {
 
             // Start the loopback Yggdrasil endpoint only when this local player has a valid custom skin.
             // No network listener is opened for Microsoft or third-party accounts.
-            val offlineSkinServerUrl = OfflineSkinServer.start(activity, account)
+            val offlineSkinServerUrl = runCatching { OfflineSkinServer.start(activity, account) }.getOrNull()
             val launchArgs = LaunchArgs(
                 account,
                 gameDirPath,
