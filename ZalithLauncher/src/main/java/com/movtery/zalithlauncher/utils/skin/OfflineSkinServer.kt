@@ -61,7 +61,7 @@ object OfflineSkinServer {
         val server = ServerSocket(0, 16, InetAddress.getByName("127.0.0.1"))
         activeServer = server
         val skinHash = MessageDigest.getInstance("SHA-256").digest(skinBytes)
-            .joinToString("") { "%02x".format(it) }
+            .joinToString("") { "%02x".format(it.toInt() and 0xff) }
         val running = AtomicBoolean(true)
         val playerName = account.username
         val playerUuid = profileId
