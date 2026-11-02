@@ -119,7 +119,7 @@ class LaunchArgs(
         verArgMap["game_assets"] = ProfilePathHome.getAssetsHome()
         verArgMap["game_directory"] = gameDirPath.absolutePath
         verArgMap["user_properties"] = "{}"
-        verArgMap["user_type"] = if (account.accountType == "LOCAL") "legacy" else "msa"
+        verArgMap["user_type"] = if (account.accountType.equals("Local", true)) "legacy" else "msa"
         verArgMap["version_name"] = versionInfo.inheritsFrom ?: versionInfo.id
 
         setLauncherInfo(verArgMap)
