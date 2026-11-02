@@ -187,17 +187,25 @@
                 app:ripple_for_relative="true">
                 <ImageView
                     android:id="@+id/custom_control_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_menu_custom_controls"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@id/custom_control_icon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:breakStrategy="simple"
+                    android:hyphenationFrequency="normal"
+                    android:gravity="center_vertical"
                     android:text="@string/custom_control_title"
                     android:textColor="@color/xui_text_primary"
                     android:textSize="12sp" />
@@ -213,17 +221,25 @@
                 app:ripple_for_relative="true">
                 <ImageView
                     android:id="@+id/open_main_dir_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_folder"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@id/open_main_dir_icon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:breakStrategy="simple"
+                    android:hyphenationFrequency="normal"
+                    android:gravity="center_vertical"
                     android:text="@string/main_open_main_dir"
                     android:textColor="@color/xui_text_primary"
                     android:textSize="12sp" />
@@ -246,17 +262,25 @@
                 app:ripple_for_relative="true">
                 <ImageView
                     android:id="@+id/install_jar_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_java"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@id/install_jar_icon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:breakStrategy="simple"
+                    android:hyphenationFrequency="normal"
+                    android:gravity="center_vertical"
                     android:text="@string/main_install_jar_file"
                     android:textColor="@color/xui_text_primary"
                     android:textSize="12sp" />
@@ -272,17 +296,25 @@
                 app:ripple_for_relative="true">
                 <ImageView
                     android:id="@+id/share_logs_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_share"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@id/share_logs_icon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:breakStrategy="simple"
+                    android:hyphenationFrequency="normal"
+                    android:gravity="center_vertical"
                     android:text="@string/main_share_logs"
                     android:textColor="@color/xui_text_primary"
                     android:textSize="12sp" />
@@ -305,18 +337,26 @@
                 app:ripple_for_relative="true">
                 <ImageView
                     android:id="@+id/about_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_about"
                     app:tint="@color/xui_primary_light" />
                 <TextView
                     android:id="@+id/about_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_toEndOf="@id/about_icon"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="2dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:breakStrategy="simple"
+                    android:hyphenationFrequency="normal"
+                    android:gravity="center_vertical"
                     android:textColor="@color/xui_text_primary"
                     android:textSize="12sp" />
             </com.movtery.zalithlauncher.ui.layout.AnimRelativeLayout>
