@@ -25,7 +25,7 @@ public class SkinLoader {
     public static Drawable getAvatarDrawable(Context context, MinecraftAccount account, int size) throws Exception {
         File skin = new File(PathManager.DIR_USER_SKIN, account.getUniqueUUID() + ".png");
         if (!skin.exists() && account.profileId != null) {
-            skin = new File(PathManager.DIR_USER_SKIN, account.getProfileId().replace("-", "") + ".png");
+            skin = new File(PathManager.DIR_USER_SKIN, account.profileId.replace("-", "") + ".png");
         }
         if (skin.exists()) {
             try (InputStream is = Files.newInputStream(skin.toPath())) {
