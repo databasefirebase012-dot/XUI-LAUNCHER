@@ -25,7 +25,8 @@ class LaunchArgs(
     private val versionInfo: JMinecraftVersionList.Version,
     private val versionFileName: String,
     private val runtime: Runtime,
-    private val launchClassPath: String
+    private val launchClassPath: String,
+    private val offlineSkinServerUrl: String? = null
 ) {
     fun getAllArgs(): List<String> {
         val argsList: MutableList<String> = ArrayList()
@@ -50,7 +51,9 @@ class LaunchArgs(
     private fun getJavaArgs(): List<String> {
         val argsList: MutableList<String> = ArrayList()
 
-        if (AccountUtils.isOtherLoginAccount(account)) {
+        if (!offlineSkinServerUrl.isNullOrBlank()) {
+            argsList.add("-javaagent:${LibPath.AUTHLIB_INJECTOR.absolutePath}=$offlineSkinServerUrl")
+        } else if (AccountUtils.isOtherLoginAccount(account)) {
             if (account.otherBaseUrl.contains("auth.mc-user.com")) {
                 argsList.add("-javaagent:${LibPath.NIDE_8_AUTH.absolutePath}=${account.otherBaseUrl.replace("https://auth.mc-user.com:233/", "")}")
                 argsList.add("-Dnide8auth.client=true")
@@ -116,7 +119,7 @@ class LaunchArgs(
         verArgMap["game_assets"] = ProfilePathHome.getAssetsHome()
         verArgMap["game_directory"] = gameDirPath.absolutePath
         verArgMap["user_properties"] = "{}"
-        verArgMap["user_type"] = "msa"
+        verArgMap["user_type"] = if (account.accountType == "LOCAL") "legacy" else "msa"
         verArgMap["version_name"] = versionInfo.inheritsFrom ?: versionInfo.id
 
         setLauncherInfo(verArgMap)
