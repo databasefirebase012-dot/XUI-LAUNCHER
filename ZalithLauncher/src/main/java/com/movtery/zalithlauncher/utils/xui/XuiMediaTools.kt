@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.movtery.zalithlauncher.R
 import com.movtery.zalithlauncher.feature.accounts.AccountsManager
+import com.movtery.zalithlauncher.feature.accounts.AccountUtils
+import java.util.UUID
 import com.movtery.zalithlauncher.utils.path.PathManager
 import java.io.File
 import java.io.FileOutputStream
@@ -186,7 +188,17 @@ object XuiMediaTools {
             val account = AccountsManager.currentAccount ?: error("Pilih akun launcher terlebih dahulu.")
             val accountId = account.uniqueUUID.toString().takeIf { it.isNotBlank() }
                 ?: error("ID akun tidak valid.")
-            val target = File(PathManager.DIR_USER_SKIN, "$accountId.png")
+            val isLocalAccount = AccountUtils.isNoLoginRequired(account)
+            if (isLocalAccount && (account.profileId.isNullOrBlank()
+                    || account.profileId == "00000000000000000000000000000000"
+                    || account.profileId == "00000000-0000-0000-0000-000000000000")) {
+                account.profileId = UUID.nameUUIDFromBytes(
+                    ("OfflinePlayer:" + account.username).toByteArray(Charsets.UTF_8)
+                ).toString().replace("-", "")
+                account.save()
+            }
+            val skinKey = if (isLocalAccount) account.profileId.replace("-", "") else account.uniqueUUID
+            val target = File(PathManager.DIR_USER_SKIN, "$skinKey.png")
             val parent = target.parentFile ?: error("Folder skin tidak tersedia.")
             if (!parent.exists() && !parent.mkdirs()) error("Folder skin tidak dapat dibuat.")
             temp = File(parent, "$accountId.png.importing")
@@ -202,7 +214,11 @@ object XuiMediaTools {
             }
             Files.move(temp!!.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING)
             temp = null
-            Toast.makeText(context, "Avatar launcher berhasil diperbarui untuk " + account.username + ". Skin server Minecraft tetap mengikuti profil akun Microsoft/Mojang.", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, if (isLocalAccount)
+                "Skin offline berhasil dipasang untuk " + account.username + ". Jalankan ulang Minecraft untuk melihatnya."
+            else
+                "Avatar launcher diperbarui. Skin akun Microsoft tetap dikelola melalui profil Microsoft/Mojang.",
+                Toast.LENGTH_LONG).show()
         }.onFailure {
             temp?.delete()
             Toast.makeText(context, "Skin gagal diimpor: " + it.message, Toast.LENGTH_LONG).show()
