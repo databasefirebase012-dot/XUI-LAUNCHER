@@ -50,7 +50,7 @@ class PathManager {
             DIR_CUSTOM_MOUSE = "$DIR_GAME_HOME/mouse"
             DIR_BACKGROUND = File("$DIR_GAME_HOME/background")
             DIR_APP_CACHE = context.externalCacheDir!!
-            DIR_USER_SKIN = File(DIR_FILE, "/user_skin")
+            DIR_USER_SKIN = File(DIR_FILE, "user_skin").apply { mkdirs() }
             DIR_INSTALLED_RENDERER_PLUGIN = File(DIR_FILE, "/renderer_plugins")
             DIR_RUNTIME_MOD = context.getDir("runtime_mod", 0)?.also {
                 it.mkdirs()
@@ -65,7 +65,6 @@ class PathManager {
             runCatching {
                 //此处的账号文件已不再使用，需要检查并清除
                 FileUtils.deleteQuietly(File("$DIR_DATA/accounts"))
-                FileUtils.deleteQuietly(File(DIR_DATA, "/user_skin"))
             }
         }
 
