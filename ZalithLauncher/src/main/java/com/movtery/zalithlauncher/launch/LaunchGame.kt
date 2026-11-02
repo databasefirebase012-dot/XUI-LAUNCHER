@@ -21,6 +21,7 @@ import com.movtery.zalithlauncher.task.TaskExecutors
 import com.movtery.zalithlauncher.ui.dialog.LifecycleAwareTipDialog
 import com.movtery.zalithlauncher.ui.dialog.TipDialog
 import com.movtery.zalithlauncher.utils.ZHTools
+import com.movtery.zalithlauncher.utils.skin.OfflineSkinServer
 import com.movtery.zalithlauncher.utils.http.NetworkUtils
 import com.movtery.zalithlauncher.utils.stringutils.StringUtils
 import net.kdt.pojavlaunch.Architecture
@@ -38,6 +39,7 @@ import net.kdt.pojavlaunch.tasks.MinecraftDownloader
 import net.kdt.pojavlaunch.utils.JREUtils
 import net.kdt.pojavlaunch.value.MinecraftAccount
 import org.greenrobot.eventbus.EventBus
+import java.util.UUID
 
 class LaunchGame {
     companion object {
@@ -124,11 +126,24 @@ class LaunchGame {
                 Renderers.setCurrentRenderer(activity, AllSettings.renderer.getValue())
             }
 
-            var account = AccountsManager.currentAccount!!
+            val selectedAccount = AccountsManager.currentAccount!!
+            var account = selectedAccount
             if (minecraftVersion.offlineAccountLogin) {
+                val savedProfileId = selectedAccount.profileId
+                    ?.replace("-", "")
+                    ?.takeIf { it.length == 32 && it.any { ch -> ch != '0' } }
+                val offlineProfileId = savedProfileId ?: UUID.nameUUIDFromBytes(
+                    ("OfflinePlayer:" + selectedAccount.username).toByteArray(Charsets.UTF_8)
+                ).toString().replace("-", "")
+                if (selectedAccount.accountType == AccountType.LOCAL.type && savedProfileId == null) {
+                    selectedAccount.profileId = offlineProfileId
+                    runCatching { selectedAccount.save() }
+                }
                 account = MinecraftAccount().apply {
-                    this.username = account.username
+                    this.username = selectedAccount.username
                     this.accountType = AccountType.LOCAL.type
+                    this.profileId = offlineProfileId
+                    this.accessToken = "0"
                 }
             }
 
@@ -231,6 +246,9 @@ class LaunchGame {
             Tools.disableSplash(gameDirPath)
             val launchClassPath = Tools.generateLaunchClassPath(versionInfo, minecraftVersion)
 
+            // Start the loopback Yggdrasil endpoint only when this local player has a valid custom skin.
+            // No network listener is opened for Microsoft or third-party accounts.
+            val offlineSkinServerUrl = OfflineSkinServer.start(activity, account)
             val launchArgs = LaunchArgs(
                 account,
                 gameDirPath,
@@ -238,7 +256,8 @@ class LaunchGame {
                 versionInfo,
                 minecraftVersion.getVersionName(),
                 runtime,
-                launchClassPath
+                launchClassPath,
+                offlineSkinServerUrl
             ).getAllArgs()
 
             FFmpegPlugin.discover(activity)
