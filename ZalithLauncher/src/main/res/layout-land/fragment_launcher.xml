@@ -194,12 +194,10 @@
                     android:src="@drawable/ic_menu_custom_controls"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/custom_control_icon"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="34dp"
                     android:layout_marginEnd="2dp"
                     android:maxLines="2"
                     android:ellipsize="end"
@@ -228,12 +226,10 @@
                     android:src="@drawable/ic_folder"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/open_main_dir_icon"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="34dp"
                     android:layout_marginEnd="2dp"
                     android:maxLines="2"
                     android:ellipsize="end"
@@ -269,12 +265,10 @@
                     android:src="@drawable/ic_java"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/install_jar_icon"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="34dp"
                     android:layout_marginEnd="2dp"
                     android:maxLines="2"
                     android:ellipsize="end"
@@ -303,12 +297,10 @@
                     android:src="@drawable/ic_share"
                     app:tint="@color/xui_primary_light" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/share_logs_icon"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="34dp"
                     android:layout_marginEnd="2dp"
                     android:maxLines="2"
                     android:ellipsize="end"
@@ -345,12 +337,10 @@
                     app:tint="@color/xui_primary_light" />
                 <TextView
                     android:id="@+id/about_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/about_icon"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="34dp"
                     android:layout_marginEnd="2dp"
                     android:maxLines="2"
                     android:ellipsize="end"
